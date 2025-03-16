@@ -19,6 +19,15 @@ const eslintConfig = [
     rules: {
       'prettier/prettier': 'error',
     },
+    ignores: [
+      'node_modules',
+      'dist',
+      '.next',
+      '.env',
+      '.env.local',
+      '.env.development.local',
+      '.env.test.local',
+    ],
   },
 ];
 
