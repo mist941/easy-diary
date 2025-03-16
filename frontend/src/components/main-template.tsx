@@ -38,11 +38,7 @@ export default function MainTemplate({ children }: MainTemplateProps) {
           </div>
           <ThemeToggle />
         </header>
-        <div className="flex flex-1 flex-col gap-4 p-4">
-          <div className="grid auto-rows-min gap-4 md:grid-cols-5">
-            {children}
-          </div>
-        </div>
+        <div className="w-full h-full p-4">{children}</div>
       </SidebarInset>
     </SidebarProvider>
   );
