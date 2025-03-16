@@ -1,5 +1,5 @@
-import { Calendar } from '@/components/atoms/calendar';
-import { SidebarGroup, SidebarGroupContent } from '@/components/atoms/sidebar';
+import { Calendar } from '@/components/calendar';
+import { SidebarGroup, SidebarGroupContent } from '@/components/sidebar';
 
 export function DatePicker() {
   return (

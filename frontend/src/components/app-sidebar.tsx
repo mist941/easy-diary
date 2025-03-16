@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { DatePicker } from '@/components/atoms/date-picker';
+import { DatePicker } from '@/components/date-picker';
 
 import {
   Sidebar,
@@ -8,7 +8,7 @@ import {
   SidebarHeader,
   SidebarRail,
   SidebarSeparator,
-} from '@/components/atoms/sidebar';
+} from '@/components/sidebar';
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (

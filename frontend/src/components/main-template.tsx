@@ -3,14 +3,14 @@ import {
   BreadcrumbItem,
   BreadcrumbList,
   BreadcrumbPage,
-} from '@/components/atoms/breadcrumb';
+} from '@/components/breadcrumb';
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
-} from '@/components/atoms/sidebar';
-import { AppSidebar } from '@/components/atoms/app-sidebar';
-import { Separator } from '@/components/atoms/separator';
+} from '@/components/sidebar';
+import { AppSidebar } from '@/components/app-sidebar';
+import { Separator } from '@/components/separator';
 
 interface MainTemplateProps {
   children: React.ReactNode;
