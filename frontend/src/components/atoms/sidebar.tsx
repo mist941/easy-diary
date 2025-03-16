@@ -5,11 +5,11 @@ import { Slot } from '@radix-ui/react-slot';
 import { VariantProps, cva } from 'class-variance-authority';
 import { PanelLeftIcon } from 'lucide-react';
 
-import { useIsMobile } from '@/hooks/useMobile';
+import { useIsMobile } from '@/hooks/use-mobile';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/atoms/button';
 import { Input } from '@/components/atoms/input';
-import { Separator } from '@/components/atoms/Separator';
+import { Separator } from '@/components/atoms/separator';
 import {
   Sheet,
   SheetContent,
