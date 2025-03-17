@@ -54,7 +54,7 @@ function Diary() {
     );
   };
 
-  const calculateOffset = useCallback(() => {
+  const calculateCurrentTimeOffset = useCallback(() => {
     const baseHeightInPx = 60;
     const expandedHeightInPx = 200;
     const additionalHeight = expandedHeightInPx - baseHeightInPx;
@@ -80,7 +80,7 @@ function Diary() {
     <ScrollArea className="w-full h-[calc(100vh-6rem)] bg-muted/50 rounded-lg overflow-auto flex flex-col justify-between relative cursor-text">
       <div
         className="relative w-full h-0.5 bg-sidebar-primary/50 z-10 transition-[top] duration-300 ease-in-out"
-        style={{ top: `${calculateOffset()}px` }}
+        style={{ top: `${calculateCurrentTimeOffset()}px` }}
       />
 
       {Array.from({ length: 24 }).map((_, index) => {
