@@ -1,2 +1,6 @@
 node_modules
 yarn.lock
+venv/
+__pycache__/
+.env
+.vscode
