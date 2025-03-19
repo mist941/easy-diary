@@ -1,3 +1,4 @@
+from src.domains.notes.dto import NoteCreate
 from src.core.database import Base, AsyncSession
 from sqlalchemy import Column, Integer, String, DateTime, select
 from datetime import UTC, datetime, timezone
@@ -8,14 +9,15 @@ class NoteModel(Base):
     __tablename__ = "notes"
     id = Column(Integer, primary_key=True)
     content = Column(String, nullable=False)
-    created_at = Column(DateTime, default=datetime.now(timezone.utc).replace(tzinfo=None))
+    started_at = Column(DateTime, default=datetime.now(timezone.utc).replace(tzinfo=None))
+    finished_at = Column(DateTime)
 
 class NoteRepository(INoteRepository):
     def __init__(self, db: AsyncSession):
         self.db = db
 
-    async def create(self, content: str) -> Note:
-        note = NoteModel(content=content)
+    async def create(self, note_data: NoteCreate) -> Note:
+        note = NoteModel(content=note_data.content, started_at=note_data.started_at, finished_at=note_data.finished_at)
         try:
             self.db.add(note)
             await self.db.commit()
