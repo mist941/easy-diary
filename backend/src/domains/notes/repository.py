@@ -10,7 +10,7 @@ class NoteModel(Base):
     content = Column(String, nullable=False)
     created_at = Column(DateTime, default=datetime.now(UTC))
 
-class SQLAlchemyNoteRepository(INoteRepository):
+class NoteRepository(INoteRepository):
     def __init__(self, db: AsyncSession):
         self.db = db
 
