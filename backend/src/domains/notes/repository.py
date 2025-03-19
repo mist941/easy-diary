@@ -10,7 +10,7 @@ class NoteModel(Base):
     id = Column(Integer, primary_key=True)
     content = Column(String, nullable=False)
     started_at = Column(DateTime, default=datetime.now(timezone.utc).replace(tzinfo=None))
-    finished_at = Column(DateTime)
+    finished_at = Column(DateTime, nullable=True, default=None)
 
 class NoteRepository(INoteRepository):
     def __init__(self, db: AsyncSession):
@@ -22,7 +22,7 @@ class NoteRepository(INoteRepository):
             self.db.add(note)
             await self.db.commit()
             await self.db.refresh(note)
-            return Note(id=note.id, content=note.content, created_at=note.created_at)
+            return Note(id=note.id, content=note.content, started_at=note.started_at, finished_at=note.finished_at)
         except Exception as e:
             await self.db.rollback()
             raise e
@@ -31,7 +31,7 @@ class NoteRepository(INoteRepository):
         try:
             result = await self.db.execute(select(NoteModel))
             notes = result.scalars().all()
-            return [Note(id=n.id, content=n.content, created_at=n.created_at) for n in notes]
+            return [Note(id=n.id, content=n.content, started_at=n.started_at, finished_at=n.finished_at) for n in notes]
         except Exception as e:
             await self.db.rollback()
             raise e
