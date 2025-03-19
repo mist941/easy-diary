@@ -16,3 +16,10 @@ def get_note_service(db: AsyncSession = Depends(get_db)):
 async def get_notes(note_service: NoteService = Depends(get_note_service)):
     notes = await note_service.get_notes()
     return notes
+
+@router.post("/notes")
+async def create_note(note_data, note_service: NoteService = Depends(get_note_service)):
+    print(note_data)
+    # note = await note_service.create_note(note_data.content)
+    return ""
+
