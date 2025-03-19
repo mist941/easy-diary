@@ -4,10 +4,9 @@ class NoteService:
     def __init__(self, repo: INoteRepository):
         self.repo = repo
 
-    def create_note(self, content: str):
-        print(content)
-        # return self.repo.create(content)
-        return "test"
+    async def create_note(self, content: str):
+        note = await self.repo.create(content)
+        return note
 
     async def get_notes(self):
         return await self.repo.list_all()

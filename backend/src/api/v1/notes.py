@@ -22,6 +22,6 @@ async def get_notes(note_service: NoteService = Depends(get_note_service)):
 
 @router.post("/notes")
 async def create_note(note_data: NoteCreate, note_service: NoteService = Depends(get_note_service)):
-    note = note_service.create_note(note_data.content)
+    note = await note_service.create_note(note_data.content)
     return note
 
