@@ -7,5 +7,5 @@ class NoteService:
     def create_note(self, content: str):
         return self.repo.create(content)
 
-    def get_notes(self):
-        return self.repo.list_all()
+    async def get_notes(self):
+        return await self.repo.list_all()

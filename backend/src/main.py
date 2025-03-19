@@ -3,4 +3,6 @@ from src.api.v1 import notes
 
 app = FastAPI()
 
-app.include_router(notes.router, prefix="/api/v1/notes")
+prefix = "/api/v1"
+
+app.include_router(notes.router, prefix=prefix)
