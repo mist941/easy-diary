@@ -7,6 +7,7 @@ import { ChevronUp } from 'lucide-react';
 import React from 'react';
 import { NoteForm } from './note-form';
 import { Note, NoteRequest } from '@/types/notes';
+import notesService from '@/services/notes';
 interface DiaryHourProps {
   index: number;
   timeString: string;
@@ -88,7 +89,7 @@ function Diary() {
   };
 
   const handleCreateNote = (values: NoteRequest) => {
-    console.log(values);
+    notesService.createNote(values);
   };
 
   const handleUpdateNote = (id: number, values: NoteRequest) => {
