@@ -5,7 +5,8 @@ import { ScrollArea } from '@/components/scroll-area';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/popover';
 import { ChevronUp } from 'lucide-react';
 import React from 'react';
-
+import { NoteForm } from './note-form';
+import { NoteRequest } from '@/types/notes';
 interface DiaryHourProps {
   index: number;
   timeString: string;
@@ -20,6 +21,11 @@ function DiaryHour({
   onToggle,
 }: DiaryHourProps) {
   const [openNoteEditor, setOpenNoteEditor] = React.useState(false);
+
+  const handleSubmit = (values: NoteRequest) => {
+    console.log(values);
+  };
+
   return (
     <Popover open={openNoteEditor} onOpenChange={setOpenNoteEditor}>
       <PopoverTrigger asChild>
@@ -48,9 +54,11 @@ function DiaryHour({
         className="w-auto p-4 flex gap-4 left-100px top-25px"
         align="start"
         side="top"
-        sideOffset={-70}
-        alignOffset={50}
-      ></PopoverContent>
+        sideOffset={-80}
+        alignOffset={60}
+      >
+        <NoteForm onSubmit={handleSubmit} />
+      </PopoverContent>
     </Popover>
   );
 }

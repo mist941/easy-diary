@@ -1,0 +1,95 @@
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { Form, FormControl, FormField, FormItem, FormMessage } from './form';
+import { z } from 'zod';
+import { Textarea } from './textarea';
+import { TimePicker } from './time-picker';
+import { Button } from './button';
+import { NoteRequest } from '@/types/notes';
+
+const formSchema = z.object({
+  note: z.string().min(2, {
+    message: 'Note must be at least 2 characters.',
+  }),
+  started_at: z.string(),
+  finished_at: z.string(),
+});
+
+interface NoteFormProps {
+  onSubmit: (values: NoteRequest) => void;
+  defaultValues?: z.infer<typeof formSchema>;
+}
+
+export function NoteForm({ onSubmit, defaultValues }: NoteFormProps) {
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      note: defaultValues?.note || '',
+      started_at: defaultValues?.started_at || '12:00',
+      finished_at: defaultValues?.finished_at || '12:00',
+    },
+  });
+
+  const handleSubmit = (values: z.infer<typeof formSchema>) => {
+    onSubmit({
+      content: values.note,
+      started_at: values.started_at,
+      finished_at: values.finished_at,
+    });
+  };
+
+  return (
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(handleSubmit)}
+        className="w-100 flex flex-col gap-2"
+      >
+        <FormField
+          control={form.control}
+          name="note"
+          render={() => (
+            <FormItem className="flex-1">
+              <FormControl>
+                <Textarea className="resize-none w-full h-full" />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <div className="flex flex-row gap-2">
+          <FormField
+            control={form.control}
+            name="note"
+            render={() => (
+              <FormItem>
+                <FormControl>
+                  <TimePicker
+                    value={form.getValues('started_at')}
+                    onChange={(value) => form.setValue('started_at', value)}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="note"
+            render={() => (
+              <FormItem>
+                <FormControl>
+                  <TimePicker
+                    value={form.getValues('finished_at')}
+                    onChange={(value) => form.setValue('finished_at', value)}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <Button type="submit" className="flex-1">
+            Save
+          </Button>
+        </div>
+      </form>
+    </Form>
+  );
+}

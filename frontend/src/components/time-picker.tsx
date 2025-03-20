@@ -11,18 +11,29 @@ const minutes = Array.from({ length: 60 }, (_, i) =>
   String(i).padStart(2, '0'),
 );
 
-export function TimePicker() {
-  const [open, setOpen] = React.useState(false);
-  const [selectedHour, setSelectedHour] = React.useState('12');
-  const [selectedMinute, setSelectedMinute] = React.useState('00');
+interface TimePickerProps {
+  value: string;
+  onChange: (value: string) => void;
+}
 
-  const formattedTime = `${selectedHour}:${selectedMinute}`;
+function TimePicker({ value = '12:00', onChange }: TimePickerProps) {
+  const [open, setOpen] = React.useState(false);
+  const hoursValue = value.split(':')[0];
+  const minutesValue = value.split(':')[1];
+
+  const handleHourChange = (hour: string) => {
+    onChange(`${hour}:${minutesValue}`);
+  };
+
+  const handleMinuteChange = (minute: string) => {
+    onChange(`${hoursValue}:${minute}`);
+  };
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button variant="outline" className="w-[120px] justify-start">
-          {formattedTime}
+        <Button variant="outline" className="w-[67px] justify-start">
+          {value}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-4 flex gap-4" align="start">
@@ -30,10 +41,10 @@ export function TimePicker() {
           {hours.map((hour) => (
             <div
               key={hour}
-              onClick={() => setSelectedHour(hour)}
+              onClick={() => handleHourChange(hour)}
               className={cn(
                 'cursor-pointer px-2 py-1 text-center hover:bg-muted rounded-sm',
-                selectedHour === hour && 'bg-muted font-semibold',
+                hoursValue === hour && 'bg-muted font-semibold',
               )}
             >
               {hour}
@@ -44,10 +55,10 @@ export function TimePicker() {
           {minutes.map((minute) => (
             <div
               key={minute}
-              onClick={() => setSelectedMinute(minute)}
+              onClick={() => handleMinuteChange(minute)}
               className={cn(
                 'cursor-pointer px-2 py-1 text-center hover:bg-muted rounded-sm',
-                selectedMinute === minute && 'bg-muted font-semibold',
+                minutesValue === minute && 'bg-muted font-semibold',
               )}
             >
               {minute}
@@ -58,3 +69,5 @@ export function TimePicker() {
     </Popover>
   );
 }
+
+export { TimePicker };
