@@ -45,8 +45,11 @@ function DiaryHour({
         </div>
       </PopoverTrigger>
       <PopoverContent
-        className="w-auto p-4 flex gap-4"
+        className="w-auto p-4 flex gap-4 left-100px top-25px"
         align="start"
+        side="top"
+        sideOffset={-70}
+        alignOffset={50}
       ></PopoverContent>
     </Popover>
   );
