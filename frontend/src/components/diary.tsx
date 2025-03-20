@@ -6,12 +6,14 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/popover';
 import { ChevronUp } from 'lucide-react';
 import React from 'react';
 import { NoteForm } from './note-form';
-import { NoteRequest } from '@/types/notes';
+import { Note, NoteRequest } from '@/types/notes';
 interface DiaryHourProps {
   index: number;
   timeString: string;
   isExpanded: boolean;
   onToggle: (e: React.MouseEvent<HTMLDivElement>) => void;
+  createNote: (values: NoteRequest) => void;
+  updateNote: (id: number, values: NoteRequest) => void;
 }
 
 function DiaryHour({
@@ -19,11 +21,20 @@ function DiaryHour({
   timeString,
   isExpanded,
   onToggle,
+  createNote,
+  updateNote,
 }: DiaryHourProps) {
   const [openNoteEditor, setOpenNoteEditor] = React.useState(false);
+  const [selectedNote, setSelectedNote] = React.useState<Note | null>(null);
 
-  const handleSubmit = (values: NoteRequest) => {
-    console.log(values);
+  const handleChangeNote = (values: NoteRequest) => {
+    if (selectedNote) {
+      updateNote(selectedNote.id, values);
+      setSelectedNote(null);
+    } else {
+      createNote(values);
+    }
+    setOpenNoteEditor(false);
   };
 
   return (
@@ -57,7 +68,7 @@ function DiaryHour({
         sideOffset={-80}
         alignOffset={60}
       >
-        <NoteForm onSubmit={handleSubmit} />
+        <NoteForm onSubmit={handleChangeNote} />
       </PopoverContent>
     </Popover>
   );
@@ -74,6 +85,14 @@ function Diary() {
         ? prev.filter((hour) => hour !== index)
         : [...prev, index],
     );
+  };
+
+  const handleCreateNote = (values: NoteRequest) => {
+    console.log(values);
+  };
+
+  const handleUpdateNote = (id: number, values: NoteRequest) => {
+    console.log(id, values);
   };
 
   const calculateCurrentTimeOffset = React.useCallback(() => {
@@ -118,6 +137,8 @@ function Diary() {
             onToggle={(e: React.MouseEvent<HTMLDivElement>) =>
               toggleHour(e, index)
             }
+            createNote={handleCreateNote}
+            updateNote={handleUpdateNote}
           />
         );
       })}

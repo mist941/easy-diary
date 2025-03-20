@@ -5,7 +5,7 @@ export function getCurrentTimeInMinutes() {
   return hours * 60 + minutes;
 }
 
-export const getTimeInISOString = (time: string) => {
+export const getTimeInISOString = (time: string): string | null => {
   if (!time) return null;
   const [hours, minutes] = time.split(':').map(Number);
   const date = new Date();
