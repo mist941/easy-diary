@@ -22,11 +22,11 @@ function TimePicker({ value = '12:00', onChange }: TimePickerProps) {
   const minutesValue = value ? value.split(':')[1] : '--';
 
   const handleHourChange = (hour: string) => {
-    onChange(`${hour}:${minutesValue || '00'}`);
+    onChange(`${hour}:${minutesValue === '--' ? '00' : minutesValue}`);
   };
 
   const handleMinuteChange = (minute: string) => {
-    onChange(`${hoursValue || '00'}:${minute}`);
+    onChange(`${hoursValue === '--' ? '00' : hoursValue}:${minute}`);
   };
 
   return (
