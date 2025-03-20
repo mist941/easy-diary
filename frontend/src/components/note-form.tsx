@@ -6,6 +6,7 @@ import { Textarea } from './textarea';
 import { TimePicker } from './time-picker';
 import { Button } from './button';
 import { NoteRequest } from '@/types/notes';
+import { getTimeInISOString } from '@/utils/time';
 
 const formSchema = z.object({
   note: z.string().min(2, {
@@ -26,15 +27,17 @@ export function NoteForm({ onSubmit, defaultValues }: NoteFormProps) {
     defaultValues: {
       note: defaultValues?.note || '',
       started_at: defaultValues?.started_at || '12:00',
-      finished_at: defaultValues?.finished_at || '12:00',
+      finished_at: defaultValues?.finished_at || '',
     },
   });
 
   const handleSubmit = (values: z.infer<typeof formSchema>) => {
+    const startedAt = getTimeInISOString(values.started_at) as string;
+    const finishedAt = getTimeInISOString(values.finished_at);
     onSubmit({
       content: values.note,
-      started_at: values.started_at,
-      finished_at: values.finished_at,
+      started_at: startedAt,
+      finished_at: finishedAt,
     });
   };
 
@@ -50,7 +53,11 @@ export function NoteForm({ onSubmit, defaultValues }: NoteFormProps) {
           render={() => (
             <FormItem className="flex-1">
               <FormControl>
-                <Textarea className="resize-none w-full h-full" />
+                <Textarea
+                  className="resize-none w-full h-full"
+                  placeholder="Write your note here..."
+                  {...form.register('note')}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -59,7 +66,7 @@ export function NoteForm({ onSubmit, defaultValues }: NoteFormProps) {
         <div className="flex flex-row gap-2">
           <FormField
             control={form.control}
-            name="note"
+            name="started_at"
             render={() => (
               <FormItem>
                 <FormControl>
@@ -73,7 +80,7 @@ export function NoteForm({ onSubmit, defaultValues }: NoteFormProps) {
           />
           <FormField
             control={form.control}
-            name="note"
+            name="finished_at"
             render={() => (
               <FormItem>
                 <FormControl>

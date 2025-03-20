@@ -18,8 +18,8 @@ interface TimePickerProps {
 
 function TimePicker({ value = '12:00', onChange }: TimePickerProps) {
   const [open, setOpen] = React.useState(false);
-  const hoursValue = value.split(':')[0];
-  const minutesValue = value.split(':')[1];
+  const hoursValue = value ? value.split(':')[0] : '--';
+  const minutesValue = value ? value.split(':')[1] : '--';
 
   const handleHourChange = (hour: string) => {
     onChange(`${hour}:${minutesValue}`);
@@ -33,7 +33,7 @@ function TimePicker({ value = '12:00', onChange }: TimePickerProps) {
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button variant="outline" className="w-[67px] justify-start">
-          {value}
+          {`${hoursValue}:${minutesValue}`}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-4 flex gap-4" align="start">
