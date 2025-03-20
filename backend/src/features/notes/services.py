@@ -1,5 +1,6 @@
-from src.domains.notes.dto import NoteCreate
+from .dto import NoteCreate
 from .interfaces import INoteRepository
+
 
 class NoteService:
     def __init__(self, repo: INoteRepository):
