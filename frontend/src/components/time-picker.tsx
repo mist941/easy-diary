@@ -26,7 +26,6 @@ export function TimePicker() {
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-4 flex gap-4" align="start">
-        {/* Hours Picker */}
         <ScrollArea className="h-48 w-16 border rounded-md">
           {hours.map((hour) => (
             <div
@@ -41,8 +40,6 @@ export function TimePicker() {
             </div>
           ))}
         </ScrollArea>
-
-        {/* Minutes Picker */}
         <ScrollArea className="h-48 w-16 border rounded-md">
           {minutes.map((minute) => (
             <div
