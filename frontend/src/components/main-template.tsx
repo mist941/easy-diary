@@ -21,6 +21,11 @@ interface MainTemplateProps {
 
 export default function MainTemplate({ children }: MainTemplateProps) {
   const { date } = useCurrentSelectedDateStore();
+  const formattedDate = date.toLocaleDateString('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+  });
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -35,7 +40,7 @@ export default function MainTemplate({ children }: MainTemplateProps) {
             <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem>
-                  <BreadcrumbPage>{date?.toLocaleDateString()}</BreadcrumbPage>
+                  <BreadcrumbPage>{formattedDate}</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>

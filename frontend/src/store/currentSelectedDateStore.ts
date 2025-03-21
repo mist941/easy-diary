@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 
 const useCurrentSelectedDateStore = create<{
-  date: Date | undefined;
+  date: Date;
   setDate: (date: Date) => void;
 }>((set) => ({ date: new Date(), setDate: (date) => set({ date }) }));
 
