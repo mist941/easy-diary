@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -12,11 +14,13 @@ import {
 import { AppSidebar } from '@/components/app-sidebar';
 import { Separator } from '@/components/separator';
 import { ThemeToggle } from '@/components/theme-toggle';
+import useCurrentSelectedDateStore from '@/store/currentSelectedDateStore';
 interface MainTemplateProps {
   children: React.ReactNode;
 }
 
 export default function MainTemplate({ children }: MainTemplateProps) {
+  const { date } = useCurrentSelectedDateStore();
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -31,7 +35,7 @@ export default function MainTemplate({ children }: MainTemplateProps) {
             <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem>
-                  <BreadcrumbPage>24 January 2024</BreadcrumbPage>
+                  <BreadcrumbPage>{date?.toLocaleDateString()}</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>

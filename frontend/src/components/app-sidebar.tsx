@@ -18,7 +18,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <DatePicker />
         <SidebarSeparator className="mx-0" />
       </SidebarContent>
-      <SidebarFooter></SidebarFooter>
+      <SidebarFooter />
       <SidebarRail />
     </Sidebar>
   );

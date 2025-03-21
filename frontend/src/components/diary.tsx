@@ -8,6 +8,7 @@ import React from 'react';
 import { NoteForm } from './note-form';
 import { Note, NoteRequest } from '@/types/notes';
 import notesService from '@/services/notes';
+import useCurrentSelectedDateStore from '@/store/currentSelectedDateStore';
 interface DiaryHourProps {
   index: number;
   timeString: string;
@@ -76,8 +77,13 @@ function DiaryHour({
 }
 
 function Diary() {
+  const { date } = useCurrentSelectedDateStore();
   const [expandedHours, setExpandedHours] = React.useState<number[]>([]);
   const currentTime = getCurrentTimeInMinutes();
+
+  React.useEffect(() => {
+    console.log(date);
+  }, [date]);
 
   const toggleHour = (e: React.MouseEvent<HTMLDivElement>, index: number) => {
     e.stopPropagation();
