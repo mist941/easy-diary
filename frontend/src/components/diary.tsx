@@ -1,6 +1,10 @@
 'use client';
 
-import { getCurrentTimeInMinutes, getDateForRequest } from '@/utils/time';
+import {
+  getCurrentTimeInMinutes,
+  getDateForPreview,
+  getDateForRequest,
+} from '@/utils/time';
 import { ScrollArea } from '@/components/scroll-area';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/popover';
 import { ChevronUp } from 'lucide-react';
@@ -67,10 +71,7 @@ function DiaryHour({
           <div className="w-full h-full pr-5 pl-5">
             {notes.slice(0, 3).map((note) => (
               <p key={note.id} className="text-xs text-foreground italic">
-                {new Date(note.started_at).toLocaleTimeString('en-US', {
-                  hour: '2-digit',
-                  minute: '2-digit',
-                })}
+                {getDateForPreview(note.started_at)}
                 {': '}
                 {note.content}
               </p>

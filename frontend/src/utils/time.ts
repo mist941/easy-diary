@@ -39,3 +39,13 @@ export const convertDateToUTC = (isoString: string | null): string | null => {
 
   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${microseconds}`;
 };
+
+export const getDateForPreview = (date: Date) => {
+  return new Date(date)
+    .toLocaleTimeString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+    })
+    .replace('AM', '')
+    .replace('PM', '');
+};
