@@ -121,8 +121,10 @@ function Diary() {
     [],
   );
 
-  const handleCreateNote = React.useCallback((values: NoteRequest) => {
-    notesService.createNote(values);
+  const handleCreateNote = React.useCallback(async (values: NoteRequest) => {
+    await notesService.createNote(values);
+    const notes = await notesService.getNotes(getDateForRequest(date));
+    setNotes(notes);
   }, []);
 
   const handleUpdateNote = React.useCallback(
