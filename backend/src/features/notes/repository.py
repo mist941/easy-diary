@@ -1,7 +1,7 @@
 from .dto import NoteCreate
 from src.core.database import Base, AsyncSession
 from sqlalchemy import Column, Integer, String, DateTime, select
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from .entities import Note
 from .interfaces import INoteRepository
 
@@ -40,9 +40,20 @@ class NoteRepository(INoteRepository):
             await self.db.rollback()
             raise e
 
-    async def list_all(self):
+    async def list_all(self, day=None):
         try:
-            result = await self.db.execute(select(NoteModel))
+            query = select(NoteModel)
+
+            if day:
+                day_start = day.replace(hour=0, minute=0, second=0, microsecond=0)
+                next_day = day_start + timedelta(days=1)
+
+                query = query.where(
+                    (NoteModel.started_at >= day_start)
+                    & (NoteModel.started_at < next_day)
+                )
+
+            result = await self.db.execute(query)
             notes = result.scalars().all()
             return [
                 Note(
