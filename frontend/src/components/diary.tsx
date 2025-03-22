@@ -37,6 +37,23 @@ function DiaryHour({
   const [openNoteEditor, setOpenNoteEditor] = React.useState(false);
   const [selectedNote, setSelectedNote] = React.useState<Note | null>(null);
 
+  const lastNote = React.useMemo(() => {
+    return [...notes]
+      .sort(
+        (a, b) =>
+          new Date(a.started_at).getTime() - new Date(b.started_at).getTime(),
+      )
+      .at(-1);
+  }, [notes]);
+
+  const lastNoteMinutes = React.useMemo(() => {
+    return lastNote?.started_at
+      ? String(new Date(lastNote.started_at).getMinutes() + 1).padStart(2, '0')
+      : '00';
+  }, [lastNote]);
+
+  console.log(lastNoteMinutes);
+
   const handleChangeNote = (values: NoteRequest) => {
     if (selectedNote) {
       updateNote(selectedNote.id, values);
