@@ -1,6 +1,6 @@
 'use client';
 
-import { getCurrentTimeInMinutes } from '@/utils/time';
+import { getCurrentTimeInMinutes, getDateForRequest } from '@/utils/time';
 import { ScrollArea } from '@/components/scroll-area';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/popover';
 import { ChevronUp } from 'lucide-react';
@@ -64,8 +64,8 @@ function DiaryHour({
               />
             </p>
           </div>
-          <div className="w-full h-full pr-9 pl-9">
-            {notes.map((note) => (
+          <div className="w-full h-full pr-5 pl-5">
+            {notes.slice(0, 3).map((note) => (
               <p key={note.id} className="text-xs text-foreground italic">
                 {new Date(note.started_at).toLocaleTimeString('en-US', {
                   hour: '2-digit',
@@ -100,13 +100,7 @@ function Diary() {
   React.useEffect(() => {
     (async () => {
       try {
-        const formattedDate = new Date(date);
-        const formattedDateString = formattedDate
-          .toISOString()
-          .replace('T', ' ')
-          .replace('Z', '');
-
-        const notes = await notesService.getNotes(formattedDateString);
+        const notes = await notesService.getNotes(getDateForRequest(date));
         setNotes(notes);
       } catch (error) {
         console.error(error);
