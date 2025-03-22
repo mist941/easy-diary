@@ -13,6 +13,7 @@ interface DiaryHourProps {
   index: number;
   timeString: string;
   isExpanded: boolean;
+  notes: Note[];
   onToggle: (e: React.MouseEvent<HTMLDivElement>) => void;
   createNote: (values: NoteRequest) => void;
   updateNote: (id: number, values: NoteRequest) => void;
@@ -22,6 +23,7 @@ function DiaryHour({
   index,
   timeString,
   isExpanded,
+  notes = [],
   onToggle,
   createNote,
   updateNote,
