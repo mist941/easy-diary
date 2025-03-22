@@ -6,7 +6,7 @@ import { Textarea } from './textarea';
 import { TimePicker } from './time-picker';
 import { Button } from './button';
 import { NoteRequest } from '@/types/notes';
-import { getTimeInISOString, convertDateToUTC } from '@/utils/time';
+import { getTimeInISOString, convertDateToLocal } from '@/utils/time';
 
 const formSchema = z.object({
   note: z.string().min(2, {
@@ -32,11 +32,13 @@ export function NoteForm({ onSubmit, defaultValues }: NoteFormProps) {
   });
 
   const handleSubmit = (values: z.infer<typeof formSchema>) => {
-    const startedAt = convertDateToUTC(
+    const startedAt = convertDateToLocal(
       getTimeInISOString(values.started_at) as string,
     ) as string;
 
-    const finishedAt = convertDateToUTC(getTimeInISOString(values.finished_at));
+    const finishedAt = convertDateToLocal(
+      getTimeInISOString(values.finished_at),
+    );
 
     onSubmit({
       content: values.note,
