@@ -103,22 +103,28 @@ function Diary() {
     })();
   }, [date]);
 
-  const toggleHour = (e: React.MouseEvent<HTMLDivElement>, index: number) => {
-    e.stopPropagation();
-    setExpandedHours((prev) =>
-      prev.includes(index)
-        ? prev.filter((hour) => hour !== index)
-        : [...prev, index],
-    );
-  };
+  const toggleHour = React.useCallback(
+    (e: React.MouseEvent<HTMLDivElement>, index: number) => {
+      e.stopPropagation();
+      setExpandedHours((prev) =>
+        prev.includes(index)
+          ? prev.filter((hour) => hour !== index)
+          : [...prev, index],
+      );
+    },
+    [],
+  );
 
-  const handleCreateNote = (values: NoteRequest) => {
+  const handleCreateNote = React.useCallback((values: NoteRequest) => {
     notesService.createNote(values);
-  };
+  }, []);
 
-  const handleUpdateNote = (id: number, values: NoteRequest) => {
-    console.log(id, values);
-  };
+  const handleUpdateNote = React.useCallback(
+    (id: number, values: NoteRequest) => {
+      console.log(id, values);
+    },
+    [],
+  );
 
   const calculateCurrentTimeOffset = React.useCallback(() => {
     const baseHeightInPx = 60;
