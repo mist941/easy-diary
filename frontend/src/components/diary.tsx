@@ -101,7 +101,11 @@ function DiaryHour({
         sideOffset={-80}
         alignOffset={60}
       >
-        <NoteForm onSubmit={handleChangeNote} startMinutes={lastNoteMinutes} />
+        <NoteForm
+          onSubmit={handleChangeNote}
+          startMinutes={lastNoteMinutes}
+          startHours={timeString.split(':')[0]}
+        />
       </PopoverContent>
     </Popover>
   );
