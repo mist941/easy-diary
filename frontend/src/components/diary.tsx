@@ -1,6 +1,10 @@
 'use client';
 
-import { getCurrentTimeInMinutes } from '@/utils/time';
+import {
+  convertDateToUTC,
+  getCurrentTimeInMinutes,
+  getTimeInISOString,
+} from '@/utils/time';
 import { ScrollArea } from '@/components/scroll-area';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/popover';
 import { ChevronUp } from 'lucide-react';
@@ -79,10 +83,24 @@ function DiaryHour({
 function Diary() {
   const { date } = useCurrentSelectedDateStore();
   const [expandedHours, setExpandedHours] = React.useState<number[]>([]);
+  const [notes, setNotes] = React.useState<Note[]>([]);
   const currentTime = getCurrentTimeInMinutes();
 
   React.useEffect(() => {
-    console.log(date);
+    (async () => {
+      try {
+        const formattedDate = new Date(date);
+        const formattedDateString = formattedDate
+          .toISOString()
+          .replace('T', ' ')
+          .replace('Z', '');
+
+        const notes = await notesService.getNotes(formattedDateString);
+        setNotes(notes);
+      } catch (error) {
+        console.error(error);
+      }
+    })();
   }, [date]);
 
   const toggleHour = (e: React.MouseEvent<HTMLDivElement>, index: number) => {

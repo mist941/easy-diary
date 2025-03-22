@@ -6,7 +6,6 @@ import {
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
-  SidebarRail,
   SidebarSeparator,
 } from '@/components/sidebar';
 
@@ -19,7 +18,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarSeparator className="mx-0" />
       </SidebarContent>
       <SidebarFooter />
-      <SidebarRail />
     </Sidebar>
   );
 }

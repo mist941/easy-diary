@@ -2,8 +2,8 @@ import { NoteRequest } from '@/types/notes';
 import { API_URL } from '@/utils/constants';
 
 const notesService = {
-  async getNotes() {
-    const response = await fetch(`${API_URL}/notes`, {
+  async getNotes(day: string) {
+    const response = await fetch(`${API_URL}/notes?day=${day}`, {
       headers: {
         'Content-Type': 'application/json',
       },
