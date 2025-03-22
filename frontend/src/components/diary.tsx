@@ -52,8 +52,6 @@ function DiaryHour({
       : '00';
   }, [lastNote]);
 
-  console.log(lastNoteMinutes);
-
   const handleChangeNote = (values: NoteRequest) => {
     if (selectedNote) {
       updateNote(selectedNote.id, values);
@@ -103,7 +101,7 @@ function DiaryHour({
         sideOffset={-80}
         alignOffset={60}
       >
-        <NoteForm onSubmit={handleChangeNote} />
+        <NoteForm onSubmit={handleChangeNote} startMinutes={lastNoteMinutes} />
       </PopoverContent>
     </Popover>
   );
@@ -145,9 +143,7 @@ function Diary() {
   }, []);
 
   const handleUpdateNote = React.useCallback(
-    (id: number, values: NoteRequest) => {
-      console.log(id, values);
-    },
+    (id: number, values: NoteRequest) => {},
     [],
   );
 

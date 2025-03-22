@@ -19,14 +19,19 @@ const formSchema = z.object({
 interface NoteFormProps {
   onSubmit: (values: NoteRequest) => void;
   defaultValues?: z.infer<typeof formSchema>;
+  startMinutes?: string;
 }
 
-export function NoteForm({ onSubmit, defaultValues }: NoteFormProps) {
+export function NoteForm({
+  onSubmit,
+  defaultValues,
+  startMinutes = '00',
+}: NoteFormProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       note: defaultValues?.note || '',
-      started_at: defaultValues?.started_at || '12:00',
+      started_at: defaultValues?.started_at || `12:${startMinutes}`,
       finished_at: defaultValues?.finished_at || '',
     },
   });
