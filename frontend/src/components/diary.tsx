@@ -9,6 +9,8 @@ import { NoteForm } from './note-form';
 import { Note, NoteRequest } from '@/types/notes';
 import notesService from '@/services/notes';
 import useCurrentSelectedDateStore from '@/store/currentSelectedDateStore';
+import { getNotesForHour } from '@/utils/notes';
+
 interface DiaryHourProps {
   index: number;
   timeString: string;
@@ -163,6 +165,7 @@ function Diary() {
             index={index}
             timeString={timeString}
             isExpanded={expandedHours.includes(index)}
+            notes={getNotesForHour(notes, hour)}
             onToggle={(e: React.MouseEvent<HTMLDivElement>) =>
               toggleHour(e, index)
             }
