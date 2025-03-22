@@ -64,7 +64,18 @@ function DiaryHour({
               />
             </p>
           </div>
-          <div className="w-full h-full"></div>
+          <div className="w-full h-full pr-9 pl-9">
+            {notes.map((note) => (
+              <p key={note.id} className="text-xs text-foreground italic">
+                {new Date(note.started_at).toLocaleTimeString('en-US', {
+                  hour: '2-digit',
+                  minute: '2-digit',
+                })}
+                {': '}
+                {note.content}
+              </p>
+            ))}
+          </div>
         </div>
       </PopoverTrigger>
       <PopoverContent
