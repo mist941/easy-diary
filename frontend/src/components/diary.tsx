@@ -1,10 +1,6 @@
 'use client';
 
-import {
-  convertDateToUTC,
-  getCurrentTimeInMinutes,
-  getTimeInISOString,
-} from '@/utils/time';
+import { getCurrentTimeInMinutes } from '@/utils/time';
 import { ScrollArea } from '@/components/scroll-area';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/popover';
 import { ChevronUp } from 'lucide-react';
