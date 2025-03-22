@@ -1,3 +1,4 @@
+from datetime import datetime
 from .dto import NoteCreate
 from .interfaces import INoteRepository
 
@@ -10,5 +11,5 @@ class NoteService:
         note = await self.repo.create(note_data)
         return note
 
-    async def get_notes(self):
-        return await self.repo.list_all()
+    async def get_notes(self, day: datetime = None):
+        return await self.repo.list_all(day)

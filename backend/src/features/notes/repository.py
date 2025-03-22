@@ -40,7 +40,7 @@ class NoteRepository(INoteRepository):
             await self.db.rollback()
             raise e
 
-    async def list_all(self, day=None):
+    async def list_all(self, day: datetime = None):
         try:
             query = select(NoteModel)
 
