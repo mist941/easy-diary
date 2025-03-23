@@ -128,3 +128,15 @@ function isSameDay(date1: Date, date2: Date): boolean {
     date1.getDate() === date2.getDate()
   );
 }
+
+/**
+ * Extracts the time portion from a date string in HH:MM format
+ * @param {string} date - The date string to extract time from
+ * @returns {string} Formatted time string (HH:MM)
+ */
+export const extractTimeFromDate = (date: string): string => {
+  const dateObj = new Date(date);
+  const hours = String(dateObj.getHours()).padStart(2, '0');
+  const minutes = String(dateObj.getMinutes()).padStart(2, '0');
+  return `${hours}:${minutes}`;
+};

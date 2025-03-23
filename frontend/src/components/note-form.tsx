@@ -6,7 +6,11 @@ import { Textarea } from './textarea';
 import { TimePicker } from './time-picker';
 import { Button } from './button';
 import { NoteRequest, Note } from '@/types/notes';
-import { getTimeInISOString, convertDateToLocal } from '@/utils/time';
+import {
+  getTimeInISOString,
+  convertDateToLocal,
+  extractTimeFromDate,
+} from '@/utils/time';
 
 const formSchema = z.object({
   note: z.string().min(2, {
@@ -33,7 +37,9 @@ export function NoteForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
       note: defaultValues?.content || '',
-      started_at: defaultValues?.started_at || `${startHours}:${startMinutes}`,
+      started_at: defaultValues?.started_at
+        ? extractTimeFromDate(defaultValues.started_at)
+        : `${startHours}:${startMinutes}`,
       finished_at: defaultValues?.finished_at || '',
     },
   });
