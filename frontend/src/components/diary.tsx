@@ -7,7 +7,7 @@ import {
 } from '@/utils/time';
 import { ScrollArea } from '@/components/scroll-area';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/popover';
-import { ChevronUp } from 'lucide-react';
+import { ChevronUp, X } from 'lucide-react';
 import React from 'react';
 import { NoteForm } from './note-form';
 import { Note, NoteRequest } from '@/types/notes';
@@ -23,6 +23,7 @@ interface DiaryHourProps {
   onToggle: (e: React.MouseEvent<HTMLDivElement>) => void;
   createNote: (values: NoteRequest) => void;
   updateNote: (id: number, values: NoteRequest) => void;
+  deleteNote: (id: number) => void;
 }
 
 function DiaryHour({
@@ -33,6 +34,7 @@ function DiaryHour({
   onToggle,
   createNote,
   updateNote,
+  deleteNote,
 }: DiaryHourProps) {
   const [openNoteEditor, setOpenNoteEditor] = React.useState(false);
   const [selectedNote, setSelectedNote] = React.useState<Note | null>(null);
@@ -85,11 +87,21 @@ function DiaryHour({
           </div>
           <div className="w-full h-full pr-5 pl-5">
             {notes.slice(0, 3).map((note) => (
-              <p key={note.id} className="text-xs text-foreground italic">
-                {getDateForPreview(note.started_at)}
-                {': '}
-                {note.content}
-              </p>
+              <div key={note.id} className="flex items-center gap-2 group/note">
+                <p className="text-xs text-foreground italic">
+                  {getDateForPreview(note.started_at)}
+                  {': '}
+                  {note.content}
+                </p>
+                <X
+                  className="w-3 h-3 text-muted-foreground cursor-pointer opacity-0 group-hover/note:opacity-100 transition-opacity"
+                  color="red"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    deleteNote(note.id);
+                  }}
+                />
+              </div>
             ))}
           </div>
         </div>
@@ -140,15 +152,31 @@ function Diary() {
     [],
   );
 
-  const handleCreateNote = React.useCallback(async (values: NoteRequest) => {
-    await notesService.createNote(values);
-    const notes = await notesService.getNotes(getDateForRequest(date));
-    setNotes(notes);
-  }, []);
+  const handleCreateNote = React.useCallback(
+    async (values: NoteRequest) => {
+      await notesService.createNote(values);
+      const notes = await notesService.getNotes(getDateForRequest(date));
+      setNotes(notes);
+    },
+    [date],
+  );
 
   const handleUpdateNote = React.useCallback(
-    (id: number, values: NoteRequest) => {},
-    [],
+    async (id: number, values: NoteRequest) => {
+      await notesService.updateNote(id, values);
+      const notes = await notesService.getNotes(getDateForRequest(date));
+      setNotes(notes);
+    },
+    [date],
+  );
+
+  const handleDeleteNote = React.useCallback(
+    async (id: number) => {
+      await notesService.deleteNote(id);
+      const notes = await notesService.getNotes(getDateForRequest(date));
+      setNotes(notes);
+    },
+    [date],
   );
 
   const calculateCurrentTimeOffset = React.useCallback(() => {
@@ -196,6 +224,7 @@ function Diary() {
             }
             createNote={handleCreateNote}
             updateNote={handleUpdateNote}
+            deleteNote={handleDeleteNote}
           />
         );
       })}

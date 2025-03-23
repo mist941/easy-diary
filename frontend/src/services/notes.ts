@@ -20,6 +20,19 @@ const notesService = {
     });
     return response.json();
   },
+  async deleteNote(id: number) {
+    const response = await fetch(`${API_URL}/notes/${id}`, {
+      method: 'DELETE',
+    });
+    return response.json();
+  },
+  async updateNote(id: number, note: NoteRequest) {
+    const response = await fetch(`${API_URL}/notes/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(note),
+    });
+    return response.json();
+  },
 };
 
 export default notesService;

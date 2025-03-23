@@ -1,8 +1,8 @@
 export interface Note {
   id: number;
   content: string;
-  started_at: Date;
-  finished_at: Date | null;
+  started_at: string;
+  finished_at: string | null;
 }
 
 export interface NoteRequest {
