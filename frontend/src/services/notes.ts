@@ -23,6 +23,9 @@ const notesService = {
   async deleteNote(id: number) {
     const response = await fetch(`${API_URL}/notes/${id}`, {
       method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
     return response.json();
   },
@@ -30,6 +33,9 @@ const notesService = {
     const response = await fetch(`${API_URL}/notes/${id}`, {
       method: 'PUT',
       body: JSON.stringify(note),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
     return response.json();
   },

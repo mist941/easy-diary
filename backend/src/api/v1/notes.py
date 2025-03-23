@@ -35,4 +35,5 @@ async def update_note(
     note_data: NoteUpdate,
     note_service: NoteService = Depends(get_note_service),
 ):
+    print(note_data)
     await note_service.update_note(note_id, note_data)

@@ -69,8 +69,13 @@ function DiaryHour({
     setOpenNoteEditor(false);
   };
 
+  const handleOpenNoteEditor = (open: boolean) => {
+    setOpenNoteEditor(open);
+    setSelectedNote(null);
+  };
+
   return (
-    <Popover open={openNoteEditor} onOpenChange={setOpenNoteEditor}>
+    <Popover open={openNoteEditor} onOpenChange={handleOpenNoteEditor}>
       <PopoverTrigger asChild>
         <div
           className={`dotted-pattern w-full p-1.5 hover:bg-muted group flex items-start gap-1.5 transition-all duration-300 ease-in-out
