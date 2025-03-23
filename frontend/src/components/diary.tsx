@@ -39,6 +39,11 @@ function DiaryHour({
   const [openNoteEditor, setOpenNoteEditor] = React.useState(false);
   const [selectedNote, setSelectedNote] = React.useState<Note | null>(null);
 
+  let notesForView = notes;
+
+  if (!isExpanded) {
+    notesForView = notes.slice(0, 3);
+  }
   const lastNote = React.useMemo(() => {
     return [...notes]
       .sort(
@@ -52,7 +57,7 @@ function DiaryHour({
     return lastNote?.started_at
       ? String(new Date(lastNote.started_at).getMinutes() + 1).padStart(2, '0')
       : '00';
-  }, [lastNote]);
+  }, [lastNote?.started_at]);
 
   const handleChangeNote = (values: NoteRequest) => {
     if (selectedNote) {
@@ -86,7 +91,7 @@ function DiaryHour({
             </p>
           </div>
           <div className="w-full h-full pr-5 pl-5">
-            {notes.slice(0, 3).map((note) => (
+            {notesForView.map((note) => (
               <div key={note.id} className="flex items-center gap-2 group/note">
                 <p className="text-xs text-foreground italic">
                   {getDateForPreview(note.started_at)}
