@@ -15,17 +15,14 @@ import { AppSidebar } from '@/components/app-sidebar';
 import { Separator } from '@/components/separator';
 import { ThemeToggle } from '@/components/theme-toggle';
 import useCurrentSelectedDateStore from '@/store/currentSelectedDateStore';
+import { getHumanReadableDate } from '@/utils/time';
 interface MainTemplateProps {
   children: React.ReactNode;
 }
 
 export default function MainTemplate({ children }: MainTemplateProps) {
   const { date } = useCurrentSelectedDateStore();
-  const formattedDate = date.toLocaleDateString('en-US', {
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
-  });
+  const formattedDate = getHumanReadableDate(date);
   return (
     <SidebarProvider>
       <AppSidebar />
