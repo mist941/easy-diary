@@ -7,7 +7,7 @@ import {
 } from '@/utils/time';
 import { ScrollArea } from '@/components/scroll-area';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/popover';
-import { ChevronUp, X } from 'lucide-react';
+import { ChevronUp, Pencil, X } from 'lucide-react';
 import React from 'react';
 import { NoteForm } from './note-form';
 import { Note, NoteRequest } from '@/types/notes';
@@ -98,6 +98,15 @@ function DiaryHour({
                   {': '}
                   {note.content}
                 </p>
+                <Pencil
+                  className="w-3 h-3 text-muted-foreground cursor-pointer opacity-0 group-hover/note:opacity-100 transition-opacity"
+                  color="gray"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelectedNote(note);
+                    setOpenNoteEditor(true);
+                  }}
+                />
                 <X
                   className="w-3 h-3 text-muted-foreground cursor-pointer opacity-0 group-hover/note:opacity-100 transition-opacity"
                   color="red"
@@ -122,6 +131,7 @@ function DiaryHour({
           onSubmit={handleChangeNote}
           startMinutes={lastNoteMinutes}
           startHours={timeString.split(':')[0]}
+          defaultValues={selectedNote}
         />
       </PopoverContent>
     </Popover>

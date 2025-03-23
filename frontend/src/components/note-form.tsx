@@ -5,7 +5,7 @@ import { z } from 'zod';
 import { Textarea } from './textarea';
 import { TimePicker } from './time-picker';
 import { Button } from './button';
-import { NoteRequest } from '@/types/notes';
+import { NoteRequest, Note } from '@/types/notes';
 import { getTimeInISOString, convertDateToLocal } from '@/utils/time';
 
 const formSchema = z.object({
@@ -18,7 +18,7 @@ const formSchema = z.object({
 
 interface NoteFormProps {
   onSubmit: (values: NoteRequest) => void;
-  defaultValues?: z.infer<typeof formSchema>;
+  defaultValues?: Note;
   startMinutes?: string;
   startHours?: string;
 }
@@ -32,7 +32,7 @@ export function NoteForm({
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      note: defaultValues?.note || '',
+      note: defaultValues?.content || '',
       started_at: defaultValues?.started_at || `${startHours}:${startMinutes}`,
       finished_at: defaultValues?.finished_at || '',
     },

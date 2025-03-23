@@ -1,17 +1,9 @@
-from src.features.notes.dto import NoteCreate
+from src.features.notes.dto import NoteCreate, NoteUpdate
 from fastapi import APIRouter, Depends, Query
-from src.features.notes.services import NoteService
-from src.features.notes.repository import NoteRepository
-from src.core.database import get_db
-from sqlalchemy.ext.asyncio import AsyncSession
+from src.features.notes.services import NoteService, get_note_service
 from datetime import datetime
 
 router = APIRouter()
-
-
-def get_note_service(db: AsyncSession = Depends(get_db)):
-    note_repository = NoteRepository(db)
-    return NoteService(note_repository)
 
 
 @router.get("/notes")
@@ -28,3 +20,19 @@ async def create_note(
 ):
     note = await note_service.create_note(note_data)
     return note
+
+
+@router.delete("/notes/{note_id}")
+async def delete_note(
+    note_id: int, note_service: NoteService = Depends(get_note_service)
+):
+    await note_service.delete_note(note_id)
+
+
+@router.put("/notes/{note_id}")
+async def update_note(
+    note_id: int,
+    note_data: NoteUpdate,
+    note_service: NoteService = Depends(get_note_service),
+):
+    await note_service.update_note(note_id, note_data)

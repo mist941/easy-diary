@@ -1,9 +1,10 @@
-from .dto import NoteCreate
+from .dto import NoteCreate, NoteUpdate
 from src.core.database import Base, AsyncSession
 from sqlalchemy import Column, Integer, String, DateTime, select
 from datetime import datetime, timezone, timedelta
 from .entities import Note
 from .interfaces import INoteRepository
+from fastapi import HTTPException
 
 
 class NoteModel(Base):
@@ -30,6 +31,32 @@ class NoteRepository(INoteRepository):
             self.db.add(note)
             await self.db.commit()
             await self.db.refresh(note)
+            return Note(
+                id=note.id,
+                content=note.content,
+                started_at=note.started_at,
+                finished_at=note.finished_at,
+            )
+        except Exception as e:
+            await self.db.rollback()
+            raise e
+
+    async def update(self, note_id: int, note_data: NoteUpdate) -> Note:
+        try:
+            note = await self.db.execute(
+                select(NoteModel).where(NoteModel.id == note_id)
+            )
+            note = note.scalar_one_or_none()
+            if note is None:
+                raise HTTPException(status_code=404, detail="Note not found")
+
+            note.content = note_data.content
+            note.started_at = note_data.started_at
+            note.finished_at = note_data.finished_at
+
+            await self.db.commit()
+            await self.db.refresh(note)
+
             return Note(
                 id=note.id,
                 content=note.content,
