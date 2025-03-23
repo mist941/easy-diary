@@ -69,13 +69,30 @@ function DiaryHour({
     setOpenNoteEditor(false);
   };
 
-  const handleOpenNoteEditor = (open: boolean) => {
+  const toggleNoteEditor = (open: boolean) => {
     setOpenNoteEditor(open);
     setSelectedNote(null);
   };
 
+  const handleOpenEditor = React.useCallback(
+    (e: React.MouseEvent<SVGSVGElement>, note: Note) => {
+      e.stopPropagation();
+      setSelectedNote(note);
+      setOpenNoteEditor(true);
+    },
+    [],
+  );
+
+  const handleDeleteNote = React.useCallback(
+    (e: React.MouseEvent<SVGSVGElement>, note: Note) => {
+      e.stopPropagation();
+      deleteNote(note.id);
+    },
+    [],
+  );
+
   return (
-    <Popover open={openNoteEditor} onOpenChange={handleOpenNoteEditor}>
+    <Popover open={openNoteEditor} onOpenChange={toggleNoteEditor}>
       <PopoverTrigger asChild>
         <div
           className={`dotted-pattern w-full p-1.5 hover:bg-muted group flex items-start gap-1.5 transition-all duration-300 ease-in-out
@@ -106,19 +123,12 @@ function DiaryHour({
                 <Pencil
                   className="w-3 h-3 text-muted-foreground cursor-pointer opacity-0 group-hover/note:opacity-100 transition-opacity"
                   color="gray"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setSelectedNote(note);
-                    setOpenNoteEditor(true);
-                  }}
+                  onClick={(e) => handleOpenEditor(e, note)}
                 />
                 <X
                   className="w-3 h-3 text-muted-foreground cursor-pointer opacity-0 group-hover/note:opacity-100 transition-opacity"
                   color="red"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    deleteNote(note.id);
-                  }}
+                  onClick={(e) => handleDeleteNote(e, note)}
                 />
               </div>
             ))}
