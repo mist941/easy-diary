@@ -22,7 +22,7 @@ const formSchema = z.object({
 
 interface NoteFormProps {
   onSubmit: (values: NoteRequest) => void;
-  defaultValues?: Note;
+  defaultValues?: Note | null;
   startMinutes?: string;
   startHours?: string;
 }
