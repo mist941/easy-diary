@@ -1,7 +1,9 @@
-from src.features.notes.dto import NoteCreate, NoteUpdate
-from fastapi import APIRouter, Depends, Query
-from src.features.notes.services import NoteService, get_note_service
 from datetime import datetime
+
+from fastapi import APIRouter, Depends, Query
+
+from src.features.notes.dto import NoteCreate, NoteUpdate
+from src.features.notes.services import NoteService, get_note_service
 
 router = APIRouter()
 

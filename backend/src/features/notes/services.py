@@ -1,11 +1,12 @@
 from datetime import datetime
 
-from src.core.database import get_db
+from fastapi import Depends
+
+from src.core.database import AsyncSession, get_db
 from src.features.notes.repository import NoteRepository
+
 from .dto import NoteCreate, NoteUpdate
 from .interfaces import INoteRepository
-from fastapi import Depends
-from src.core.database import AsyncSession
 
 
 class NoteService:

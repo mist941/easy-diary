@@ -1,5 +1,6 @@
-from typing import List
 from datetime import datetime
+from typing import List
+
 from .dto import NoteCreate, NoteUpdate
 from .entities import Note
 

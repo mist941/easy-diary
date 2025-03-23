@@ -1,10 +1,13 @@
+from datetime import datetime, timedelta, timezone
+
+from fastapi import HTTPException
+from sqlalchemy import Column, DateTime, Integer, String, select
+
+from src.core.database import AsyncSession, Base
+
 from .dto import NoteCreate, NoteUpdate
-from src.core.database import Base, AsyncSession
-from sqlalchemy import Column, Integer, String, DateTime, select
-from datetime import datetime, timezone, timedelta
 from .entities import Note
 from .interfaces import INoteRepository
-from fastapi import HTTPException
 
 
 class NoteModel(Base):
