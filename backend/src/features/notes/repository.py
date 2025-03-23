@@ -67,6 +67,21 @@ class NoteRepository(INoteRepository):
             await self.db.rollback()
             raise e
 
+    async def delete(self, note_id: int) -> None:
+        try:
+            note = await self.db.execute(
+                select(NoteModel).where(NoteModel.id == note_id)
+            )
+            note = note.scalar_one_or_none()
+            if note is None:
+                raise HTTPException(status_code=404, detail="Note not found")
+
+            await self.db.delete(note)
+            await self.db.commit()
+        except Exception as e:
+            await self.db.rollback()
+            raise e
+
     async def list_all(self, day: datetime = None):
         try:
             query = select(NoteModel).order_by(NoteModel.started_at)
