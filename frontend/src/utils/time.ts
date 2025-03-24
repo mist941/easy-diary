@@ -28,7 +28,7 @@ export function getDateForRequest(date: Date): string {
  */
 export const getTimeInISOString = (
   time: string | null,
-  date?: string | null,
+  date?: Date,
 ): string | null => {
   if (!time) return null;
 
