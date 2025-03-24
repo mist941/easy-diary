@@ -26,7 +26,10 @@ export function getDateForRequest(date: Date): string {
  * @param {string | null} time - Time string in HH:MM format
  * @returns {string | null} ISO formatted time string or null if input is null
  */
-export const getTimeInISOString = (time: string | null): string | null => {
+export const getTimeInISOString = (
+  time: string | null,
+  date?: string | null,
+): string | null => {
   if (!time) return null;
 
   // Validate time format
@@ -35,12 +38,12 @@ export const getTimeInISOString = (time: string | null): string | null => {
   }
 
   const [hours, minutes] = time.split(':').map(Number);
-  const date = new Date();
-  date.setHours(hours);
-  date.setMinutes(minutes);
-  date.setSeconds(0);
-  date.setMilliseconds(0);
-  return date.toISOString();
+  const dateObj = date ? new Date(date) : new Date();
+  dateObj.setHours(hours);
+  dateObj.setMinutes(minutes);
+  dateObj.setSeconds(0);
+  dateObj.setMilliseconds(0);
+  return dateObj.toISOString();
 };
 
 /**

@@ -11,7 +11,7 @@ import {
   convertDateToLocal,
   extractTimeFromDate,
 } from '@/utils/time';
-
+import useCurrentSelectedDateStore from '@/store/current-selected-date-store';
 const formSchema = z.object({
   note: z.string().min(2, {
     message: 'Note must be at least 2 characters.',
@@ -33,6 +33,7 @@ export function NoteForm({
   startMinutes = '00',
   startHours = '12',
 }: NoteFormProps) {
+  const { date } = useCurrentSelectedDateStore();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -46,7 +47,7 @@ export function NoteForm({
 
   const handleSubmit = (values: z.infer<typeof formSchema>) => {
     const startedAt = convertDateToLocal(
-      getTimeInISOString(values.started_at) as string,
+      getTimeInISOString(values.started_at, date) as string,
     ) as string;
 
     const finishedAt = convertDateToLocal(

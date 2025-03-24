@@ -12,7 +12,7 @@ import React from 'react';
 import { NoteForm } from './note-form';
 import { Note, NoteRequest } from '@/types/notes';
 import notesService from '@/services/notes';
-import useCurrentSelectedDateStore from '@/store/currentSelectedDateStore';
+import useCurrentSelectedDateStore from '@/store/current-selected-date-store';
 import { getNotesForHour } from '@/utils/notes';
 
 interface DiaryHourProps {

@@ -14,7 +14,7 @@ import {
 import { AppSidebar } from '@/components/app-sidebar';
 import { Separator } from '@/components/separator';
 import { ThemeToggle } from '@/components/theme-toggle';
-import useCurrentSelectedDateStore from '@/store/currentSelectedDateStore';
+import useCurrentSelectedDateStore from '@/store/current-selected-date-store';
 import { getHumanReadableDate } from '@/utils/time';
 interface MainTemplateProps {
   children: React.ReactNode;

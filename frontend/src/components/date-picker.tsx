@@ -2,7 +2,7 @@
 
 import { Calendar } from '@/components/calendar';
 import { SidebarGroup, SidebarGroupContent } from '@/components/sidebar';
-import useCurrentSelectedDateStore from '@/store/currentSelectedDateStore';
+import useCurrentSelectedDateStore from '@/store/current-selected-date-store';
 
 export function DatePicker() {
   const { setDate, date } = useCurrentSelectedDateStore();
