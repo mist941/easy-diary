@@ -21,8 +21,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY backend/ .
 
 # Copy built frontend from previous stage
-COPY --from=frontend-builder /app/frontend/.next /app/frontend/.next
-COPY --from=frontend-builder /app/frontend/public /app/frontend/public
+COPY --from=frontend-builder /app/frontend/ /app/frontend/
 
 # Copy nginx configuration
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
