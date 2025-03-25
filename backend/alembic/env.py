@@ -3,9 +3,9 @@ import os
 from dotenv import load_dotenv
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
+
 load_dotenv()
 from alembic import context
-
 
 
 # this is the Alembic Config object, which provides
@@ -30,10 +30,12 @@ target_metadata = None
 POSTGRES_USER = os.getenv("POSTGRES_USER")
 POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD")
 POSTGRES_DB = os.getenv("POSTGRES_DB")
+DB_HOST = os.getenv("DB_HOST")
 
-db_url = f"postgresql+psycopg://{POSTGRES_USER}:{POSTGRES_PASSWORD}@localhost:5432/{POSTGRES_DB}"
+db_url = f"postgresql+psycopg://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{DB_HOST}:5432/{POSTGRES_DB}"
 
 config.set_main_option("sqlalchemy.url", db_url)
+
 
 def run_migrations_offline() -> None:
     """Run migrations in 'offline' mode.
@@ -73,9 +75,7 @@ def run_migrations_online() -> None:
     )
 
     with connectable.connect() as connection:
-        context.configure(
-            connection=connection, target_metadata=target_metadata
-        )
+        context.configure(connection=connection, target_metadata=target_metadata)
 
         with context.begin_transaction():
             context.run_migrations()
