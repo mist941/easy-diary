@@ -2,6 +2,7 @@ fastapi==0.115.11
 uvicorn[standard]==0.34.0
 sqlalchemy[asyncio]==2.0.39
 asyncpg==0.30.0
+psycopg[binary]==3.2.6
 alembic==1.15.1
 python-dotenv==1.0.1
 pydantic==2.10.6
