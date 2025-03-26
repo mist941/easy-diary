@@ -1,6 +1,6 @@
 # 📝 Easy Diary
 
-Easy Diary is a modern web application for journaling that makes it easy to record notes.
+Easy Diary is a modern web application designed for convenient digital journaling, allowing you to effortlessly capture, organize, and reflect on your daily thoughts and experiences in a digital format.
 
 ## ⭐ Support the Project
 If you find Easy Diary useful, please consider giving it a star on GitHub! Your support helps the project grow.
@@ -12,6 +12,8 @@ If you find Easy Diary useful, please consider giving it a star on GitHub! Your 
 - ⚡ Fast performance with Next.js and FastAPI
 - 🔒 Secure data storage with PostgreSQL
 - 🐳 Full Docker support for easy deployment
+- 📅 Daily journal entries organization
+- 🔍 Easy navigation through past entries
 
 ## 🛠️ Tech Stack
 
@@ -100,6 +102,3 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ---
 
 Made with ❤️ in Ukraine
-
-## ⭐ Star the Repository
-If you like this project, please show your support by starring the repository on GitHub.
