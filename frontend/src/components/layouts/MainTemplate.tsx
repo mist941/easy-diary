@@ -13,7 +13,7 @@ import {
 } from '@/components/layouts/Sidebar';
 import { AppSidebar } from '@/components/layouts/AppSidebar';
 import { Separator } from '@/components/ui/Separator';
-import { ThemeToggle } from '@/components/theme-toggle';
+import { ThemeToggle } from '@/components/features/theme/components/ThemeToggle';
 import useCurrentSelectedDateStore from '@/store/current-selected-date-store';
 import { getHumanReadableDate } from '@/utils/time';
 interface MainTemplateProps {

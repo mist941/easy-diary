@@ -1,10 +1,16 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { Form, FormControl, FormField, FormItem, FormMessage } from './form';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from '@/components/ui/Form';
 import { z } from 'zod';
-import { Textarea } from './ui/Textarea';
-import { TimePicker } from './time-picker';
-import { Button } from './ui/Button';
+import { Textarea } from '@/components/ui/Textarea';
+import { TimePicker } from '@/components/ui/TimePicker';
+import { Button } from '@/components/ui/Button';
 import { NoteRequest, Note } from '@/types/notes';
 import {
   getTimeInISOString,
@@ -12,6 +18,7 @@ import {
   extractTimeFromDate,
 } from '@/utils/time';
 import useCurrentSelectedDateStore from '@/store/current-selected-date-store';
+
 const formSchema = z.object({
   note: z.string().min(2, {
     message: 'Note must be at least 2 characters.',

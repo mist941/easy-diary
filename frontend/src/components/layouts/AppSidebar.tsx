@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { DatePicker } from '@/components/date-picker';
+import { DatePicker } from '@/components/layouts/DatePicker';
 
 import {
   Sidebar,

@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/Popover';
 import { Pencil, X } from 'lucide-react';
 import React from 'react';
-import { NoteForm } from './note-form';
+import { NoteForm } from '../../notes/components/NoteForm';
 import { Note, NoteRequest } from '@/types/notes';
 import notesService from '@/services/notes';
 import useCurrentSelectedDateStore from '@/store/current-selected-date-store';
