@@ -11,7 +11,8 @@ import { z } from 'zod';
 import { Textarea } from '@/components/ui/Textarea';
 import { TimePicker } from '@/components/ui/TimePicker';
 import { Button } from '@/components/ui/Button';
-import { NoteRequest, Note } from '@/types/notes';
+import { NoteRequest } from '@/components/features/notes/api/types';
+import { NoteI } from '@/components/features/notes/types';
 import {
   getTimeInISOString,
   convertDateToLocal,
@@ -29,7 +30,7 @@ const formSchema = z.object({
 
 interface NoteFormProps {
   onSubmit: (values: NoteRequest) => void;
-  defaultValues?: Note | null;
+  defaultValues?: NoteI | null;
   startMinutes?: string;
   startHours?: string;
 }

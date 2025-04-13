@@ -14,15 +14,16 @@ import {
 import { Pencil, X } from 'lucide-react';
 import React from 'react';
 import { NoteForm } from '../../notes/components/NoteForm';
-import { Note, NoteRequest } from '@/types/notes';
-import notesService from '@/services/notes';
+import { NoteRequest } from '@/components/features/notes/api/types';
+import { NoteI } from '@/components/features/notes/types';
+import notesApi from '@/components/features/notes/api';
 import useCurrentSelectedDateStore from '@/store/current-selected-date-store';
-import { getNotesForHour } from '@/utils/notes';
+import { getNotesForHour } from '@/components/features/notes/utils';
 
 interface DiaryHourProps {
   index: number;
   timeString: string;
-  notes: Note[];
+  notes: NoteI[];
   createNote: (values: NoteRequest) => void;
   updateNote: (id: number, values: NoteRequest) => void;
   deleteNote: (id: number) => void;
@@ -37,7 +38,7 @@ function DiaryHour({
   deleteNote,
 }: DiaryHourProps) {
   const [openNoteEditor, setOpenNoteEditor] = React.useState(false);
-  const [selectedNote, setSelectedNote] = React.useState<Note | null>(null);
+  const [selectedNote, setSelectedNote] = React.useState<NoteI | null>(null);
 
   const lastNote = React.useMemo(() => {
     return [...notes]
@@ -70,7 +71,7 @@ function DiaryHour({
   };
 
   const handleOpenEditor = React.useCallback(
-    (e: React.MouseEvent<SVGSVGElement>, note: Note) => {
+    (e: React.MouseEvent<SVGSVGElement>, note: NoteI) => {
       e.stopPropagation();
       setSelectedNote(note);
       setOpenNoteEditor(true);
@@ -79,7 +80,7 @@ function DiaryHour({
   );
 
   const handleDeleteNote = React.useCallback(
-    (e: React.MouseEvent<SVGSVGElement>, note: Note) => {
+    (e: React.MouseEvent<SVGSVGElement>, note: NoteI) => {
       e.stopPropagation();
       deleteNote(note.id);
     },
@@ -142,7 +143,7 @@ function DiaryHour({
 
 function Diary() {
   const { date } = useCurrentSelectedDateStore();
-  const [notes, setNotes] = React.useState<Note[]>([]);
+  const [notes, setNotes] = React.useState<NoteI[]>([]);
   const [loading, setLoading] = React.useState(false);
   const hoursRef = React.useRef<HTMLDivElement>(null);
   const offsetRef = React.useRef<HTMLDivElement>(null);
@@ -151,7 +152,7 @@ function Diary() {
   React.useEffect(() => {
     (async () => {
       try {
-        const notes = await notesService.getNotes(getDateForRequest(date));
+        const notes = await notesApi.getNotes(getDateForRequest(date));
         setNotes(notes);
       } catch (error) {
         console.error(error);
@@ -183,8 +184,8 @@ function Diary() {
 
   const handleCreateNote = React.useCallback(
     async (values: NoteRequest) => {
-      await notesService.createNote(values);
-      const notes = await notesService.getNotes(getDateForRequest(date));
+      await notesApi.createNote(values);
+      const notes = await notesApi.getNotes(getDateForRequest(date));
       setNotes(notes);
     },
     [date],
@@ -192,8 +193,8 @@ function Diary() {
 
   const handleUpdateNote = React.useCallback(
     async (id: number, values: NoteRequest) => {
-      await notesService.updateNote(id, values);
-      const notes = await notesService.getNotes(getDateForRequest(date));
+      await notesApi.updateNote(id, values);
+      const notes = await notesApi.getNotes(getDateForRequest(date));
       setNotes(notes);
     },
     [date],
@@ -201,8 +202,8 @@ function Diary() {
 
   const handleDeleteNote = React.useCallback(
     async (id: number) => {
-      await notesService.deleteNote(id);
-      const notes = await notesService.getNotes(getDateForRequest(date));
+      await notesApi.deleteNote(id);
+      const notes = await notesApi.getNotes(getDateForRequest(date));
       setNotes(notes);
     },
     [date],
