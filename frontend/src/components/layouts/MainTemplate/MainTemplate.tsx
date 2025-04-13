@@ -10,7 +10,7 @@ import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
-} from '@/components/layouts/Sidebar/Sidebar';
+} from '@/components/layouts/Sidebar';
 import { AppSidebar } from '@/components/layouts/AppSidebar';
 import { Separator } from '@/components/ui/Separator';
 import { ThemeToggle } from '@/components/features/theme/components/ThemeToggle';

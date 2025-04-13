@@ -4,7 +4,7 @@ import { Calendar } from '@/components/layouts/Calendar';
 import {
   SidebarGroup,
   SidebarGroupContent,
-} from '@/components/layouts/Sidebar/Sidebar';
+} from '@/components/layouts/Sidebar';
 import useCurrentSelectedDateStore from '@/store/current-selected-date-store';
 
 export function DatePicker() {
