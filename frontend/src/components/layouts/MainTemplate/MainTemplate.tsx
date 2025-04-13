@@ -16,6 +16,7 @@ import { Separator } from '@/components/ui/Separator';
 import { ThemeToggle } from '@/components/features/theme/components/ThemeToggle';
 import useCurrentSelectedDateStore from '@/store/current-selected-date-store';
 import { getHumanReadableDate } from '@/utils/time';
+
 interface MainTemplateProps {
   children: React.ReactNode;
 }
@@ -23,6 +24,7 @@ interface MainTemplateProps {
 function MainTemplate({ children }: MainTemplateProps) {
   const { date } = useCurrentSelectedDateStore();
   const formattedDate = getHumanReadableDate(date);
+
   return (
     <SidebarProvider>
       <AppSidebar />
