@@ -1,0 +1,2 @@
+172.18.0.1 - - [13/Apr/2025:14:26:09 +0000] "POST /api/v1/notes HTTP/1.1" 200 123 "http://localhost:3050/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"
+172.18.0.1 - - [13/Apr/2025:14:26:09 +0000] "GET /api/v1/notes?day=2025-04-13 HTTP/1.1" 200 1853 "http://localhost:3050/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36"

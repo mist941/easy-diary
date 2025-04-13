@@ -10,7 +10,7 @@ import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
-} from '@/components/layouts/Sidebar';
+} from '@/components/layouts/Sidebar/Sidebar';
 import { AppSidebar } from '@/components/layouts/AppSidebar';
 import { Separator } from '@/components/ui/Separator';
 import { ThemeToggle } from '@/components/features/theme/components/ThemeToggle';
@@ -20,7 +20,7 @@ interface MainTemplateProps {
   children: React.ReactNode;
 }
 
-export default function MainTemplate({ children }: MainTemplateProps) {
+function MainTemplate({ children }: MainTemplateProps) {
   const { date } = useCurrentSelectedDateStore();
   const formattedDate = getHumanReadableDate(date);
   return (
@@ -49,3 +49,5 @@ export default function MainTemplate({ children }: MainTemplateProps) {
     </SidebarProvider>
   );
 }
+
+export { MainTemplate };
