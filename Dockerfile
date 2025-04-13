@@ -1,5 +1,5 @@
 # Stage 1: Build Frontend
-FROM node:23-alpine as frontend-builder
+FROM node:23 as frontend-builder
 WORKDIR /app/frontend
 COPY frontend/package*.json ./
 RUN npm install --legacy-peer-deps
