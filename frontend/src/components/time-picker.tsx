@@ -1,10 +1,14 @@
 'use client';
 
 import * as React from 'react';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/popover';
-import { Button } from '@/components/button';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/Popover';
+import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
-import { ScrollArea } from '@/components/scroll-area';
+import { ScrollArea } from '@/components/ui/ScrollArea';
 
 const hours = Array.from({ length: 24 }, (_, i) => String(i).padStart(2, '0'));
 const minutes = Array.from({ length: 60 }, (_, i) =>

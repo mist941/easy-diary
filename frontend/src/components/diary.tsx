@@ -5,8 +5,12 @@ import {
   getDateForPreview,
   getDateForRequest,
 } from '@/utils/time';
-import { ScrollArea } from '@/components/scroll-area';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/popover';
+import { ScrollArea } from '@/components/ui/ScrollArea';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/Popover';
 import { Pencil, X } from 'lucide-react';
 import React from 'react';
 import { NoteForm } from './note-form';

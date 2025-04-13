@@ -7,7 +7,7 @@ import {
   SidebarFooter,
   SidebarHeader,
   SidebarSeparator,
-} from '@/components/sidebar';
+} from '@/components/layouts/Sidebar';
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (

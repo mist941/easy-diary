@@ -2,9 +2,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { Form, FormControl, FormField, FormItem, FormMessage } from './form';
 import { z } from 'zod';
-import { Textarea } from './textarea';
+import { Textarea } from './ui/Textarea';
 import { TimePicker } from './time-picker';
-import { Button } from './button';
+import { Button } from './ui/Button';
 import { NoteRequest, Note } from '@/types/notes';
 import {
   getTimeInISOString,

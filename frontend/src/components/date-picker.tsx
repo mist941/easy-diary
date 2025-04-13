@@ -1,7 +1,10 @@
 'use client';
 
 import { Calendar } from '@/components/calendar';
-import { SidebarGroup, SidebarGroupContent } from '@/components/sidebar';
+import {
+  SidebarGroup,
+  SidebarGroupContent,
+} from '@/components/layouts/Sidebar';
 import useCurrentSelectedDateStore from '@/store/current-selected-date-store';
 
 export function DatePicker() {

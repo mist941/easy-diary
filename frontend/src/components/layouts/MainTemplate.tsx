@@ -5,14 +5,14 @@ import {
   BreadcrumbItem,
   BreadcrumbList,
   BreadcrumbPage,
-} from '@/components/breadcrumb';
+} from '@/components/ui/Breadcrumb';
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
-} from '@/components/sidebar';
-import { AppSidebar } from '@/components/app-sidebar';
-import { Separator } from '@/components/separator';
+} from '@/components/layouts/Sidebar';
+import { AppSidebar } from '@/components/layouts/AppSidebar';
+import { Separator } from '@/components/ui/Separator';
 import { ThemeToggle } from '@/components/theme-toggle';
 import useCurrentSelectedDateStore from '@/store/current-selected-date-store';
 import { getHumanReadableDate } from '@/utils/time';
