@@ -12,6 +12,12 @@ import {
 import { useSidebar } from './useSidebar';
 import { SIDEBAR_WIDTH_MOBILE } from './constants';
 
+interface SidebarProps extends React.ComponentProps<'div'> {
+  side?: 'left' | 'right';
+  variant?: 'sidebar' | 'floating' | 'inset';
+  collapsible?: 'offcanvas' | 'icon' | 'none';
+}
+
 function Sidebar({
   side = 'left',
   variant = 'sidebar',
@@ -19,11 +25,7 @@ function Sidebar({
   className,
   children,
   ...props
-}: React.ComponentProps<'div'> & {
-  side?: 'left' | 'right';
-  variant?: 'sidebar' | 'floating' | 'inset';
-  collapsible?: 'offcanvas' | 'icon' | 'none';
-}) {
+}: SidebarProps) {
   const { isMobile, state, openMobile, setOpenMobile } = useSidebar();
 
   if (collapsible === 'none') {
