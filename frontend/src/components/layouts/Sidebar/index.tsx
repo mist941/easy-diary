@@ -1,4 +1,3 @@
-export { Sidebar } from './Sidebar';
 export { SidebarHeader } from './SidebarHeader';
 export { SidebarFooter } from './SidebarFooter';
 export { SidebarSeparator } from './SidebarSeparator';
@@ -6,5 +5,6 @@ export { SidebarContent } from './SidebarContent';
 export { SidebarGroup } from './SidebarGroup';
 export { SidebarGroupContent } from './SidebarGroupContent';
 export { SidebarInset } from './SidebarInset';
-export { SidebarProvider } from './SidebarContext';
 export { SidebarTrigger } from './SidebarTrigger';
+export { SidebarProvider } from './SidebarContext';
+export { Sidebar } from './Sidebar';
