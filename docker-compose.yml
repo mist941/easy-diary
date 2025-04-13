@@ -27,6 +27,9 @@ services:
       - POSTGRES_DB=${POSTGRES_DB}
     ports:
       - "3050:80"
+    volumes:
+      - ./logs:/var/log/nginx
+      - ./logs:/app/logs
     depends_on:
       - db
 
