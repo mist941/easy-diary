@@ -1,6 +1,7 @@
+import * as React from 'react';
 import { NotebookPen } from 'lucide-react';
 
-function SidebarHeader() {
+const SidebarHeader = React.memo(function SidebarHeader() {
   return (
     <div
       data-slot="sidebar-header"
@@ -13,6 +14,6 @@ function SidebarHeader() {
       </div>
     </div>
   );
-}
+});
 
 export { SidebarHeader };

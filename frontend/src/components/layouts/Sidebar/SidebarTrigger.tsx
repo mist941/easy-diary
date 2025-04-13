@@ -1,9 +1,10 @@
+import * as React from 'react';
 import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
 import { PanelLeftIcon } from 'lucide-react';
 import { useSidebar } from './useSidebar';
 
-function SidebarTrigger({
+const SidebarTrigger = React.memo(function SidebarTrigger({
   className,
   onClick,
   ...props
@@ -29,6 +30,6 @@ function SidebarTrigger({
       <span className="sr-only">Toggle Sidebar</span>
     </Button>
   );
-}
+});
 
 export { SidebarTrigger };

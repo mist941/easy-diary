@@ -1,6 +1,10 @@
+import * as React from 'react';
 import { cn } from '@/lib/utils';
 
-function SidebarFooter({ className, ...props }: React.ComponentProps<'div'>) {
+const SidebarFooter = React.memo(function SidebarFooter({
+  className,
+  ...props
+}: React.ComponentProps<'div'>) {
   return (
     <div
       data-slot="sidebar-footer"
@@ -9,6 +13,6 @@ function SidebarFooter({ className, ...props }: React.ComponentProps<'div'>) {
       {...props}
     />
   );
-}
+});
 
 export { SidebarFooter };

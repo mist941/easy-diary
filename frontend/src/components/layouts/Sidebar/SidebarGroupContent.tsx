@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { cn } from '@/lib/utils';
 
-function SidebarGroupContent({
+const SidebarGroupContent = React.memo(function SidebarGroupContent({
   className,
   ...props
 }: React.ComponentProps<'div'>) {
@@ -13,6 +13,6 @@ function SidebarGroupContent({
       {...props}
     />
   );
-}
+});
 
 export { SidebarGroupContent };

@@ -1,7 +1,8 @@
+import * as React from 'react';
 import { Separator } from '@/components/ui/Separator';
 import { cn } from '@/lib/utils';
 
-function SidebarSeparator({
+const SidebarSeparator = React.memo(function SidebarSeparator({
   className,
   ...props
 }: React.ComponentProps<typeof Separator>) {
@@ -13,6 +14,6 @@ function SidebarSeparator({
       {...props}
     />
   );
-}
+});
 
 export { SidebarSeparator };

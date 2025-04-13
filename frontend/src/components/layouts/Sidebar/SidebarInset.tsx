@@ -1,6 +1,10 @@
+import * as React from 'react';
 import { cn } from '@/lib/utils';
 
-function SidebarInset({ className, ...props }: React.ComponentProps<'main'>) {
+const SidebarInset = React.memo(function SidebarInset({
+  className,
+  ...props
+}: React.ComponentProps<'main'>) {
   return (
     <main
       data-slot="sidebar-inset"
@@ -12,6 +16,6 @@ function SidebarInset({ className, ...props }: React.ComponentProps<'main'>) {
       {...props}
     />
   );
-}
+});
 
 export { SidebarInset };
