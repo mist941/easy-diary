@@ -77,21 +77,6 @@ const convertDateToLocal = (isoString: string | null): string | null => {
 };
 
 /**
- * Formats a date for preview display (HH:MM without AM/PM)
- * @param {string} date - The date to format
- * @returns {string} Formatted time string
- */
-const getDateForPreview = (date: string): string => {
-  return new Date(date)
-    .toLocaleTimeString('en-US', {
-      hour: '2-digit',
-      minute: '2-digit',
-    })
-    .replace('AM', '')
-    .replace('PM', '');
-};
-
-/**
  * Formats a date to display as a human-readable string (Today, Yesterday, Tomorrow, or date)
  * @param {Date} date - The date to format
  * @returns {string} Human-readable date string
@@ -129,7 +114,6 @@ export {
   getCurrentTimeInMinutes,
   extractTimeFromDate,
   getHumanReadableDate,
-  getDateForPreview,
   convertDateToLocal,
   getTimeInISOString,
   getDateForRequest,

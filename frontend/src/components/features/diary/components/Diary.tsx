@@ -1,10 +1,6 @@
 'use client';
 
-import {
-  getCurrentTimeInMinutes,
-  getDateForPreview,
-  getDateForRequest,
-} from '@/utils/time';
+import { getCurrentTimeInMinutes, getDateForRequest } from '@/utils/time';
 import { ScrollArea } from '@/components/ui/ScrollArea';
 import {
   Popover,
@@ -13,12 +9,13 @@ import {
 } from '@/components/ui/Popover';
 import { Pencil, X } from 'lucide-react';
 import React from 'react';
-import { NoteForm } from '../../notes/components/NoteForm';
+import { NoteForm } from '@/components/features/notes/components/NoteForm';
 import { NoteRequest } from '@/components/features/notes/api/types';
 import { NoteI } from '@/components/features/notes/types';
 import notesApi from '@/components/features/notes/api';
 import useCurrentSelectedDateStore from '@/store/current-selected-date-store';
 import { getNotesForHour } from '@/components/features/notes/utils';
+import { getDateForPreview } from '@/components/features/diary/utils';
 
 interface DiaryHourProps {
   index: number;
