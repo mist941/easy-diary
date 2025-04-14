@@ -13,11 +13,7 @@ import { TimePicker } from '@/components/ui/TimePicker';
 import { Button } from '@/components/ui/Button';
 import { NoteRequest } from '@/components/features/notes/api/types';
 import { NoteI } from '@/components/features/notes/types';
-import {
-  getTimeInISOString,
-  convertDateToLocal,
-  extractTimeFromDate,
-} from '@/utils/time';
+import { extractTimeFromDate, formatTimeForBackend } from '@/utils/time';
 import useCurrentSelectedDateStore from '@/store/current-selected-date-store';
 
 const formSchema = z.object({
@@ -54,13 +50,8 @@ export function NoteForm({
   });
 
   const handleSubmit = (values: z.infer<typeof formSchema>) => {
-    const startedAt = convertDateToLocal(
-      getTimeInISOString(values.started_at, date) as string,
-    ) as string;
-
-    const finishedAt = convertDateToLocal(
-      getTimeInISOString(values.finished_at),
-    );
+    const startedAt = formatTimeForBackend(values.started_at, date) as string;
+    const finishedAt = formatTimeForBackend(values.finished_at);
 
     onSubmit({
       content: values.note,

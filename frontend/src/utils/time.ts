@@ -18,11 +18,12 @@ function getDateForRequest(date: Date): string {
 }
 
 /**
- * Converts a time string (HH:MM) to ISO format
+ * Formats time to the backend-required format
  * @param {string | null} time - Time string in HH:MM format
- * @returns {string | null} ISO formatted time string or null if input is null
+ * @param {Date} [date] - Optional date to use (defaults to today)
+ * @returns {string | null} Formatted time string for backend or null if input is null
  */
-const getTimeInISOString = (
+const formatTimeForBackend = (
   time: string | null,
   date?: Date,
 ): string | null => {
@@ -33,47 +34,15 @@ const getTimeInISOString = (
     throw new Error('Invalid time format. Expected HH:MM');
   }
 
-  const [hours, minutes] = time.split(':').map(Number);
-  const dateObj = date ? new Date(date) : new Date();
-  dateObj.setHours(hours);
-  dateObj.setMinutes(minutes);
-  dateObj.setSeconds(0);
-  dateObj.setMilliseconds(0);
-  return dateObj.toISOString();
-};
+  const [hours, minutes] = time.split(':');
+  const dateToUse = date ? moment(date) : moment();
 
-/**
- * Converts an ISO date string to local format (YYYY-MM-DD HH:MM:SS.MICROSECONDS)
- * @param {string | null} isoString - ISO date string
- * @returns {string | null} Formatted local date string or null if input is null
- */
-const convertDateToLocal = (isoString: string | null): string | null => {
-  if (!isoString) return null;
-
-  try {
-    const date = new Date(isoString);
-
-    // Check if date is valid
-    if (isNaN(date.getTime())) {
-      throw new Error('Invalid date');
-    }
-
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-
-    const hours = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
-    const seconds = String(date.getSeconds()).padStart(2, '0');
-
-    const milliseconds = String(date.getMilliseconds()).padStart(3, '0');
-    const microseconds = milliseconds + '000';
-
-    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${microseconds}`;
-  } catch (error) {
-    console.error('Error converting date to local format:', error);
-    return null;
-  }
+  return dateToUse
+    .hours(parseInt(hours, 10))
+    .minutes(parseInt(minutes, 10))
+    .seconds(0)
+    .milliseconds(0)
+    .format('YYYY-MM-DD HH:mm:ss.SSSSSS');
 };
 
 /**
@@ -104,17 +73,13 @@ const getHumanReadableDate = (date: Date): string => {
  * @returns {string} Formatted time string (HH:MM)
  */
 const extractTimeFromDate = (date: string): string => {
-  const dateObj = new Date(date);
-  const hours = String(dateObj.getHours()).padStart(2, '0');
-  const minutes = String(dateObj.getMinutes()).padStart(2, '0');
-  return `${hours}:${minutes}`;
+  return moment(date).format('HH:mm');
 };
 
 export {
   getCurrentTimeInMinutes,
   extractTimeFromDate,
   getHumanReadableDate,
-  convertDateToLocal,
-  getTimeInISOString,
+  formatTimeForBackend,
   getDateForRequest,
 };

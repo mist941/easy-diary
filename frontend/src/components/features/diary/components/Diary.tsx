@@ -81,7 +81,7 @@ function DiaryHour({
       e.stopPropagation();
       deleteNote(note.id);
     },
-    [],
+    [deleteNote],
   );
 
   return (
