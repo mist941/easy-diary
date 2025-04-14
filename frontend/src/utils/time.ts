@@ -78,8 +78,8 @@ const extractTimeFromDate = (date: string): string => {
 
 export {
   getCurrentTimeInMinutes,
-  extractTimeFromDate,
-  getHumanReadableDate,
-  formatTimeForBackend,
   getDateForRequest,
+  formatTimeForBackend,
+  getHumanReadableDate,
+  extractTimeFromDate,
 };
