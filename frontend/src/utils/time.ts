@@ -1,12 +1,11 @@
+import moment from 'moment';
+
 /**
  * Returns the current time as minutes since midnight
  * @returns {number} Minutes since midnight
  */
-export function getCurrentTimeInMinutes(): number {
-  const now = new Date();
-  const hours = now.getHours();
-  const minutes = now.getMinutes();
-  return hours * 60 + minutes;
+function getCurrentTimeInMinutes(): number {
+  return moment().diff(moment().startOf('day'), 'minutes');
 }
 
 /**
@@ -14,11 +13,8 @@ export function getCurrentTimeInMinutes(): number {
  * @param {Date} date - The date to format
  * @returns {string} Formatted date string (YYYY-MM-DD)
  */
-export function getDateForRequest(date: Date): string {
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  return `${year}-${month}-${day}`;
+function getDateForRequest(date: Date): string {
+  return moment(date).format('YYYY-MM-DD');
 }
 
 /**
@@ -26,7 +22,7 @@ export function getDateForRequest(date: Date): string {
  * @param {string | null} time - Time string in HH:MM format
  * @returns {string | null} ISO formatted time string or null if input is null
  */
-export const getTimeInISOString = (
+const getTimeInISOString = (
   time: string | null,
   date?: Date,
 ): string | null => {
@@ -51,7 +47,7 @@ export const getTimeInISOString = (
  * @param {string | null} isoString - ISO date string
  * @returns {string | null} Formatted local date string or null if input is null
  */
-export const convertDateToLocal = (isoString: string | null): string | null => {
+const convertDateToLocal = (isoString: string | null): string | null => {
   if (!isoString) return null;
 
   try {
@@ -85,7 +81,7 @@ export const convertDateToLocal = (isoString: string | null): string | null => {
  * @param {string} date - The date to format
  * @returns {string} Formatted time string
  */
-export const getDateForPreview = (date: string): string => {
+const getDateForPreview = (date: string): string => {
   return new Date(date)
     .toLocaleTimeString('en-US', {
       hour: '2-digit',
@@ -96,50 +92,45 @@ export const getDateForPreview = (date: string): string => {
 };
 
 /**
- * Formats a date to display as a human-readable string (Today, Yesterday, or date)
+ * Formats a date to display as a human-readable string (Today, Yesterday, Tomorrow, or date)
  * @param {Date} date - The date to format
  * @returns {string} Human-readable date string
  */
-export const getHumanReadableDate = (date: Date): string => {
-  const today = new Date();
-  const yesterday = new Date(today);
-  yesterday.setDate(yesterday.getDate() - 1);
+const getHumanReadableDate = (date: Date): string => {
+  const now = moment();
+  const inputDate = moment(date);
 
-  if (isSameDay(date, today)) {
+  if (inputDate.isSame(now, 'day')) {
     return 'Today';
-  } else if (isSameDay(date, yesterday)) {
-    return 'Yesterday';
-  } else {
-    return date.toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      year: today.getFullYear() !== date.getFullYear() ? 'numeric' : undefined,
-    });
   }
+  if (inputDate.isSame(now.clone().subtract(1, 'day'), 'day')) {
+    return 'Yesterday';
+  }
+  if (inputDate.isSame(now.clone().add(1, 'day'), 'day')) {
+    return 'Tomorrow';
+  }
+  const format = inputDate.year() === now.year() ? 'MMM D' : 'MMM D, YYYY';
+  return inputDate.format(format);
 };
-
-/**
- * Checks if two dates are on the same day
- * @param {Date} date1 - First date
- * @param {Date} date2 - Second date
- * @returns {boolean} True if dates are on the same day
- */
-function isSameDay(date1: Date, date2: Date): boolean {
-  return (
-    date1.getFullYear() === date2.getFullYear() &&
-    date1.getMonth() === date2.getMonth() &&
-    date1.getDate() === date2.getDate()
-  );
-}
 
 /**
  * Extracts the time portion from a date string in HH:MM format
  * @param {string} date - The date string to extract time from
  * @returns {string} Formatted time string (HH:MM)
  */
-export const extractTimeFromDate = (date: string): string => {
+const extractTimeFromDate = (date: string): string => {
   const dateObj = new Date(date);
   const hours = String(dateObj.getHours()).padStart(2, '0');
   const minutes = String(dateObj.getMinutes()).padStart(2, '0');
   return `${hours}:${minutes}`;
+};
+
+export {
+  getCurrentTimeInMinutes,
+  extractTimeFromDate,
+  getHumanReadableDate,
+  getDateForPreview,
+  convertDateToLocal,
+  getTimeInISOString,
+  getDateForRequest,
 };
