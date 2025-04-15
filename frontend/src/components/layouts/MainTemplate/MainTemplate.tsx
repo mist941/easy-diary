@@ -15,7 +15,7 @@ import {
 import { AppSidebar } from '@/components/layouts/AppSidebar';
 import { Separator } from '@/components/ui/Separator';
 import { ThemeToggle } from '@/components/features/theme/components/ThemeToggle';
-import useCurrentSelectedDateStore from '@/store/current-selected-date-store';
+import useCurrentSelectedDateStore from '@/store/currentSelectedDateStore';
 import { getHumanReadableDate } from '@/utils/time';
 
 interface MainTemplateProps {

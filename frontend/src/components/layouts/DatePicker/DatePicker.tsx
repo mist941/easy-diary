@@ -5,7 +5,7 @@ import {
   SidebarGroup,
   SidebarGroupContent,
 } from '@/components/layouts/Sidebar';
-import useCurrentSelectedDateStore from '@/store/current-selected-date-store';
+import useCurrentSelectedDateStore from '@/store/currentSelectedDateStore';
 
 export function DatePicker() {
   const { setDate, date } = useCurrentSelectedDateStore();

@@ -14,7 +14,7 @@ import { Button } from '@/components/ui/Button';
 import { NoteRequest } from '@/components/features/notes/api/types';
 import { NoteI } from '@/components/features/notes/types';
 import { extractTimeFromDate, formatTimeForBackend } from '@/utils/time';
-import useCurrentSelectedDateStore from '@/store/current-selected-date-store';
+import useCurrentSelectedDateStore from '@/store/currentSelectedDateStore';
 
 const formSchema = z.object({
   note: z.string().min(2, {
