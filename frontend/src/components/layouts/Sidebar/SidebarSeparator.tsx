@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Separator } from '@/components/ui/Separator';
+import { Separator } from '@/components/ui/Separator/Separator';
 import { cn } from '@/lib/utils';
 
 const SidebarSeparator = React.memo(function SidebarSeparator({
