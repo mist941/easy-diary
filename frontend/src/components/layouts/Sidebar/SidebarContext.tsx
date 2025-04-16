@@ -1,4 +1,4 @@
-import { TooltipProvider } from '@/components/ui/Tooltip/Tooltip';
+import { TooltipProvider } from '@/components/ui/Tooltip';
 import { useIsMobile } from '@/hooks/useMobile';
 import * as React from 'react';
 import { cn } from '@/lib/utils';
