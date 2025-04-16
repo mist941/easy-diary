@@ -5,7 +5,7 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/Popover';
+} from '@/components/ui/Popover/Popover';
 import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
 import { ScrollArea } from '@/components/ui/ScrollArea';
