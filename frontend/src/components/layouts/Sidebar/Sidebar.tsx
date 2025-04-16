@@ -8,7 +8,7 @@ import {
   SheetDescription,
   SheetHeader,
   SheetTitle,
-} from '@/components/ui/Sheet/Sheet';
+} from '@/components/ui/Sheet';
 import { useSidebar } from './useSidebar';
 import { SIDEBAR_WIDTH_MOBILE } from './constants';
 
