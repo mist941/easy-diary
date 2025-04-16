@@ -1,7 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 import {
-  Form,
   FormControl,
   FormField,
   FormItem,
@@ -61,7 +60,7 @@ export function NoteForm({
   };
 
   return (
-    <Form {...form}>
+    <FormProvider {...form}>
       <form
         onSubmit={form.handleSubmit(handleSubmit)}
         className="w-100 flex flex-col gap-2"
@@ -102,6 +101,6 @@ export function NoteForm({
           </Button>
         </div>
       </form>
-    </Form>
+    </FormProvider>
   );
 }
