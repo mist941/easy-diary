@@ -1,43 +1,42 @@
-import { API_URL } from '@/utils/constants';
+import { handleError } from '@/utils/errors';
+import { NoteI } from '../types';
 import { NoteRequest } from './types';
+import axios from '@/api/axios';
 
 const notesService = {
-  async getNotes(day: string) {
-    const response = await fetch(`${API_URL}/notes?day=${day}`, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    return response.json();
+  async getNotes(day: string): Promise<NoteI[]> {
+    try {
+      const response = await axios.get(`/notes?day=${day}`);
+      return response.data;
+    } catch (error) {
+      return handleError(error);
+    }
   },
-  async createNote(note: NoteRequest) {
-    const response = await fetch(`${API_URL}/notes`, {
-      method: 'POST',
-      body: JSON.stringify(note),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    return response.json();
+
+  async createNote(note: NoteRequest): Promise<NoteI> {
+    try {
+      const response = await axios.post('/notes', note);
+      return response.data;
+    } catch (error) {
+      return handleError(error);
+    }
   },
-  async deleteNote(id: number) {
-    const response = await fetch(`${API_URL}/notes/${id}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    return response.json();
+
+  async deleteNote(id: number): Promise<void> {
+    try {
+      await axios.delete(`/notes/${id}`);
+    } catch (error) {
+      return handleError(error);
+    }
   },
-  async updateNote(id: number, note: NoteRequest) {
-    const response = await fetch(`${API_URL}/notes/${id}`, {
-      method: 'PUT',
-      body: JSON.stringify(note),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    return response.json();
+
+  async updateNote(id: number, note: NoteRequest): Promise<NoteI> {
+    try {
+      const response = await axios.put(`/notes/${id}`, note);
+      return response.data;
+    } catch (error) {
+      return handleError(error);
+    }
   },
 };
 
