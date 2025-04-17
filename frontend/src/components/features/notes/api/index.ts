@@ -1,5 +1,6 @@
 import { API_URL } from '@/utils/constants';
 import { NoteRequest } from './types';
+
 const notesService = {
   async getNotes(day: string) {
     const response = await fetch(`${API_URL}/notes?day=${day}`, {

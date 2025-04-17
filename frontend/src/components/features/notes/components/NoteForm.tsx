@@ -30,7 +30,7 @@ interface NoteFormProps {
   startHours?: string;
 }
 
-export function NoteForm({
+function NoteForm({
   onSubmit,
   defaultValues,
   startMinutes = '00',
@@ -104,3 +104,5 @@ export function NoteForm({
     </FormProvider>
   );
 }
+
+export { NoteForm };
