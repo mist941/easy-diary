@@ -1,6 +1,6 @@
 'use client';
 
-import { getCurrentTimeInMinutes, getDateForRequest } from '@/utils/time';
+import { getDateForRequest } from '@/utils/time';
 import { ScrollArea } from '@/components/ui/ScrollArea';
 import React from 'react';
 import { NoteRequest } from '@/components/features/notes/api/types';
@@ -9,6 +9,7 @@ import notesApi from '@/components/features/notes/api';
 import useCurrentSelectedDateStore from '@/store/currentSelectedDateStore';
 import { getNotesForHour } from '@/components/features/notes/utils';
 import { DiaryHour } from './DiaryHour';
+import { useTimelinePosition } from '../hooks/useTimelinePosition';
 
 function Diary() {
   const { date } = useCurrentSelectedDateStore();
@@ -16,7 +17,8 @@ function Diary() {
   const [loading, setLoading] = React.useState(false);
   const hoursRef = React.useRef<HTMLDivElement>(null);
   const offsetRef = React.useRef<HTMLDivElement>(null);
-  const currentTime = getCurrentTimeInMinutes();
+
+  useTimelinePosition(hoursRef, offsetRef, loading, notes.length);
 
   React.useEffect(() => {
     (async () => {
@@ -30,26 +32,6 @@ function Diary() {
       }
     })();
   }, [date]);
-
-  React.useEffect(() => {
-    if (hoursRef.current) {
-      const hourItems = hoursRef.current.querySelectorAll('.hour-item');
-      const currentHourIndex = Math.floor((currentTime - 5 * 60) / 60);
-      if (currentHourIndex < 0 || currentHourIndex >= hourItems.length) return;
-      const currentHourItem = hourItems[currentHourIndex];
-      if (!currentHourItem) return;
-      const currentHourItemHeight =
-        currentHourItem.getBoundingClientRect().height;
-      let height = 0;
-      height = Array.from(hourItems)
-        .slice(0, currentHourIndex)
-        .reduce((acc, item) => acc + item.getBoundingClientRect().height, 0);
-      height += (currentHourItemHeight / 60) * (currentTime % 60);
-      if (offsetRef.current) {
-        offsetRef.current.style.top = `${height}px`;
-      }
-    }
-  }, [currentTime, notes.length, loading]);
 
   const handleCreateNote = React.useCallback(
     async (values: NoteRequest) => {
