@@ -1,5 +1,5 @@
 import { Diary } from '@/components/features/diary/components';
 
-export default async function Home() {
+export default function Home() {
   return <Diary />;
 }

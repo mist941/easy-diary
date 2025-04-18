@@ -9,6 +9,7 @@ import notesApi from '@/components/features/notes/api';
 import useCurrentSelectedDateStore from '@/store/currentSelectedDateStore';
 import { getNotesForHour } from '@/components/features/notes/utils';
 import { DiaryHour } from './DiaryHour';
+
 function Diary() {
   const { date } = useCurrentSelectedDateStore();
   const [notes, setNotes] = React.useState<NoteI[]>([]);
