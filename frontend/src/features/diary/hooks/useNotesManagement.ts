@@ -1,6 +1,6 @@
 import React from 'react';
 import { NoteRequest } from '@/api/notes/types';
-import notesApi from '@/api/notes';
+import { notesServices } from '@/api/notes';
 import { getDateForRequest } from '@/utils/time';
 import { NoteI } from '@/features/notes/types';
 import { handleError } from '@/utils/errors';
@@ -10,7 +10,7 @@ export function useNotesManagement(date: Date) {
   const [loading, setLoading] = React.useState(false);
 
   const fetchNotes = React.useCallback(async () => {
-    const fetchedNotes = await notesApi.getNotes(getDateForRequest(date));
+    const fetchedNotes = await notesServices.getNotes(getDateForRequest(date));
     setNotes(fetchedNotes);
   }, [date]);
 
@@ -29,7 +29,7 @@ export function useNotesManagement(date: Date) {
 
   const createNote = React.useCallback(async (values: NoteRequest) => {
     try {
-      await notesApi.createNote(values);
+      await notesServices.createNote(values);
       await fetchNotes();
     } catch (error) {
       handleError(error);
@@ -39,7 +39,7 @@ export function useNotesManagement(date: Date) {
   const updateNote = React.useCallback(
     async (id: number, values: NoteRequest) => {
       try {
-        await notesApi.updateNote(id, values);
+        await notesServices.updateNote(id, values);
         await fetchNotes();
       } catch (error) {
         handleError(error);
@@ -50,7 +50,7 @@ export function useNotesManagement(date: Date) {
 
   const deleteNote = React.useCallback(async (id: number) => {
     try {
-      await notesApi.deleteNote(id);
+      await notesServices.deleteNote(id);
       await fetchNotes();
     } catch (error) {
       handleError(error);
