@@ -17,18 +17,20 @@ function ThemeToggle() {
     return null;
   }
 
+  const handleThemeToggle = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
+  };
+
+  const ThemeIcon = theme === 'dark' ? SunIcon : MoonIcon;
+
   return (
     <Button
       variant="outline"
       size="icon"
-      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+      onClick={handleThemeToggle}
       className="rounded-full"
     >
-      {theme === 'dark' ? (
-        <SunIcon className="h-4 w-4" />
-      ) : (
-        <MoonIcon className="h-4 w-4" />
-      )}
+      <ThemeIcon className="h-4 w-4" />
     </Button>
   );
 }
