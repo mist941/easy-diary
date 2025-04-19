@@ -1,8 +1,7 @@
 import moment from 'moment';
 
 /**
- * Returns the current time as minutes since midnight
- * @returns Minutes since midnight
+ * @returns Returns the current time as minutes since midnight
  */
 function getCurrentTimeInMinutes(): number {
   return moment().diff(moment().startOf('day'), 'minutes');
