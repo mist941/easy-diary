@@ -2,7 +2,7 @@ import moment from 'moment';
 
 /**
  * Returns the current time as minutes since midnight
- * @returns {number} Minutes since midnight
+ * @returns Minutes since midnight
  */
 function getCurrentTimeInMinutes(): number {
   return moment().diff(moment().startOf('day'), 'minutes');
@@ -10,8 +10,8 @@ function getCurrentTimeInMinutes(): number {
 
 /**
  * Formats a Date object into YYYY-MM-DD string for API requests
- * @param {Date} date - The date to format
- * @returns {string} Formatted date string (YYYY-MM-DD)
+ * @param date - The date to format
+ * @returns Formatted date string (YYYY-MM-DD)
  */
 function getDateForRequest(date: Date): string {
   return moment(date).format('YYYY-MM-DD');
@@ -19,9 +19,9 @@ function getDateForRequest(date: Date): string {
 
 /**
  * Formats time to the backend-required format
- * @param {string | null} time - Time string in HH:MM format
- * @param {Date} [date] - Optional date to use (defaults to today)
- * @returns {string | null} Formatted time string for backend or null if input is null
+ * @param time - Time string in HH:MM format
+ * @param date - Optional date to use (defaults to today)
+ * @returns Formatted time string for backend or null if input is null
  */
 const formatTimeForBackend = (
   time: string | null,
@@ -47,8 +47,8 @@ const formatTimeForBackend = (
 
 /**
  * Formats a date to display as a human-readable string (Today, Yesterday, Tomorrow, or date)
- * @param {Date} date - The date to format
- * @returns {string} Human-readable date string
+ * @param date - The date to format
+ * @returns Human-readable date string
  */
 const getHumanReadableDate = (date: Date): string => {
   const now = moment();
@@ -69,8 +69,8 @@ const getHumanReadableDate = (date: Date): string => {
 
 /**
  * Extracts the time portion from a date string in HH:MM format
- * @param {string} date - The date string to extract time from
- * @returns {string} Formatted time string (HH:MM)
+ * @param date - The date string to extract time from
+ * @returns Formatted time string (HH:MM)
  */
 const extractTimeFromDate = (date: string): string => {
   return moment(date).format('HH:mm');
