@@ -10,8 +10,8 @@ import { z } from 'zod';
 import { Textarea } from '@/components/ui/Textarea';
 import { TimePicker } from '@/components/ui/TimePicker';
 import { Button } from '@/components/ui/Button';
-import { NoteRequest } from '@/components/features/notes/api/types';
-import { NoteI } from '@/components/features/notes/types';
+import { NoteRequest } from '@/api/notes/types';
+import { NoteI } from '@/features/notes/types';
 import { extractTimeFromDate, formatTimeForBackend } from '@/utils/time';
 import useCurrentSelectedDateStore from '@/store/currentSelectedDateStore';
 

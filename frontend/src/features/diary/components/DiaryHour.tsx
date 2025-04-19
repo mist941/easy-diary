@@ -1,14 +1,14 @@
 import * as React from 'react';
-import { NoteI } from '@/components/features/notes/types';
-import { NoteRequest } from '@/components/features/notes/api/types';
+import { NoteI } from '@/features/notes/types';
+import { NoteRequest } from '@/api/notes/types';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/Popover';
-import { getDateForPreview } from '@/components/features/diary/utils';
+import { getDateForPreview } from '@/features/diary/utils';
 import { Pencil, X } from 'lucide-react';
-import { NoteForm } from '@/components/features/notes/components/NoteForm';
+import { NoteForm } from '@/features/notes/components/NoteForm';
 
 interface DiaryHourProps {
   index: number;

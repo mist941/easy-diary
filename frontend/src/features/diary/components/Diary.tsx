@@ -3,7 +3,7 @@
 import { ScrollArea } from '@/components/ui/ScrollArea';
 import React from 'react';
 import useCurrentSelectedDateStore from '@/store/currentSelectedDateStore';
-import { getNotesForHour } from '@/components/features/notes/utils';
+import { getNotesForHour } from '@/features/notes/utils';
 import { DiaryHour } from './DiaryHour';
 import { useTimelinePosition } from '../hooks/useTimelinePosition';
 import { useNotesManagement } from '../hooks/useNotesManagement';

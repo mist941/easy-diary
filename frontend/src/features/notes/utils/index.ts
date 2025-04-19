@@ -1,4 +1,4 @@
-import { NoteI } from '@/components/features/notes/types';
+import { NoteI } from '@/features/notes/types';
 
 export function getNotesForHour(notes: NoteI[], hour: number) {
   return notes.filter((note) => {

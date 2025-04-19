@@ -1,8 +1,8 @@
 import React from 'react';
-import { NoteRequest } from '@/components/features/notes/api/types';
-import notesApi from '@/components/features/notes/api';
+import { NoteRequest } from '@/api/notes/types';
+import notesApi from '@/api/notes';
 import { getDateForRequest } from '@/utils/time';
-import { NoteI } from '@/components/features/notes/types';
+import { NoteI } from '@/features/notes/types';
 import { handleError } from '@/utils/errors';
 
 export function useNotesManagement(date: Date) {

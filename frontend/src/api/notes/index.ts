@@ -1,8 +1,8 @@
-import { NoteI } from '../types';
-import { NoteRequest } from './types';
+import { NoteI } from '@/features/notes/types';
+import { NoteRequest } from '@/api/notes/types';
 import axios from '@/api/axios';
 
-const notesService = {
+const notesApi = {
   async getNotes(day: string): Promise<NoteI[]> {
     try {
       const response = await axios.get(`/notes?day=${day}`);
@@ -39,4 +39,4 @@ const notesService = {
   },
 };
 
-export default notesService;
+export default notesApi;
