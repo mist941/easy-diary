@@ -6,9 +6,8 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/Popover';
-import { getDateForPreview } from '@/features/diary/utils';
-import { Pencil, X } from 'lucide-react';
 import { NoteForm } from '@/features/notes/components/NoteForm';
+import { SingleNote } from '@/features/notes/components';
 
 interface DiaryHourProps {
   index: number;
@@ -92,23 +91,12 @@ function DiaryHour({
           </div>
           <div className="w-full h-full pr-5 pl-5">
             {notes.map((note) => (
-              <div key={note.id} className="flex items-center gap-2 group/note">
-                <p className="text-xs text-foreground italic">
-                  {getDateForPreview(note.started_at)}
-                  {': '}
-                  {note.content}
-                </p>
-                <Pencil
-                  className="w-3 h-3 text-muted-foreground cursor-pointer opacity-0 group-hover/note:opacity-100 transition-opacity"
-                  color="gray"
-                  onClick={(e) => handleOpenEditor(e, note)}
-                />
-                <X
-                  className="w-3 h-3 text-muted-foreground cursor-pointer opacity-0 group-hover/note:opacity-100 transition-opacity"
-                  color="red"
-                  onClick={(e) => handleDeleteNote(e, note)}
-                />
-              </div>
+              <SingleNote
+                key={note.id}
+                note={note}
+                handleOpenEditor={handleOpenEditor}
+                handleDeleteNote={handleDeleteNote}
+              />
             ))}
           </div>
         </div>

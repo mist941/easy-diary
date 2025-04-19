@@ -3,7 +3,7 @@
 import { ScrollArea } from '@/components/ui/ScrollArea';
 import React from 'react';
 import useCurrentSelectedDateStore from '@/store/currentSelectedDateStore';
-import { getNotesForHour } from '@/features/notes/utils';
+import { filterNotesForHour } from '@/features/notes/utils';
 import { DiaryHour } from './DiaryHour';
 import { useTimelinePosition } from '../hooks/useTimelinePosition';
 import { useNotesManagement } from '../hooks/useNotesManagement';
@@ -37,7 +37,7 @@ function Diary() {
             key={index}
             index={index}
             timeString={timeString}
-            notes={getNotesForHour(notes, hour)}
+            notes={filterNotesForHour(notes, hour)}
             createNote={createNote}
             updateNote={updateNote}
             deleteNote={deleteNote}

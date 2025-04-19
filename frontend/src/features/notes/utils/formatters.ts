@@ -1,9 +1,9 @@
 /**
  * Formats a date for preview display (HH:MM without AM/PM)
- * @param {string} date - The date to format
- * @returns {string} Formatted time string
+ * @param date - The date to format
+ * @returns Formatted time string
  */
-const getDateForPreview = (date: string): string => {
+const formatDateForNotePreview = (date: string): string => {
   return new Date(date)
     .toLocaleTimeString('en-US', {
       hour: '2-digit',
@@ -13,4 +13,4 @@ const getDateForPreview = (date: string): string => {
     .replace('PM', '');
 };
 
-export { getDateForPreview };
+export { formatDateForNotePreview };
