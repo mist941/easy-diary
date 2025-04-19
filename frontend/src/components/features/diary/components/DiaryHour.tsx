@@ -31,7 +31,7 @@ function DiaryHour({
   const [selectedNote, setSelectedNote] = React.useState<NoteI | null>(null);
 
   const lastNote = React.useMemo(() => {
-    return [...notes]
+    return notes
       .sort(
         (a, b) =>
           new Date(a.started_at).getTime() - new Date(b.started_at).getTime(),
