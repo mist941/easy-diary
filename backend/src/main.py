@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from src.api.v1 import notes
+from src.api.v1 import notes, tags
 
 app = FastAPI()
 
@@ -21,3 +21,4 @@ app.add_middleware(
 prefix = "/api/v1"
 
 app.include_router(notes.router, prefix=prefix)
+app.include_router(tags.router, prefix=prefix)
