@@ -1,4 +1,4 @@
-from backend.src.features.tags.repository import TagRepository
+from .repository import TagRepository
 from fastapi import Depends
 from src.core.database import AsyncSession, get_db
 from .entities import Tag
