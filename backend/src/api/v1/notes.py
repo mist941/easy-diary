@@ -12,16 +12,14 @@ router = APIRouter()
 async def get_notes(
     day: datetime = Query(None), note_service: NoteService = Depends(get_note_service)
 ):
-    notes = await note_service.get_notes(day)
-    return notes
+    return await note_service.get_notes(day)
 
 
 @router.post("/notes")
 async def create_note(
     note_data: NoteCreate, note_service: NoteService = Depends(get_note_service)
 ):
-    note = await note_service.create_note(note_data)
-    return note
+    return await note_service.create_note(note_data)
 
 
 @router.delete("/notes/{note_id}")
@@ -37,5 +35,4 @@ async def update_note(
     note_data: NoteUpdate,
     note_service: NoteService = Depends(get_note_service),
 ):
-    print(note_data)
     await note_service.update_note(note_id, note_data)
