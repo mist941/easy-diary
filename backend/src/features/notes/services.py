@@ -14,8 +14,7 @@ class NoteService:
         self.repo = repo
 
     async def create_note(self, note_data: NoteCreate):
-        note = await self.repo.create(note_data)
-        return note
+        return await self.repo.create(note_data)
 
     async def get_notes(self, day: datetime = None):
         return await self.repo.list_all(day)

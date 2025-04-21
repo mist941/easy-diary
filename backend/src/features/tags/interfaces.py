@@ -1,5 +1,3 @@
-from typing import List
-
 from .dto import TagCreate, TagUpdate
 from .entities import Tag
 
