@@ -1,6 +1,6 @@
 from backend.src.features.tags.dto import TagCreate, TagUpdate
 from backend.src.features.tags.services import TagService, get_tag_service
-from fastapi import APIRouter, Depends, Query
+from fastapi import APIRouter, Depends
 
 router = APIRouter()
 
