@@ -8,7 +8,7 @@ import { SidebarSeparator } from '@/components/layouts/Sidebar';
 import { SidebarMenuButton } from '@/components/layouts/Sidebar';
 import { SidebarMenuItem } from '@/components/layouts/Sidebar';
 import { SidebarMenu } from '@/components/layouts/Sidebar';
-import { Tags } from 'lucide-react';
+import { Tags, BarChart, Settings } from 'lucide-react';
 
 function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
@@ -22,6 +22,16 @@ function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarMenuItem>
               <SidebarMenuButton>
                 <Tags className="size-4" /> Tags
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton>
+                <BarChart className="size-4" /> Statistics
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton>
+                <Settings className="size-4" /> Settings
               </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>
