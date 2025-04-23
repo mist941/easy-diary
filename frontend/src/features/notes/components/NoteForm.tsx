@@ -50,7 +50,7 @@ function NoteForm({
 
   const handleSubmit = (values: z.infer<typeof formSchema>) => {
     const startedAt = formatTimeForBackend(values.started_at, date) as string;
-    const finishedAt = formatTimeForBackend(values.finished_at);
+    const finishedAt = formatTimeForBackend(values.finished_at, date);
 
     onSubmit({
       content: values.note,

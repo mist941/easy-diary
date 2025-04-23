@@ -88,7 +88,6 @@ class NoteRepository(INoteRepository):
     async def list_all(self, day: datetime = None):
         try:
             query = select(NoteModel).order_by(NoteModel.started_at)
-
             if day:
                 day_start = day.replace(hour=0, minute=0, second=0, microsecond=0)
                 next_day = day_start + timedelta(days=1)
