@@ -8,9 +8,16 @@ import { SidebarSeparator } from '@/components/layouts/Sidebar';
 import { SidebarMenuButton } from '@/components/layouts/Sidebar';
 import { SidebarMenuItem } from '@/components/layouts/Sidebar';
 import { SidebarMenu } from '@/components/layouts/Sidebar';
-import { Tags, BarChart, Settings } from 'lucide-react';
+import { Tags, BarChart, Settings, Home } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const router = useRouter();
+
+  const handleRedirect = (path: string) => {
+    router.push(path);
+  };
+
   return (
     <Sidebar {...props}>
       <SidebarHeader />
@@ -20,17 +27,22 @@ function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarGroup>
           <SidebarMenu>
             <SidebarMenuItem>
-              <SidebarMenuButton>
+              <SidebarMenuButton onClick={() => handleRedirect('/')}>
+                <Home className="size-4" /> Home
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <SidebarMenuButton onClick={() => handleRedirect('/tags')}>
                 <Tags className="size-4" /> Tags
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <SidebarMenuButton>
+              <SidebarMenuButton onClick={() => handleRedirect('/statistics')}>
                 <BarChart className="size-4" /> Statistics
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <SidebarMenuButton>
+              <SidebarMenuButton onClick={() => handleRedirect('/settings')}>
                 <Settings className="size-4" /> Settings
               </SidebarMenuButton>
             </SidebarMenuItem>
