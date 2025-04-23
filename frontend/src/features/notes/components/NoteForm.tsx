@@ -96,6 +96,20 @@ function NoteForm({
               </FormItem>
             )}
           />
+          <FormField
+            control={form.control}
+            name="finished_at"
+            render={() => (
+              <FormItem>
+                <FormControl>
+                  <TimePicker
+                    value={form.getValues('finished_at')}
+                    onChange={(value) => form.setValue('finished_at', value)}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
           <Button type="submit" className="flex-1">
             Save
           </Button>
