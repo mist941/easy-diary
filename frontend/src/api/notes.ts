@@ -1,5 +1,5 @@
 import { INote } from '@/features/notes/types';
-import { INoteRequest } from '@/api/notes/types';
+import { INoteRequest } from '@/features/notes/types';
 import axios from '@/api/axios';
 
 const notesServices = {

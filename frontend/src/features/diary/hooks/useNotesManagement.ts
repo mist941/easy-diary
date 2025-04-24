@@ -1,6 +1,6 @@
 import React from 'react';
-import { INoteRequest } from '@/api/notes/types';
-import { notesServices } from '@/api/notes';
+import { INoteRequest } from '@/features/notes/types';
+import { notesServices } from '@/api';
 import { getDateForRequest } from '@/utils/time';
 import { INote } from '@/features/notes/types';
 import { handleError } from '@/utils/errors';
