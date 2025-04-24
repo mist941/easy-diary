@@ -10,8 +10,8 @@ import { z } from 'zod';
 import { Textarea } from '@/components/ui/Textarea';
 import { TimePicker } from '@/components/ui/TimePicker';
 import { Button } from '@/components/ui/Button';
-import { NoteRequest } from '@/api/notes/types';
-import { NoteI } from '@/features/notes/types';
+import { INoteRequest } from '@/api/notes/types';
+import { INote } from '@/features/notes/types';
 import { extractTimeFromDate, formatTimeForBackend } from '@/utils/time';
 import useCurrentSelectedDateStore from '@/store/currentSelectedDateStore';
 
@@ -24,8 +24,8 @@ const formSchema = z.object({
 });
 
 interface NoteFormProps {
-  onSubmit: (values: NoteRequest) => void;
-  defaultValues?: NoteI | null;
+  onSubmit: (values: INoteRequest) => void;
+  defaultValues?: INote | null;
   startMinutes?: string;
   startHours?: string;
 }

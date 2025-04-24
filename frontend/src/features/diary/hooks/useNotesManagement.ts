@@ -1,12 +1,12 @@
 import React from 'react';
-import { NoteRequest } from '@/api/notes/types';
+import { INoteRequest } from '@/api/notes/types';
 import { notesServices } from '@/api/notes';
 import { getDateForRequest } from '@/utils/time';
-import { NoteI } from '@/features/notes/types';
+import { INote } from '@/features/notes/types';
 import { handleError } from '@/utils/errors';
 
 export function useNotesManagement(date: Date) {
-  const [notes, setNotes] = React.useState<NoteI[]>([]);
+  const [notes, setNotes] = React.useState<INote[]>([]);
   const [loading, setLoading] = React.useState(false);
 
   const fetchNotes = React.useCallback(async () => {
@@ -27,7 +27,7 @@ export function useNotesManagement(date: Date) {
     })();
   }, [date]);
 
-  const createNote = React.useCallback(async (values: NoteRequest) => {
+  const createNote = React.useCallback(async (values: INoteRequest) => {
     try {
       await notesServices.createNote(values);
       await fetchNotes();
@@ -37,7 +37,7 @@ export function useNotesManagement(date: Date) {
   }, []);
 
   const updateNote = React.useCallback(
-    async (id: number, values: NoteRequest) => {
+    async (id: number, values: INoteRequest) => {
       try {
         await notesServices.updateNote(id, values);
         await fetchNotes();

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { NoteI } from '@/features/notes/types';
-import { NoteRequest } from '@/api/notes/types';
+import { INote } from '@/features/notes/types';
+import { INoteRequest } from '@/api/notes/types';
 import {
   Popover,
   PopoverContent,
@@ -12,9 +12,9 @@ import { SingleNote } from '@/features/notes/components';
 interface DiaryHourProps {
   index: number;
   timeString: string;
-  notes: NoteI[];
-  createNote: (values: NoteRequest) => void;
-  updateNote: (id: number, values: NoteRequest) => void;
+  notes: INote[];
+  createNote: (values: INoteRequest) => void;
+  updateNote: (id: number, values: INoteRequest) => void;
   deleteNote: (id: number) => void;
 }
 
@@ -27,7 +27,7 @@ function DiaryHour({
   deleteNote,
 }: DiaryHourProps) {
   const [openNoteEditor, setOpenNoteEditor] = React.useState(false);
-  const [selectedNote, setSelectedNote] = React.useState<NoteI | null>(null);
+  const [selectedNote, setSelectedNote] = React.useState<INote | null>(null);
 
   const lastNote = React.useMemo(() => {
     return notes
@@ -44,7 +44,7 @@ function DiaryHour({
       : '00';
   }, [lastNote?.started_at]);
 
-  const handleChangeNote = (values: NoteRequest) => {
+  const handleChangeNote = (values: INoteRequest) => {
     if (selectedNote) {
       updateNote(selectedNote.id, values);
       setSelectedNote(null);
@@ -60,7 +60,7 @@ function DiaryHour({
   };
 
   const handleOpenEditor = React.useCallback(
-    (e: React.MouseEvent<SVGSVGElement>, note: NoteI) => {
+    (e: React.MouseEvent<SVGSVGElement>, note: INote) => {
       e.stopPropagation();
       setSelectedNote(note);
       setOpenNoteEditor(true);
@@ -69,7 +69,7 @@ function DiaryHour({
   );
 
   const handleDeleteNote = React.useCallback(
-    (e: React.MouseEvent<SVGSVGElement>, note: NoteI) => {
+    (e: React.MouseEvent<SVGSVGElement>, note: INote) => {
       e.stopPropagation();
       deleteNote(note.id);
     },

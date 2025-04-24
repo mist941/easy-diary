@@ -1,4 +1,4 @@
-export interface NoteI {
+export interface INote {
   id: number;
   content: string;
   started_at: string;

@@ -1,9 +1,9 @@
-import { NoteI } from '@/features/notes/types';
-import { NoteRequest } from '@/api/notes/types';
+import { INote } from '@/features/notes/types';
+import { INoteRequest } from '@/api/notes/types';
 import axios from '@/api/axios';
 
 const notesServices = {
-  async getNotes(day: string): Promise<NoteI[]> {
+  async getNotes(day: string): Promise<INote[]> {
     try {
       const response = await axios.get(`/notes?day=${day}`);
       return response.data;
@@ -12,7 +12,7 @@ const notesServices = {
     }
   },
 
-  async createNote(note: NoteRequest): Promise<NoteI> {
+  async createNote(note: INoteRequest): Promise<INote> {
     try {
       const response = await axios.post('/notes', note);
       return response.data;
@@ -29,7 +29,7 @@ const notesServices = {
     }
   },
 
-  async updateNote(id: number, note: NoteRequest): Promise<NoteI> {
+  async updateNote(id: number, note: INoteRequest): Promise<INote> {
     try {
       const response = await axios.put(`/notes/${id}`, note);
       return response.data;
