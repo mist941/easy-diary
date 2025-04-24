@@ -5,6 +5,13 @@ from fastapi import APIRouter, Depends
 router = APIRouter()
 
 
+@router.get("/tags")
+async def get_all_tags(
+    query: str = "", tag_service: TagService = Depends(get_tag_service)
+):
+    return await tag_service.get_all_tags(query)
+
+
 @router.post("/tags")
 async def create_tag(
     tag_data: TagCreate, tag_service: TagService = Depends(get_tag_service)

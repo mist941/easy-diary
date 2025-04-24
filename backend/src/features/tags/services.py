@@ -10,6 +10,9 @@ class TagService:
     def __init__(self, repo: ITagRepository):
         self.repo = repo
 
+    async def get_all_tags(self, query: str) -> list[Tag]:
+        return await self.repo.get_all(query)
+
     async def create_tag(self, tag_data: TagCreate) -> Tag:
         return await self.repo.create(tag_data)
 

@@ -17,6 +17,16 @@ class TagRepository(ITagRepository):
     def __init__(self, db: AsyncSession):
         self.db = db
 
+    async def get_all(self, query: str) -> list[Tag]:
+        try:
+            tags = await self.db.execute(
+                select(TagModel).where(TagModel.name.like(f"%{query}%"))
+            )
+            return [Tag(id=tag.id, name=tag.name) for tag in tags.scalars().all()]
+        except Exception as e:
+            await self.db.rollback()
+            raise e
+
     async def create(self, tag_data: TagCreate) -> Tag:
         tag = TagModel(name=tag_data.name)
         try:

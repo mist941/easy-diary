@@ -3,6 +3,9 @@ from .entities import Tag
 
 
 class ITagRepository:
+    def get_all(self, query: str) -> list[Tag]:
+        raise NotImplementedError
+
     def create(self, tag_data: TagCreate) -> Tag:
         raise NotImplementedError
 
