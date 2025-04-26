@@ -12,12 +12,8 @@ function TagsTable() {
     <div className="rounded-md border">
       <Table>
         <TableHeader>
-          {['1', '2', '3'].map((headerGroup) => (
-            <TableRow key={headerGroup}>
-              {['1', '2', '3'].map((header) => {
-                return <TableHead key={header}>{header}</TableHead>;
-              })}
-            </TableRow>
+          {['Name', 'Color', 'Actions'].map((header) => (
+            <TableHead key={header}>{header}</TableHead>
           ))}
         </TableHeader>
         <TableBody>

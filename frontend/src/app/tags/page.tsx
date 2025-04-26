@@ -1,5 +1,5 @@
-import { TagsTable } from '@/features/tags/components';
+import { TagsPanel } from '@/features/tags/components';
 
 export default function TagsPage() {
-  return <TagsTable />;
+  return <TagsPanel />;
 }
