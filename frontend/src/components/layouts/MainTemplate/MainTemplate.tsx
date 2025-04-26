@@ -17,6 +17,7 @@ import { Separator } from '@/components/ui/Separator/Separator';
 import { ThemeToggle } from '@/features/theme/components/ThemeToggle';
 import useCurrentSelectedDateStore from '@/store/currentSelectedDateStore';
 import { getHumanReadableDate } from '@/utils/time';
+import { usePathname } from 'next/navigation';
 
 interface MainTemplateProps {
   children: React.ReactNode;
@@ -25,6 +26,15 @@ interface MainTemplateProps {
 function MainTemplate({ children }: MainTemplateProps) {
   const { date } = useCurrentSelectedDateStore();
   const formattedDate = getHumanReadableDate(date);
+  const pathname = usePathname();
+
+  const getBreadcrumbs = () => {
+    if (pathname === '/') {
+      return <BreadcrumbPage>{formattedDate}</BreadcrumbPage>;
+    }
+
+    return pathname.replace('/', '');
+  };
 
   return (
     <SidebarProvider>
@@ -40,7 +50,9 @@ function MainTemplate({ children }: MainTemplateProps) {
             <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem>
-                  <BreadcrumbPage>{formattedDate}</BreadcrumbPage>
+                  <BreadcrumbPage className="first-letter:uppercase">
+                    {getBreadcrumbs()}
+                  </BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>

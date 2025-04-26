@@ -12,9 +12,11 @@ function TagsTable() {
     <div className="rounded-md border">
       <Table>
         <TableHeader>
-          {['Name', 'Color', 'Actions'].map((header) => (
-            <TableHead key={header}>{header}</TableHead>
-          ))}
+          <TableRow>
+            {['Name', 'Color', 'Action'].map((header) => {
+              return <TableHead key={header}>{header}</TableHead>;
+            })}
+          </TableRow>
         </TableHeader>
         <TableBody>
           {['1', '2', '3'].length ? (
