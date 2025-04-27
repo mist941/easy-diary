@@ -19,21 +19,13 @@ function TagsTable() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {['1', '2', '3'].length ? (
-            ['1', '2', '3'].map((row) => (
-              <TableRow key={row}>
-                {['1', '2', '3'].map((cell) => (
-                  <TableCell key={cell}>{cell}</TableCell>
-                ))}
-              </TableRow>
-            ))
-          ) : (
-            <TableRow>
-              <TableCell colSpan={3} className="h-24 text-center">
-                No results.
-              </TableCell>
+          {['1', '2', '3'].map((row) => (
+            <TableRow key={row}>
+              <TableCell>1</TableCell>
+              <TableCell>2</TableCell>
+              <TableCell>3</TableCell>
             </TableRow>
-          )}
+          ))}
         </TableBody>
       </Table>
     </div>
