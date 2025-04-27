@@ -27,14 +27,17 @@ export function useNotesManagement(date: Date) {
     })();
   }, [date]);
 
-  const createNote = React.useCallback(async (values: INoteRequest) => {
-    try {
-      await notesServices.createNote(values);
-      await fetchNotes();
-    } catch (error) {
-      handleError(error);
-    }
-  }, []);
+  const createNote = React.useCallback(
+    async (values: INoteRequest) => {
+      try {
+        await notesServices.createNote(values);
+        await fetchNotes();
+      } catch (error) {
+        handleError(error);
+      }
+    },
+    [date],
+  );
 
   const updateNote = React.useCallback(
     async (id: number, values: INoteRequest) => {
@@ -45,17 +48,20 @@ export function useNotesManagement(date: Date) {
         handleError(error);
       }
     },
-    [],
+    [date],
   );
 
-  const deleteNote = React.useCallback(async (id: number) => {
-    try {
-      await notesServices.deleteNote(id);
-      await fetchNotes();
-    } catch (error) {
-      handleError(error);
-    }
-  }, []);
+  const deleteNote = React.useCallback(
+    async (id: number) => {
+      try {
+        await notesServices.deleteNote(id);
+        await fetchNotes();
+      } catch (error) {
+        handleError(error);
+      }
+    },
+    [date],
+  );
 
   return {
     notes,
