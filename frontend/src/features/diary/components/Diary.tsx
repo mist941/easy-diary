@@ -2,19 +2,17 @@
 
 import { ScrollArea } from '@/components/ui/ScrollArea';
 import React from 'react';
-import useCurrentSelectedDateStore from '@/store/currentSelectedDateStore';
 import { filterNotesForHour } from '@/features/notes/utils';
 import { DiaryHour } from './DiaryHour';
 import { useTimelinePosition } from '../hooks/useTimelinePosition';
 import { useNotesManagement } from '../hooks/useNotesManagement';
 
 function Diary() {
-  const { date } = useCurrentSelectedDateStore();
   const hoursRef = React.useRef<HTMLDivElement>(null);
   const offsetRef = React.useRef<HTMLDivElement>(null);
 
   const { notes, loading, createNote, updateNote, deleteNote } =
-    useNotesManagement(date);
+    useNotesManagement();
 
   useTimelinePosition(hoursRef, offsetRef, loading, notes.length);
 

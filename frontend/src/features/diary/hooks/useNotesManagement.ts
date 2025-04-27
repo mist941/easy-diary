@@ -4,8 +4,10 @@ import { notesServices } from '@/api';
 import { getDateForRequest } from '@/utils/time';
 import { INote } from '@/features/notes/types';
 import { handleError } from '@/utils/errors';
+import useCurrentSelectedDateStore from '@/store/currentSelectedDateStore';
 
-export function useNotesManagement(date: Date) {
+export function useNotesManagement() {
+  const { date } = useCurrentSelectedDateStore();
   const [notes, setNotes] = React.useState<INote[]>([]);
   const [loading, setLoading] = React.useState(false);
 
