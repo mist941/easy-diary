@@ -4,13 +4,11 @@
  * @returns Formatted time string
  */
 const formatDateForNotePreview = (date: string): string => {
-  return new Date(date)
-    .toLocaleTimeString('en-US', {
-      hour: '2-digit',
-      minute: '2-digit',
-    })
-    .replace('AM', '')
-    .replace('PM', '');
+  return new Date(date).toLocaleTimeString('en-US', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  });
 };
 
 export { formatDateForNotePreview };
