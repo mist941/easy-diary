@@ -18,6 +18,7 @@ function SingleNote({
     <div className="flex items-center gap-2 group/note">
       <p className="text-xs text-foreground italic">
         {formatDateForNotePreview(note.started_at)}
+        {note.finished_at && ` - ${formatDateForNotePreview(note.finished_at)}`}
         {': '}
         {note.content}
       </p>
