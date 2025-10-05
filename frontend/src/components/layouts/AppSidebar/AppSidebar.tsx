@@ -8,7 +8,7 @@ import { SidebarSeparator } from '@/components/layouts/Sidebar';
 import { SidebarMenuButton } from '@/components/layouts/Sidebar';
 import { SidebarMenuItem } from '@/components/layouts/Sidebar';
 import { SidebarMenu } from '@/components/layouts/Sidebar';
-import { Tags, BarChart, Settings, Home, Bubbles } from 'lucide-react';
+import { Tags, Home, Bubbles, BarChart, Settings } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
