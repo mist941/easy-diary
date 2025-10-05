@@ -1,9 +1,9 @@
-import * as React from 'react';
+import React, { ComponentProps, useId } from 'react';
 import { cn } from '@/lib/utils';
 import { FormItemContext } from './FormItemContext';
 
-function FormItem({ className, ...props }: React.ComponentProps<'div'>) {
-  const id = React.useId();
+function FormItem({ className, ...props }: ComponentProps<'div'>) {
+  const id = useId();
 
   return (
     <FormItemContext.Provider value={{ id }}>

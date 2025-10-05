@@ -1,7 +1,7 @@
-import * as React from 'react';
+import React, { ComponentProps } from 'react';
 import { cn } from '@/lib/utils';
 
-function SheetFooter({ className, ...props }: React.ComponentProps<'div'>) {
+function SheetFooter({ className, ...props }: ComponentProps<'div'>) {
   return (
     <div
       data-slot="sheet-footer"

@@ -1,3 +1,4 @@
+import React, { ComponentProps } from 'react';
 import { XIcon } from 'lucide-react';
 import { SheetPortal } from './SheetPortal';
 import { SheetOverlay } from './SheetOverlay';
@@ -9,7 +10,7 @@ function SheetContent({
   children,
   side = 'right',
   ...props
-}: React.ComponentProps<typeof SheetPrimitive.Content> & {
+}: ComponentProps<typeof SheetPrimitive.Content> & {
   side?: 'top' | 'right' | 'bottom' | 'left';
 }) {
   return (

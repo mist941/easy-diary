@@ -1,3 +1,4 @@
+import React, { ComponentProps } from 'react';
 import { Tooltip } from '@/components/ui/Tooltip/Tooltip';
 import { TooltipContent } from '@/components/ui/Tooltip/TooltipContent';
 import { useSidebar } from './useSidebar';
@@ -37,10 +38,10 @@ function SidebarMenuButton({
   tooltip,
   className,
   ...props
-}: React.ComponentProps<'button'> & {
+}: ComponentProps<'button'> & {
   asChild?: boolean;
   isActive?: boolean;
-  tooltip?: string | React.ComponentProps<typeof TooltipContent>;
+  tooltip?: string | ComponentProps<typeof TooltipContent>;
 } & VariantProps<typeof sidebarMenuButtonVariants>) {
   const Comp = asChild ? Slot : 'button';
   const { isMobile, state } = useSidebar();

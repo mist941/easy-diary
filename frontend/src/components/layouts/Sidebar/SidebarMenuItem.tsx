@@ -1,6 +1,7 @@
+import React, { ComponentProps } from 'react';
 import { cn } from '@/lib/utils';
 
-function SidebarMenuItem({ className, ...props }: React.ComponentProps<'li'>) {
+function SidebarMenuItem({ className, ...props }: ComponentProps<'li'>) {
   return (
     <li
       data-slot="sidebar-menu-item"

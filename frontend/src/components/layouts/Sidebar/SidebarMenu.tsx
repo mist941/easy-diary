@@ -1,7 +1,7 @@
-import * as React from 'react';
+import React, { ComponentProps } from 'react';
 import { cn } from '@/lib/utils';
 
-function SidebarMenu({ className, ...props }: React.ComponentProps<'ul'>) {
+function SidebarMenu({ className, ...props }: ComponentProps<'ul'>) {
   return (
     <ul
       data-slot="sidebar-menu"

@@ -1,6 +1,7 @@
+import React, { ComponentProps } from 'react';
 import { cn } from '@/lib/utils';
 
-function TableFooter({ className, ...props }: React.ComponentProps<'tfoot'>) {
+function TableFooter({ className, ...props }: ComponentProps<'tfoot'>) {
   return (
     <tfoot
       data-slot="table-footer"

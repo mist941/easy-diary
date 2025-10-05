@@ -1,12 +1,12 @@
-import * as React from 'react';
+import { MouseEvent } from 'react';
 import { Pencil, X } from 'lucide-react';
 import { INote } from '@/features/notes/types';
 import { formatDateForNotePreview } from '../utils';
 
 interface SingleNoteProps {
   note: INote;
-  handleOpenEditor: (e: React.MouseEvent<SVGSVGElement>, note: INote) => void;
-  handleDeleteNote: (e: React.MouseEvent<SVGSVGElement>, note: INote) => void;
+  handleOpenEditor: (e: MouseEvent<SVGSVGElement>, note: INote) => void;
+  handleDeleteNote: (e: MouseEvent<SVGSVGElement>, note: INote) => void;
 }
 
 function SingleNote({

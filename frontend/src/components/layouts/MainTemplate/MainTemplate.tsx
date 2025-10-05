@@ -1,6 +1,6 @@
 'use client';
 
-import * as React from 'react';
+import React, { ReactNode } from 'react';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -20,7 +20,7 @@ import { getHumanReadableDate } from '@/utils/time';
 import { usePathname } from 'next/navigation';
 
 interface MainTemplateProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 function MainTemplate({ children }: MainTemplateProps) {

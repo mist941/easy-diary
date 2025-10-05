@@ -1,6 +1,7 @@
+import React, { ComponentProps } from 'react';
 import { cn } from '@/lib/utils';
 
-function BreadcrumbItem({ className, ...props }: React.ComponentProps<'li'>) {
+function BreadcrumbItem({ className, ...props }: ComponentProps<'li'>) {
   return (
     <li
       data-slot="breadcrumb-item"

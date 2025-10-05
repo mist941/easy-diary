@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { createContext } from 'react';
 import { FieldValues, FieldPath } from 'react-hook-form';
 
 interface FormFieldContextValue<
@@ -8,7 +8,7 @@ interface FormFieldContextValue<
   name: TName;
 }
 
-const FormFieldContext = React.createContext<FormFieldContextValue>(
+const FormFieldContext = createContext<FormFieldContextValue>(
   {} as FormFieldContextValue,
 );
 

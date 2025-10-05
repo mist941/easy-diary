@@ -1,15 +1,15 @@
+import { useEffect, RefObject } from 'react';
 import { getCurrentTimeInMinutes } from '@/utils/time';
-import * as React from 'react';
 
 function useTimelinePosition(
-  hoursRef: React.RefObject<HTMLDivElement | null>,
-  offsetRef: React.RefObject<HTMLDivElement | null>,
+  hoursRef: RefObject<HTMLDivElement | null>,
+  offsetRef: RefObject<HTMLDivElement | null>,
   loading: boolean,
   totalNotes: number,
 ) {
   const currentTime = getCurrentTimeInMinutes();
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (hoursRef.current) {
       const hourItems = hoursRef.current.querySelectorAll('.hour-item');
       const currentHourIndex = Math.floor((currentTime - 5 * 60) / 60);

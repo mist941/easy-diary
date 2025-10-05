@@ -1,17 +1,17 @@
-import * as React from 'react';
+import React, { ComponentProps, memo, MouseEvent } from 'react';
 import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
 import { PanelLeftIcon } from 'lucide-react';
 import { useSidebar } from './useSidebar';
 
-const SidebarTrigger = React.memo(function SidebarTrigger({
+const SidebarTrigger = memo(function SidebarTrigger({
   className,
   onClick,
   ...props
-}: React.ComponentProps<typeof Button>) {
+}: ComponentProps<typeof Button>) {
   const { toggleSidebar } = useSidebar();
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     onClick?.(event);
     toggleSidebar();
   };

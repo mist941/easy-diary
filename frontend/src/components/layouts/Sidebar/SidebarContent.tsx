@@ -1,10 +1,10 @@
-import * as React from 'react';
+import React, { ComponentProps, memo } from 'react';
 import { cn } from '@/lib/utils';
 
-const SidebarContent = React.memo(function SidebarContent({
+const SidebarContent = memo(function SidebarContent({
   className,
   ...props
-}: React.ComponentProps<'div'>) {
+}: ComponentProps<'div'>) {
   return (
     <div
       data-slot="sidebar-content"

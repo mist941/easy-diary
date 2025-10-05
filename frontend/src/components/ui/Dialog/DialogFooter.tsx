@@ -1,6 +1,7 @@
+import React, { ComponentProps } from 'react';
 import { cn } from '@/lib/utils';
 
-function DialogFooter({ className, ...props }: React.ComponentProps<'div'>) {
+function DialogFooter({ className, ...props }: ComponentProps<'div'>) {
   return (
     <div
       data-slot="dialog-footer"

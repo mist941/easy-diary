@@ -1,3 +1,4 @@
+import React, { ComponentProps } from 'react';
 import { cn } from '@/lib/utils';
 import { ChevronRight } from 'lucide-react';
 
@@ -5,7 +6,7 @@ function BreadcrumbSeparator({
   children,
   className,
   ...props
-}: React.ComponentProps<'li'>) {
+}: ComponentProps<'li'>) {
   return (
     <li
       data-slot="breadcrumb-separator"

@@ -1,6 +1,6 @@
 'use client';
 
-import * as React from 'react';
+import React, { ComponentProps, CSSProperties } from 'react';
 import { cn } from '@/lib/utils';
 import {
   Sheet,
@@ -12,7 +12,7 @@ import {
 import { useSidebar } from './useSidebar';
 import { SIDEBAR_WIDTH_MOBILE } from './constants';
 
-interface SidebarProps extends React.ComponentProps<'div'> {
+interface SidebarProps extends ComponentProps<'div'> {
   side?: 'left' | 'right';
   variant?: 'sidebar' | 'floating' | 'inset';
   collapsible?: 'offcanvas' | 'icon' | 'none';
@@ -54,7 +54,7 @@ function Sidebar({
           style={
             {
               '--sidebar-width': SIDEBAR_WIDTH_MOBILE,
-            } as React.CSSProperties
+            } as CSSProperties
           }
           side={side}
         >

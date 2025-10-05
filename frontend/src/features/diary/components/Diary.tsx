@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useRef } from 'react';
 import { ScrollArea } from '@/components/ui/ScrollArea';
 import { filterNotesForHour } from '@/features/notes/utils';
 import { DiaryHour } from './DiaryHour';
@@ -8,8 +8,8 @@ import { useTimelinePosition } from '../hooks/useTimelinePosition';
 import { useNotesManagement } from '../hooks/useNotesManagement';
 
 function Diary() {
-  const hoursRef = React.useRef<HTMLDivElement>(null);
-  const offsetRef = React.useRef<HTMLDivElement>(null);
+  const hoursRef = useRef<HTMLDivElement>(null);
+  const offsetRef = useRef<HTMLDivElement>(null);
 
   const { notes, loading, createNote, updateNote, deleteNote } =
     useNotesManagement();

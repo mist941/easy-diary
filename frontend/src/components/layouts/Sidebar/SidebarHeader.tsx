@@ -1,7 +1,7 @@
-import * as React from 'react';
+import React, { memo } from 'react';
 import { NotebookPen } from 'lucide-react';
 
-const SidebarHeader = React.memo(function SidebarHeader() {
+const SidebarHeader = memo(function SidebarHeader() {
   return (
     <div
       data-slot="sidebar-header"

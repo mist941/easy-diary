@@ -1,11 +1,11 @@
-import * as React from 'react';
+import { useContext } from 'react';
 import { useFormState, useFormContext } from 'react-hook-form';
 import { FormFieldContext } from './FormFieldContext';
 import { FormItemContext } from './FormItemContext';
 
 const useFormField = () => {
-  const fieldContext = React.useContext(FormFieldContext);
-  const itemContext = React.useContext(FormItemContext);
+  const fieldContext = useContext(FormFieldContext);
+  const itemContext = useContext(FormItemContext);
   const { getFieldState } = useFormContext();
   const formState = useFormState({ name: fieldContext.name });
   const fieldState = getFieldState(fieldContext.name, formState);

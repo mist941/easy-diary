@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { INoteRequest, INote } from '@/features/notes/types';
 import { notesServices } from '@/api';
 import { getDateForRequest } from '@/utils/time';
@@ -7,15 +7,15 @@ import useCurrentSelectedDateStore from '@/store/currentSelectedDateStore';
 
 export function useNotesManagement() {
   const { date } = useCurrentSelectedDateStore();
-  const [notes, setNotes] = React.useState<INote[]>([]);
-  const [loading, setLoading] = React.useState(false);
+  const [notes, setNotes] = useState<INote[]>([]);
+  const [loading, setLoading] = useState(false);
 
-  const fetchNotes = React.useCallback(async () => {
+  const fetchNotes = useCallback(async () => {
     const fetchedNotes = await notesServices.getNotes(getDateForRequest(date));
     setNotes(fetchedNotes);
   }, [date]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     (async () => {
       try {
         setLoading(true);
@@ -28,7 +28,7 @@ export function useNotesManagement() {
     })();
   }, [date]);
 
-  const createNote = React.useCallback(
+  const createNote = useCallback(
     async (values: INoteRequest) => {
       try {
         await notesServices.createNote(values);
@@ -40,7 +40,7 @@ export function useNotesManagement() {
     [date],
   );
 
-  const updateNote = React.useCallback(
+  const updateNote = useCallback(
     async (id: number, values: INoteRequest) => {
       try {
         await notesServices.updateNote(id, values);
@@ -52,7 +52,7 @@ export function useNotesManagement() {
     [date],
   );
 
-  const deleteNote = React.useCallback(
+  const deleteNote = useCallback(
     async (id: number) => {
       try {
         await notesServices.deleteNote(id);

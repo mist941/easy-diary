@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { ComponentProps } from 'react';
 import { DatePicker } from '@/components/layouts/DatePicker';
 import { Sidebar, SidebarGroup } from '@/components/layouts/Sidebar';
 import { SidebarHeader } from '@/components/layouts/Sidebar';
@@ -11,7 +11,7 @@ import { SidebarMenu } from '@/components/layouts/Sidebar';
 import { Tags, Home, Bubbles, BarChart, Settings } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
-function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+function AppSidebar({ ...props }: ComponentProps<typeof Sidebar>) {
   const router = useRouter();
 
   const handleRedirect = (path: string) => {

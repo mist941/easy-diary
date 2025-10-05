@@ -1,6 +1,6 @@
 'use client';
 
-import * as React from 'react';
+import React, { useState } from 'react';
 import {
   Popover,
   PopoverContent,
@@ -21,7 +21,7 @@ interface TimePickerProps {
 }
 
 function TimePicker({ value = '12:00', onChange }: TimePickerProps) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const hoursValue = value ? value.split(':')[0] : '--';
   const minutesValue = value ? value.split(':')[1] : '--';
 

@@ -1,10 +1,10 @@
-import * as React from 'react';
+import { createContext } from 'react';
 
 interface FormItemContextValue {
   id: string;
 }
 
-const FormItemContext = React.createContext<FormItemContextValue>(
+const FormItemContext = createContext<FormItemContextValue>(
   {} as FormItemContextValue,
 );
 

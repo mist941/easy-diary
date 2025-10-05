@@ -1,7 +1,7 @@
-import * as React from 'react';
+import React, { ComponentProps } from 'react';
 import { cn } from '@/lib/utils';
 
-function SheetHeader({ className, ...props }: React.ComponentProps<'div'>) {
+function SheetHeader({ className, ...props }: ComponentProps<'div'>) {
   return (
     <div
       data-slot="sheet-header"

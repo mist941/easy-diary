@@ -1,3 +1,4 @@
+import React, { ComponentProps } from 'react';
 import { DialogOverlay } from './DialogOverlay';
 import { DialogPortal } from './DialogPortal';
 import { cn } from '@/lib/utils';
@@ -8,7 +9,7 @@ function DialogContent({
   className,
   children,
   ...props
-}: React.ComponentProps<typeof DialogPrimitive.Content>) {
+}: ComponentProps<typeof DialogPrimitive.Content>) {
   return (
     <DialogPortal data-slot="dialog-portal">
       <DialogOverlay />
