@@ -13,17 +13,16 @@ function TagsTable() {
       <Table>
         <TableHeader>
           <TableRow>
-            {['Name', 'Color', 'Action'].map((header) => {
+            {['Name', 'Color'].map((header) => {
               return <TableHead key={header}>{header}</TableHead>;
             })}
           </TableRow>
         </TableHeader>
         <TableBody>
-          {['1', '2', '3'].map((row) => (
+          {['1', '2'].map((row) => (
             <TableRow key={row}>
               <TableCell>1</TableCell>
               <TableCell>2</TableCell>
-              <TableCell>3</TableCell>
             </TableRow>
           ))}
         </TableBody>
