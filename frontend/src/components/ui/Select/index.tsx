@@ -1,4 +1,4 @@
-export { Select } from './select';
+export { Select } from './Select';
 export { SelectContent } from './SelectContent';
 export { SelectItem } from './SelectItem';
 export { SelectLabel } from './SelectLabel';

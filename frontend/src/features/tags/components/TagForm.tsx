@@ -18,11 +18,18 @@ import {
   FormItem,
 } from '@/components/ui/Form';
 import { Input } from '@/components/ui/Input';
+import {
+  ColorPicker,
+  ColorPickerSelection,
+  ColorPickerHue,
+  ColorPickerFormat,
+} from '@/components/ui/ColorPicker';
 
 const formSchema = z.object({
   name: z.string().min(2, {
     message: 'Name must be at least 2 characters.',
   }),
+  color: z.string(),
 });
 
 function TagForm() {
@@ -30,6 +37,7 @@ function TagForm() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: '',
+      color: '#000000',
     },
   });
 
@@ -55,10 +63,32 @@ function TagForm() {
                 <FormItem className="flex-1">
                   <FormControl>
                     <Input
-                      className="resize-none w-full h-full"
+                      className="resize-none w-full"
                       placeholder="Tag name"
                       {...form.register('name')}
                     />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="color"
+              render={() => (
+                <FormItem className="flex-1">
+                  <FormControl>
+                    <ColorPicker className="max-w-sm rounded-md border bg-background p-4 shadow-sm h-90">
+                      <ColorPickerSelection />
+                      <div className="flex items-center gap-4">
+                        <div className="grid w-full gap-1">
+                          <ColorPickerHue />
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <ColorPickerFormat />
+                      </div>
+                    </ColorPicker>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
