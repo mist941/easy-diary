@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { useFormState } from 'react-hook-form';
-import { useFormContext } from 'react-hook-form';
+import { useFormState, useFormContext } from 'react-hook-form';
 import { FormFieldContext } from './FormFieldContext';
 import { FormItemContext } from './FormItemContext';
 

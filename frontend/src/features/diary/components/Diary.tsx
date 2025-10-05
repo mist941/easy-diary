@@ -1,7 +1,7 @@
 'use client';
 
-import { ScrollArea } from '@/components/ui/ScrollArea';
 import React from 'react';
+import { ScrollArea } from '@/components/ui/ScrollArea';
 import { filterNotesForHour } from '@/features/notes/utils';
 import { DiaryHour } from './DiaryHour';
 import { useTimelinePosition } from '../hooks/useTimelinePosition';

@@ -1,8 +1,7 @@
 import React from 'react';
-import { INoteRequest } from '@/features/notes/types';
+import { INoteRequest, INote } from '@/features/notes/types';
 import { notesServices } from '@/api';
 import { getDateForRequest } from '@/utils/time';
-import { INote } from '@/features/notes/types';
 import { handleError } from '@/utils/errors';
 import useCurrentSelectedDateStore from '@/store/currentSelectedDateStore';
 

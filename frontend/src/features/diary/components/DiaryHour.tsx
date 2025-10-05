@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { INote } from '@/features/notes/types';
-import { INoteRequest } from '@/features/notes/types';
+import { INote, INoteRequest } from '@/features/notes/types';
 import {
   Popover,
   PopoverContent,
