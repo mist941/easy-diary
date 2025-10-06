@@ -25,7 +25,6 @@ import {
   ColorPickerFormat,
 } from '@/components/ui/ColorPicker';
 import { ITagRequest } from '../types/dto';
-import { useCallback } from 'react';
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -47,17 +46,10 @@ function TagForm({ onSubmit }: TagFormProps) {
     },
   });
 
-  const handleSubmit = useCallback(
-    (values: z.infer<typeof formSchema>) => {
-      onSubmit(values);
-    },
-    [onSubmit],
-  );
-
   return (
     <DialogContent className="sm:max-w-[425px]">
       <FormProvider {...form}>
-        <form onSubmit={form.handleSubmit(handleSubmit)}>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
           <DialogHeader>
             <DialogTitle>Add Tag</DialogTitle>
             <DialogDescription>

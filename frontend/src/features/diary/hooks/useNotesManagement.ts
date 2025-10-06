@@ -5,7 +5,7 @@ import { getDateForRequest } from '@/utils/time';
 import { handleError } from '@/utils/errors';
 import useCurrentSelectedDateStore from '@/store/currentSelectedDateStore';
 
-export function useNotesManagement() {
+function useNotesManagement() {
   const { date } = useCurrentSelectedDateStore();
   const [notes, setNotes] = useState<INote[]>([]);
   const [loading, setLoading] = useState(false);
@@ -73,3 +73,5 @@ export function useNotesManagement() {
     fetchNotes,
   };
 }
+
+export { useNotesManagement };
