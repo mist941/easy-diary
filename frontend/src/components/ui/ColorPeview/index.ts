@@ -1,0 +1,1 @@
+export { ColorPeview } from './ColorPeview';

@@ -24,7 +24,7 @@ import {
   ColorPickerHue,
   ColorPickerFormat,
 } from '@/components/ui/ColorPicker';
-import { ITagRequest } from '../types';
+import { ITag, ITagRequest } from '../types';
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -35,14 +35,15 @@ const formSchema = z.object({
 
 interface TagFormProps {
   onSubmit: (values: ITagRequest) => void;
+  defaultValues: ITag | null;
 }
 
-function TagForm({ onSubmit }: TagFormProps) {
+function TagForm({ onSubmit, defaultValues }: TagFormProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: '',
-      color: '#000000',
+      name: defaultValues?.name || '',
+      color: defaultValues?.color || '#000000',
     },
   });
 

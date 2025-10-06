@@ -2,9 +2,9 @@ import axios from '@/api/axios';
 import { ITag, ITagRequest } from '@/features/tags/types';
 
 const tagsServices = {
-  async getTags(): Promise<ITag[]> {
+  async getTags(query: string = ''): Promise<ITag[]> {
     try {
-      const response = await axios.get(`/tags`);
+      const response = await axios.get(`/tags`, { params: { query } });
       return response.data;
     } catch (error) {
       throw error;

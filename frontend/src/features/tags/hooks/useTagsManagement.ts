@@ -7,8 +7,8 @@ function useTagsManagement() {
   const [tags, setTags] = useState<ITag[]>([]);
   const [loading, setLoading] = useState(false);
 
-  const fetchTags = useCallback(async () => {
-    const fetchedTags = await tagsServices.getTags();
+  const fetchTags = useCallback(async (query: string = '') => {
+    const fetchedTags = await tagsServices.getTags(query);
     setTags(fetchedTags);
   }, []);
 

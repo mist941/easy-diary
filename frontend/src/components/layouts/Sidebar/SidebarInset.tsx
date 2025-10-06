@@ -1,10 +1,7 @@
 import React, { ComponentProps, memo } from 'react';
 import { cn } from '@/lib/utils';
 
-const SidebarInset = memo(function SidebarInset({
-  className,
-  ...props
-}: ComponentProps<'main'>) {
+const SidebarInset = memo(({ className, ...props }: ComponentProps<'main'>) => {
   return (
     <main
       data-slot="sidebar-inset"
@@ -17,5 +14,7 @@ const SidebarInset = memo(function SidebarInset({
     />
   );
 });
+
+SidebarInset.displayName = 'SidebarInset';
 
 export { SidebarInset };
