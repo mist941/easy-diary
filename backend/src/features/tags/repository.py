@@ -11,6 +11,7 @@ class TagModel(Base):
     __tablename__ = "tags"
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)
+    color = Column(String, nullable=False)
 
 
 class TagRepository(ITagRepository):
@@ -22,18 +23,18 @@ class TagRepository(ITagRepository):
             tags = await self.db.execute(
                 select(TagModel).where(TagModel.name.like(f"%{query}%"))
             )
-            return [Tag(id=tag.id, name=tag.name) for tag in tags.scalars().all()]
+            return [Tag(id=tag.id, name=tag.name, color=tag.color) for tag in tags.scalars().all()]
         except Exception as e:
             await self.db.rollback()
             raise e
 
     async def create(self, tag_data: TagCreate) -> Tag:
-        tag = TagModel(name=tag_data.name)
+        tag = TagModel(name=tag_data.name, color=tag_data.color)
         try:
             self.db.add(tag)
             await self.db.commit()
             await self.db.refresh(tag)
-            return Tag(id=tag.id, name=tag.name)
+            return Tag(id=tag.id, name=tag.name, color=tag.color)
         except Exception as e:
             await self.db.rollback()
             raise e
@@ -46,10 +47,11 @@ class TagRepository(ITagRepository):
                 raise HTTPException(status_code=404, detail="Tag not found")
 
             tag.name = tag_data.name
+            tag.color = tag_data.color
 
             await self.db.commit()
             await self.db.refresh(tag)
-            return Tag(id=tag.id, name=tag.name)
+            return Tag(id=tag.id, name=tag.name, color=tag.color)
         except Exception as e:
             await self.db.rollback()
             raise e
