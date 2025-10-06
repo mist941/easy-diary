@@ -1,10 +1,18 @@
+'use client';
+
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { TagsTable } from './TagsTable';
 import { Dialog, DialogTrigger } from '@/components/ui/Dialog';
 import { TagForm } from './TagForm';
+import { ITagRequest } from '../types/dto';
+import { useCallback } from 'react';
 
 function TagsPanel() {
+  const handleSubmit = useCallback((values: ITagRequest) => {
+    console.log(values);
+  }, []);
+
   return (
     <Dialog>
       <div className="flex flex-col gap-4">
@@ -16,7 +24,7 @@ function TagsPanel() {
         </div>
         <TagsTable />
       </div>
-      <TagForm />
+      <TagForm onSubmit={handleSubmit} />
     </Dialog>
   );
 }

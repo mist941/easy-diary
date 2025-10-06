@@ -6,7 +6,7 @@ import { ColorPickerContext } from './useColorPicker';
 type ColorPickerProps = HTMLAttributes<HTMLDivElement> & {
   value?: Parameters<typeof Color>[0];
   defaultValue?: Parameters<typeof Color>[0];
-  onChange?: (value: Parameters<typeof Color.rgb>[0]) => void;
+  onChange?: (value: string) => void;
 };
 
 const ColorPicker = ({
@@ -46,9 +46,7 @@ const ColorPicker = ({
   useEffect(() => {
     if (onChange) {
       const color = Color.hsl(hue, saturation, lightness);
-      const rgba = color.rgb().array();
-
-      onChange([rgba[0], rgba[1], rgba[2], 1]);
+      onChange(color.hex());
     }
   }, [hue, saturation, lightness, onChange]);
 

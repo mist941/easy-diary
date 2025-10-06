@@ -22,7 +22,7 @@ const ColorPickerFormat = ({ className, ...props }: ColorPickerFormatProps) => {
         {...props}
       >
         <Input
-          className="h-8 rounded-r-none bg-secondary px-2 text-xs shadow-none"
+          className="h-8 bg-secondary px-2 text-xs shadow-none"
           readOnly
           type="text"
           value={hex}
@@ -48,7 +48,7 @@ const ColorPickerFormat = ({ className, ...props }: ColorPickerFormatProps) => {
         {rgb.map((value, index) => (
           <Input
             className={cn(
-              'h-8 rounded-r-none bg-secondary px-2 text-xs shadow-none',
+              'h-8 bg-secondary px-2 text-xs shadow-none',
               index && 'rounded-l-none',
               className,
             )}
@@ -98,7 +98,7 @@ const ColorPickerFormat = ({ className, ...props }: ColorPickerFormatProps) => {
         {hsl.map((value, index) => (
           <Input
             className={cn(
-              'h-8 rounded-r-none bg-secondary px-2 text-xs shadow-none',
+              'h-8 bg-secondary px-2 text-xs shadow-none',
               index && 'rounded-l-none',
               className,
             )}

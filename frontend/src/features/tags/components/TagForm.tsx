@@ -24,6 +24,8 @@ import {
   ColorPickerHue,
   ColorPickerFormat,
 } from '@/components/ui/ColorPicker';
+import { ITagRequest } from '../types/dto';
+import { useCallback } from 'react';
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -32,7 +34,11 @@ const formSchema = z.object({
   color: z.string(),
 });
 
-function TagForm() {
+interface TagFormProps {
+  onSubmit: (values: ITagRequest) => void;
+}
+
+function TagForm({ onSubmit }: TagFormProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -41,9 +47,12 @@ function TagForm() {
     },
   });
 
-  const handleSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
-  };
+  const handleSubmit = useCallback(
+    (values: z.infer<typeof formSchema>) => {
+      onSubmit(values);
+    },
+    [onSubmit],
+  );
 
   return (
     <DialogContent className="sm:max-w-[425px]">
@@ -82,7 +91,9 @@ function TagForm() {
                       className="max-w-sm rounded-md border bg-background p-4 shadow-sm h-90"
                       value={form.watch('color')}
                       onChange={(value) => {
-                        console.log(value);
+                        if (typeof value === 'string') {
+                          form.setValue('color', value);
+                        }
                       }}
                     >
                       <ColorPickerSelection />
