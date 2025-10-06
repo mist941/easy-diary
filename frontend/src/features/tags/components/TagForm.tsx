@@ -78,7 +78,13 @@ function TagForm() {
               render={() => (
                 <FormItem className="flex-1">
                   <FormControl>
-                    <ColorPicker className="max-w-sm rounded-md border bg-background p-4 shadow-sm h-90">
+                    <ColorPicker
+                      className="max-w-sm rounded-md border bg-background p-4 shadow-sm h-90"
+                      value={form.watch('color')}
+                      onChange={(value) => {
+                        console.log(value);
+                      }}
+                    >
                       <ColorPickerSelection />
                       <div className="flex items-center gap-4">
                         <div className="grid w-full gap-1">

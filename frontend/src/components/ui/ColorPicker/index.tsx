@@ -3,7 +3,6 @@ export { ColorPickerSelection } from './ColorPickerSelection';
 export { ColorPickerEyeDropper } from './ColorPickerEyeDropper';
 export { ColorPickerFormat } from './ColorPickerFormat';
 export { ColorPickerHue } from './ColorPickerHue';
-export { ColorPickerAlpha } from './ColorPickerAlpha';
 export { ColorPickerOutput } from './ColorPickerOutput';
 export { useColorPicker } from './useColorPicker';
 export { ColorPickerContext } from './useColorPicker';

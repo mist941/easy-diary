@@ -11,7 +11,7 @@ const ColorPickerEyeDropper = ({
   className,
   ...props
 }: ColorPickerEyeDropperProps) => {
-  const { setHue, setSaturation, setLightness, setAlpha } = useColorPicker();
+  const { setHue, setSaturation, setLightness } = useColorPicker();
 
   const handleEyeDropper = async () => {
     try {
@@ -24,7 +24,6 @@ const ColorPickerEyeDropper = ({
       setHue(h);
       setSaturation(s);
       setLightness(l);
-      setAlpha(100);
     } catch (error) {
       console.error('EyeDropper failed:', error);
     }

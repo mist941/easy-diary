@@ -3,13 +3,12 @@ import { useColorPicker } from './useColorPicker';
 import Color from 'color';
 import { cn } from '@/lib/utils';
 import { Input } from '../Input';
-import { PercentageInput } from './PercentageInput';
 
 type ColorPickerFormatProps = HTMLAttributes<HTMLDivElement>;
 
 const ColorPickerFormat = ({ className, ...props }: ColorPickerFormatProps) => {
-  const { hue, saturation, lightness, alpha, mode } = useColorPicker();
-  const color = Color.hsl(hue, saturation, lightness, alpha / 100);
+  const { hue, saturation, lightness, mode } = useColorPicker();
+  const color = Color.hsl(hue, saturation, lightness, 1);
 
   if (mode === 'hex') {
     const hex = color.hex();
@@ -28,7 +27,6 @@ const ColorPickerFormat = ({ className, ...props }: ColorPickerFormatProps) => {
           type="text"
           value={hex}
         />
-        <PercentageInput value={alpha} />
       </div>
     );
   }
@@ -60,7 +58,6 @@ const ColorPickerFormat = ({ className, ...props }: ColorPickerFormatProps) => {
             value={value}
           />
         ))}
-        <PercentageInput value={alpha} />
       </div>
     );
   }
@@ -77,7 +74,7 @@ const ColorPickerFormat = ({ className, ...props }: ColorPickerFormatProps) => {
           className="h-8 w-full bg-secondary px-2 text-xs shadow-none"
           readOnly
           type="text"
-          value={`rgba(${rgb.join(', ')}, ${alpha}%)`}
+          value={`rgba(${rgb.join(', ')}, 1)`}
           {...props}
         />
       </div>
@@ -111,7 +108,6 @@ const ColorPickerFormat = ({ className, ...props }: ColorPickerFormatProps) => {
             value={value}
           />
         ))}
-        <PercentageInput value={alpha} />
       </div>
     );
   }

@@ -28,9 +28,7 @@ const ColorPicker = ({
   const [lightness, setLightness] = useState(
     selectedColor.lightness() || defaultColor.lightness() || 50,
   );
-  const [alpha, setAlpha] = useState(
-    selectedColor.alpha() * 100 || defaultColor.alpha() * 100,
-  );
+
   const [mode, setMode] = useState('hex');
 
   // Update color when controlled value changes
@@ -41,19 +39,18 @@ const ColorPicker = ({
       setHue(color.r);
       setSaturation(color.g);
       setLightness(color.b);
-      setAlpha(color.a);
     }
   }, [value]);
 
   // Notify parent of changes
   useEffect(() => {
     if (onChange) {
-      const color = Color.hsl(hue, saturation, lightness).alpha(alpha / 100);
+      const color = Color.hsl(hue, saturation, lightness);
       const rgba = color.rgb().array();
 
-      onChange([rgba[0], rgba[1], rgba[2], alpha / 100]);
+      onChange([rgba[0], rgba[1], rgba[2], 1]);
     }
-  }, [hue, saturation, lightness, alpha, onChange]);
+  }, [hue, saturation, lightness, onChange]);
 
   return (
     <ColorPickerContext.Provider
@@ -61,12 +58,10 @@ const ColorPicker = ({
         hue,
         saturation,
         lightness,
-        alpha,
         mode,
         setHue,
         setSaturation,
         setLightness,
-        setAlpha,
         setMode,
       }}
     >
