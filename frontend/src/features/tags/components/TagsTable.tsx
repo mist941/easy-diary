@@ -6,8 +6,13 @@ import {
   TableBody,
   TableCell,
 } from '@/components/ui/Table';
+import { ITag } from '../types';
 
-function TagsTable() {
+interface TagsTableProps {
+  tags: ITag[];
+}
+
+function TagsTable({ tags }: TagsTableProps) {
   return (
     <div className="rounded-md border">
       <Table>
@@ -19,10 +24,10 @@ function TagsTable() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {['1', '2', '3'].map((row) => (
-            <TableRow key={row}>
-              <TableCell>1</TableCell>
-              <TableCell>2</TableCell>
+          {tags.map((row) => (
+            <TableRow key={row.id}>
+              <TableCell>{row.name}</TableCell>
+              <TableCell>{row.color}</TableCell>
               <TableCell>3</TableCell>
             </TableRow>
           ))}

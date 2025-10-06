@@ -5,12 +5,15 @@ import { Input } from '@/components/ui/Input';
 import { TagsTable } from './TagsTable';
 import { Dialog, DialogTrigger } from '@/components/ui/Dialog';
 import { TagForm } from './TagForm';
-import { ITagRequest } from '../types/dto';
+import { ITagRequest } from '../types';
+import { useTagsManagement } from '../hooks/useTagsManagement';
 import { useCallback } from 'react';
 
 function TagsPanel() {
+  const { tags, createTag } = useTagsManagement();
+
   const handleSubmit = useCallback((values: ITagRequest) => {
-    console.log(values);
+    createTag(values);
   }, []);
 
   return (
@@ -22,7 +25,7 @@ function TagsPanel() {
             <Button variant="outline">Add Tag</Button>
           </DialogTrigger>
         </div>
-        <TagsTable />
+        <TagsTable tags={tags} />
       </div>
       <TagForm onSubmit={handleSubmit} />
     </Dialog>

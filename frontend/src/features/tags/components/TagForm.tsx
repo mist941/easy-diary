@@ -24,7 +24,7 @@ import {
   ColorPickerHue,
   ColorPickerFormat,
 } from '@/components/ui/ColorPicker';
-import { ITagRequest } from '../types/dto';
+import { ITagRequest } from '../types';
 
 const formSchema = z.object({
   name: z.string().min(2, {

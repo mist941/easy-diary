@@ -25,7 +25,7 @@ function useTagsManagement() {
     })();
   }, []);
 
-  const createNote = useCallback(async (values: ITagRequest) => {
+  const createTag = useCallback(async (values: ITagRequest) => {
     try {
       await tagsServices.createTag(values);
       await fetchTags();
@@ -34,7 +34,7 @@ function useTagsManagement() {
     }
   }, []);
 
-  const updateNote = useCallback(async (id: number, values: ITagRequest) => {
+  const updateTag = useCallback(async (id: number, values: ITagRequest) => {
     try {
       await tagsServices.updateTag(id, values);
       await fetchTags();
@@ -43,7 +43,7 @@ function useTagsManagement() {
     }
   }, []);
 
-  const deleteNote = useCallback(async (id: number) => {
+  const deleteTag = useCallback(async (id: number) => {
     try {
       await tagsServices.deleteTag(id);
       await fetchTags();
@@ -55,9 +55,9 @@ function useTagsManagement() {
   return {
     tags,
     loading,
-    createNote,
-    updateNote,
-    deleteNote,
+    createTag,
+    updateTag,
+    deleteTag,
     fetchTags,
   };
 }

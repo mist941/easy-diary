@@ -1,13 +1,16 @@
 import React, { ComponentProps } from 'react';
 import { DatePicker } from '@/components/layouts/DatePicker';
-import { Sidebar, SidebarGroup } from '@/components/layouts/Sidebar';
-import { SidebarHeader } from '@/components/layouts/Sidebar';
-import { SidebarContent } from '@/components/layouts/Sidebar';
-import { SidebarFooter } from '@/components/layouts/Sidebar';
-import { SidebarSeparator } from '@/components/layouts/Sidebar';
-import { SidebarMenuButton } from '@/components/layouts/Sidebar';
-import { SidebarMenuItem } from '@/components/layouts/Sidebar';
-import { SidebarMenu } from '@/components/layouts/Sidebar';
+import {
+  Sidebar,
+  SidebarGroup,
+  SidebarHeader,
+  SidebarContent,
+  SidebarFooter,
+  SidebarSeparator,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarMenu,
+} from '@/components/layouts/Sidebar';
 import { Tags, Bubbles, BarChart, Settings, NotebookPen } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
