@@ -11,7 +11,7 @@ const ColorPickerEyeDropper = ({
   className,
   ...props
 }: ColorPickerEyeDropperProps) => {
-  const { setHue, setSaturation, setLightness } = useColorPicker();
+  const { onChange } = useColorPicker();
 
   const handleEyeDropper = async () => {
     try {
@@ -19,11 +19,10 @@ const ColorPickerEyeDropper = ({
       const eyeDropper = new EyeDropper();
       const result = await eyeDropper.open();
       const color = Color(result.sRGBHex);
-      const [h, s, l] = color.hsl().array();
 
-      setHue(h);
-      setSaturation(s);
-      setLightness(l);
+      if (onChange) {
+        onChange(color.hex());
+      }
     } catch (error) {
       console.error('EyeDropper failed:', error);
     }

@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { HTMLAttributes, useState, useEffect } from 'react';
+import { HTMLAttributes } from 'react';
 import Color from 'color';
 import { ColorPickerContext } from './useColorPicker';
 
@@ -19,36 +19,10 @@ const ColorPicker = ({
   const selectedColor = Color(value);
   const defaultColor = Color(defaultValue);
 
-  const [hue, setHue] = useState(
-    selectedColor.hue() || defaultColor.hue() || 0,
-  );
-  const [saturation, setSaturation] = useState(
-    selectedColor.saturationl() || defaultColor.saturationl() || 100,
-  );
-  const [lightness, setLightness] = useState(
-    selectedColor.lightness() || defaultColor.lightness() || 50,
-  );
-
-  const [mode, setMode] = useState('hex');
-
-  // Update color when controlled value changes
-  useEffect(() => {
-    if (value) {
-      const color = Color.rgb(value).rgb().object();
-
-      setHue(color.r);
-      setSaturation(color.g);
-      setLightness(color.b);
-    }
-  }, [value]);
-
-  // Notify parent of changes
-  useEffect(() => {
-    if (onChange) {
-      const color = Color.hsl(hue, saturation, lightness);
-      onChange(color.hex());
-    }
-  }, [hue, saturation, lightness, onChange]);
+  const hue = selectedColor.hue() || defaultColor.hue() || 0;
+  const saturation =
+    selectedColor.saturationl() || defaultColor.saturationl() || 100;
+  const lightness = selectedColor.lightness() || defaultColor.lightness() || 50;
 
   return (
     <ColorPickerContext.Provider
@@ -56,11 +30,7 @@ const ColorPicker = ({
         hue,
         saturation,
         lightness,
-        mode,
-        setHue,
-        setSaturation,
-        setLightness,
-        setMode,
+        onChange,
       }}
     >
       <div

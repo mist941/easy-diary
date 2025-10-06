@@ -9,6 +9,7 @@ import React, {
 } from 'react';
 import { useColorPicker } from './useColorPicker';
 import { cn } from '@/lib/utils';
+import Color from 'color';
 
 type ColorPickerSelectionProps = HTMLAttributes<HTMLDivElement>;
 
@@ -18,7 +19,7 @@ const ColorPickerSelection = memo(
     const [isDragging, setIsDragging] = useState(false);
     const [positionX, setPositionX] = useState(0);
     const [positionY, setPositionY] = useState(0);
-    const { hue, setSaturation, setLightness } = useColorPicker();
+    const { hue, saturation, onChange } = useColorPicker();
 
     const backgroundGradient = useMemo(() => {
       return `linear-gradient(0deg, rgba(0,0,0,1), rgba(0,0,0,0)),
@@ -42,13 +43,15 @@ const ColorPickerSelection = memo(
         );
         setPositionX(x);
         setPositionY(y);
-        setSaturation(x * 100);
+
         const topLightness = x < 0.01 ? 100 : 50 + 50 * (1 - x);
         const lightness = topLightness * (1 - y);
 
-        setLightness(lightness);
+        if (onChange) {
+          onChange(Color.hsl(hue, saturation, lightness).hex());
+        }
       },
-      [isDragging, setSaturation, setLightness],
+      [isDragging, onChange],
     );
 
     useEffect(() => {

@@ -2,17 +2,22 @@ import { cn } from '@/lib/utils';
 import { useColorPicker } from './useColorPicker';
 import { Slider } from 'radix-ui';
 import { ComponentProps } from 'react';
+import Color from 'color';
 
 type ColorPickerHueProps = ComponentProps<typeof Slider.Root>;
 
 const ColorPickerHue = ({ className, ...props }: ColorPickerHueProps) => {
-  const { hue, setHue } = useColorPicker();
+  const { hue, lightness, saturation, onChange } = useColorPicker();
 
   return (
     <Slider.Root
       className={cn('relative flex h-4 w-full touch-none', className)}
       max={360}
-      onValueChange={([hue]) => setHue(hue)}
+      onValueChange={([hue]) => {
+        if (onChange) {
+          onChange(Color.hsl(hue, saturation, lightness).hex());
+        }
+      }}
       step={1}
       value={[hue]}
       {...props}
