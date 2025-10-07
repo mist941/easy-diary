@@ -4,7 +4,7 @@ import { ITag } from '@/features/tags/types';
 export interface IDailyReflection {
   id: number;
   date: Date;
-  mood: Mood;
+  mood?: Mood;
   content: string;
   tags: ITag[];
 }

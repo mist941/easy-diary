@@ -1,5 +1,4 @@
 import { IDailyReflection } from '../types/entities';
-import { Mood } from '../types/enums';
 import { ReflectionItem } from './ReflectionItem';
 import moment from 'moment';
 
@@ -23,7 +22,7 @@ function ReflectionsList({ reflections, dates }: ReflectionsListProps) {
               reflection={{
                 id: 0,
                 date,
-                mood: Mood.NEUTRAL,
+                mood: undefined,
                 content: '',
                 tags: [],
               }}

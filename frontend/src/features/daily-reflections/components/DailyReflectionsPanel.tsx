@@ -45,6 +45,20 @@ function DailyReflectionsPanel() {
             content: 'I had a very bad day!',
             tags: [{ id: 5, name: 'very_bad', color: 'red' }],
           },
+          {
+            id: 6,
+            date: new Date('2025-10-02'),
+            mood: Mood.VERY_GOOD,
+            content: 'I had a very good day!',
+            tags: [{ id: 6, name: 'very_good', color: 'green' }],
+          },
+          {
+            id: 7,
+            date: new Date('2025-10-01'),
+            mood: Mood.EXCELLENT,
+            content: 'I had an excellent day!',
+            tags: [{ id: 7, name: 'excellent', color: 'purple' }],
+          },
         ]}
       />
     </div>
