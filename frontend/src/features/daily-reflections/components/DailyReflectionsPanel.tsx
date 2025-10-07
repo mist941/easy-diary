@@ -3,7 +3,7 @@ import { Mood } from '../types/enums';
 import { generateDatesList } from '@/utils/time';
 
 function DailyReflectionsPanel() {
-  const dates = generateDatesList(10);
+  const dates = generateDatesList(7);
 
   return (
     <div className="w-full xl:w-1/2 xl:mx-auto h-full">
