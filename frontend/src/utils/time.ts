@@ -75,10 +75,28 @@ const extractTimeFromDate = (date: string): string => {
   return moment(date).format('HH:mm');
 };
 
+/**
+ * Generates a list of dates starting from today and going back specified number of days
+ * @param daysBack - Number of days to go back from today (default: 10)
+ * @returns Array of Date objects in descending order (today first, oldest last)
+ */
+const generateDatesList = (daysBack: number = 10): Date[] => {
+  const dates: Date[] = [];
+  const today = moment();
+
+  for (let i = 0; i <= daysBack; i++) {
+    const date = today.clone().subtract(i, 'days').toDate();
+    dates.push(date);
+  }
+
+  return dates;
+};
+
 export {
   getCurrentTimeInMinutes,
   getDateForRequest,
   formatTimeForBackend,
   getHumanReadableDate,
   extractTimeFromDate,
+  generateDatesList,
 };
