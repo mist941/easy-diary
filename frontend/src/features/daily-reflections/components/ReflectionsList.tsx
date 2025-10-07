@@ -7,7 +7,7 @@ interface ReflectionsListProps {
 
 function ReflectionsList({ reflections }: ReflectionsListProps) {
   return (
-    <div>
+    <div className="flex flex-col gap-4">
       {reflections.map((reflection) => (
         <ReflectionItem key={reflection.id} reflection={reflection} />
       ))}
