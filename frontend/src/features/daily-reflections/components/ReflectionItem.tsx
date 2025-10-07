@@ -8,7 +8,7 @@ interface ReflectionItemProps {
 
 function ReflectionItem({ reflection }: ReflectionItemProps) {
   return (
-    <div className="bg-secondary p-3 rounded-md hover:bg-secondary/80 transition-colors cursor-pointer flex flex-col gap-2">
+    <div className="bg-sidebar p-3 rounded-md hover:bg-sidebar/80 transition-colors cursor-pointer flex flex-col gap-2">
       <header className="flex justify-between items-center border-b pb-2">
         <h1 className="text-lg font-bold">
           {getHumanReadableDate(reflection.date)}
