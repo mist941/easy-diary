@@ -33,7 +33,7 @@ function MainTemplate({ children }: MainTemplateProps) {
       return <BreadcrumbPage>{formattedDate}</BreadcrumbPage>;
     }
 
-    return pathname.replace('/', '');
+    return pathname.replace('/', '').replace('-', ' ');
   };
 
   return (
