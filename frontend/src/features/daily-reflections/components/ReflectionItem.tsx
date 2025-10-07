@@ -9,7 +9,7 @@ interface ReflectionItemProps {
 function ReflectionItem({ reflection }: ReflectionItemProps) {
   return (
     <div
-      className={`bg-sidebar p-3 rounded-md hover:bg-sidebar/80 transition-all cursor-pointer flex flex-col gap-2 ${reflection.id === 0 ? 'opacity-50 border border-gray-300 hover:bg-sidebar hover:opacity-100 hover:border-none' : ''}`}
+      className={`bg-sidebar p-3 rounded-md hover:bg-sidebar/80 transition-all cursor-pointer flex flex-col gap-2 ${reflection.id === 0 ? 'opacity-50 hover:bg-sidebar hover:opacity-100 hover:border-none' : ''}`}
     >
       <header className="flex justify-between items-center border-b pb-2">
         <h1 className="text-lg font-bold">
