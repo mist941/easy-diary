@@ -1,17 +1,10 @@
-from sqlalchemy import Column, DateTime, Integer, String, IdentifierList
-from src.core.database import Base
 from .interfaces import IDailyReflectionRepository
 from .dto import DailyReflectionCreate
 from .entities import DailyReflection
 from src.core.database import AsyncSession
-
-class DailyReflectionModel(Base):
-    __tablename__ = "daily_reflections"
-    id = Column(Integer, primary_key=True)
-    date = Column(DateTime, nullable=False)
-    mood = Column(String, nullable=False)
-    content = Column(String, nullable=False)
-    tags = Column(IdentifierList, nullable=True)
+from src.core.models import DailyReflectionModel, TagModel
+from src.features.tags.entities import Tag
+from sqlalchemy import select
 
 class DailyReflectionRepository(IDailyReflectionRepository):
     def __init__(self, db: AsyncSession):
@@ -21,18 +14,32 @@ class DailyReflectionRepository(IDailyReflectionRepository):
         daily_reflection = DailyReflectionModel(
             date=daily_reflection_data.date,
             mood=daily_reflection_data.mood,
-            content=daily_reflection_data.content,
-            tags=daily_reflection_data.tags)
+            content=daily_reflection_data.content)
+        
         try:
+            if daily_reflection_data.tag_ids:
+                tags_result = await self.db.execute(
+                    select(TagModel).where(TagModel.id.in_(daily_reflection_data.tag_ids))
+                )
+                tags = tags_result.scalars().all()
+                daily_reflection.tags = list(tags)
+            
             self.db.add(daily_reflection)
             await self.db.commit()
             await self.db.refresh(daily_reflection)
+            
+
+            tag_entities = [
+                Tag(id=tag.id, name=tag.name, color=tag.color) 
+                for tag in daily_reflection.tags
+            ]
+            
             return DailyReflection(
                 id=daily_reflection.id,
                 date=daily_reflection.date,
                 mood=daily_reflection.mood,
                 content=daily_reflection.content,
-                tags=daily_reflection.tags)
+                tags=tag_entities)
         except Exception as e:
             await self.db.rollback()
             raise e

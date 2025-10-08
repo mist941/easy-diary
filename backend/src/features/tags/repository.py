@@ -1,17 +1,11 @@
 from http.client import HTTPException
-from src.core.database import AsyncSession, Base
+from src.core.database import AsyncSession
 from .dto import TagCreate, TagUpdate
 from .interfaces import ITagRepository
-from sqlalchemy import Column, Integer, String, select
+from sqlalchemy import select
 from fastapi import HTTPException
 from .entities import Tag
-
-
-class TagModel(Base):
-    __tablename__ = "tags"
-    id = Column(Integer, primary_key=True)
-    name = Column(String, nullable=False)
-    color = Column(String, nullable=False)
+from src.core.models import TagModel
 
 
 class TagRepository(ITagRepository):
