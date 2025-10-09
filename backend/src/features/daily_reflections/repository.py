@@ -5,10 +5,19 @@ from src.core.database import AsyncSession
 from src.core.models import DailyReflectionModel, TagModel
 from src.features.tags.entities import Tag
 from sqlalchemy import select
+from datetime import datetime
+from typing import List
 
 class DailyReflectionRepository(IDailyReflectionRepository):
     def __init__(self, db: AsyncSession):
         self.db = db
+
+    async def get_all(self, from_date: datetime, to_date: datetime) -> List[DailyReflection]:
+        daily_reflections = await self.db.execute(
+            select(DailyReflectionModel).where(DailyReflectionModel.date >= from_date, DailyReflectionModel.date <= to_date)
+        )
+        return [DailyReflection(id=dr.id, date=dr.date, mood=dr.mood, content=dr.content, tags=dr.tags) for dr in daily_reflections.scalars().all()]
+
 
     async def create(self, daily_reflection_data: DailyReflectionCreate) -> DailyReflection:
         daily_reflection = DailyReflectionModel(

@@ -12,6 +12,3 @@ class IDailyReflectionRepository:
 
     def update(self, daily_reflection_id: int, daily_reflection_data: DailyReflectionUpdate) -> DailyReflection:
         raise NotImplementedError
-
-    def delete(self, daily_reflection_id: int) -> None:
-        raise NotImplementedError   
