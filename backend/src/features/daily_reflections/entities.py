@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import List
 
-from .entities import Tag
+from src.features.tags.entities import Tag
 from .enums import Mood
 
 

@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from src.api.v1 import notes, tags
+from src.api.v1 import notes, tags, daily_reflections
 
 app = FastAPI()
 
@@ -22,3 +22,4 @@ prefix = "/api/v1"
 
 app.include_router(notes.router, prefix=prefix)
 app.include_router(tags.router, prefix=prefix)
+app.include_router(daily_reflections.router, prefix=prefix)

@@ -1,9 +1,24 @@
+'use client';
+
 import { ReflectionsList } from './ReflectionsList';
 import { Mood } from '../types/enums';
-import { generateDatesList } from '@/utils/time';
+import { generateDatesList, getDateForRequest } from '@/utils/time';
+import { dailyReflectionServices } from '@/api';
+import { useEffect } from 'react';
 
 function DailyReflectionsPanel() {
   const dates = generateDatesList(7);
+
+  useEffect(() => {
+    dailyReflectionServices
+      .getDailyReflections(
+        getDateForRequest(dates[0]),
+        getDateForRequest(dates[dates.length - 1]),
+      )
+      .then((reflections) => {
+        console.log(reflections);
+      });
+  }, []);
 
   return (
     <div className="w-full xl:w-1/2 xl:mx-auto h-full">
