@@ -1,6 +1,6 @@
 'use client';
 
-import { Calendar } from '@/components/layouts/Calendar';
+import { Calendar } from '@/components/ui/Calendar';
 import {
   SidebarGroup,
   SidebarGroupContent,
