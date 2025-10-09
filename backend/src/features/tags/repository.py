@@ -1,11 +1,14 @@
 from http.client import HTTPException
-from src.core.database import AsyncSession
-from .dto import TagCreate, TagUpdate
-from .interfaces import ITagRepository
-from sqlalchemy import select
+
 from fastapi import HTTPException
-from .entities import Tag
+from sqlalchemy import select
+
+from src.core.database import AsyncSession
 from src.core.models import TagModel
+
+from .dto import TagCreate, TagUpdate
+from .entities import Tag
+from .interfaces import ITagRepository
 
 
 class TagRepository(ITagRepository):
@@ -17,7 +20,10 @@ class TagRepository(ITagRepository):
             tags = await self.db.execute(
                 select(TagModel).where(TagModel.name.like(f"%{query}%"))
             )
-            return [Tag(id=tag.id, name=tag.name, color=tag.color) for tag in tags.scalars().all()]
+            return [
+                Tag(id=tag.id, name=tag.name, color=tag.color)
+                for tag in tags.scalars().all()
+            ]
         except Exception as e:
             await self.db.rollback()
             raise e

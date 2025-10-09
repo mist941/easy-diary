@@ -1,9 +1,11 @@
-from .repository import TagRepository
 from fastapi import Depends
+
 from src.core.database import AsyncSession, get_db
-from .entities import Tag
+
 from .dto import TagCreate, TagUpdate
+from .entities import Tag
 from .interfaces import ITagRepository
+from .repository import TagRepository
 
 
 class TagService:
