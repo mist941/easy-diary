@@ -2,24 +2,19 @@
 
 import { ReflectionsList } from './ReflectionsList';
 import { Mood } from '../types/enums';
-import {
-  generateDatesRange,
-  generateDatesRangeFromToday,
-  getDateForRequest,
-} from '@/utils/time';
+import { generateDatesRange, getDateForRequest } from '@/utils/time';
 import { dailyReflectionServices } from '@/api';
 import { useEffect, useState } from 'react';
 import { DateRangeFilter } from '../types';
 import { DailyReflectionsFilter } from './DailyReflectionsFilter';
+import moment from 'moment';
 
 function DailyReflectionsPanel() {
-  const predefinedDates = generateDatesRangeFromToday(7);
-
   const [filterDate, setFilterDate] = useState<DateRangeFilter>({
-    startDate: predefinedDates[0],
-    endDate: predefinedDates[predefinedDates.length - 1],
+    startDate: moment().subtract(7, 'days').toDate(),
+    endDate: moment().toDate(),
   });
-
+  console.log(filterDate);
   const dates = generateDatesRange(
     filterDate.startDate,
     filterDate.endDate,
