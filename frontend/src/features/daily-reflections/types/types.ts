@@ -1,4 +1,4 @@
 export type DateRangeFilter = {
-  startDate?: Date;
-  endDate?: Date;
+  startDate: Date;
+  endDate: Date;
 };

@@ -92,6 +92,32 @@ const generateDatesRangeFromToday = (daysBack: number = 10): Date[] => {
   return dates;
 };
 
+/**
+ * Generates a range of dates between two dates
+ * @param startDate - The start date
+ * @param endDate - The end date
+ * @returns Array of Date objects in chronological order (start date first, end date last)
+ */
+const generateDatesRange = (startDate: Date, endDate: Date): Date[] => {
+  const dates: Date[] = [];
+  const start = moment(startDate);
+  const end = moment(endDate);
+
+  // Ensure start date is not after end date
+  if (start.isAfter(end)) {
+    return [];
+  }
+
+  const current = start.clone();
+
+  while (current.isSameOrBefore(end, 'day')) {
+    dates.push(current.toDate());
+    current.add(1, 'day');
+  }
+
+  return dates;
+};
+
 export {
   getCurrentTimeInMinutes,
   getDateForRequest,
@@ -99,4 +125,5 @@ export {
   getHumanReadableDate,
   extractTimeFromDate,
   generateDatesRangeFromToday,
+  generateDatesRange,
 };

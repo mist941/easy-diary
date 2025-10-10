@@ -2,27 +2,34 @@
 
 import { ReflectionsList } from './ReflectionsList';
 import { Mood } from '../types/enums';
-import { generateDatesRangeFromToday, getDateForRequest } from '@/utils/time';
+import {
+  generateDatesRange,
+  generateDatesRangeFromToday,
+  getDateForRequest,
+} from '@/utils/time';
 import { dailyReflectionServices } from '@/api';
 import { useEffect, useState } from 'react';
 import { DateRangeFilter } from '../types';
 import { DailyReflectionsFilter } from './DailyReflectionsFilter';
 
 function DailyReflectionsPanel() {
-  const dates = generateDatesRangeFromToday(7);
+  const predefinedDates = generateDatesRangeFromToday(7);
 
   const [filterDate, setFilterDate] = useState<DateRangeFilter>({
-    startDate: dates[0],
-    endDate: dates[dates.length - 1],
+    startDate: predefinedDates[0],
+    endDate: predefinedDates[predefinedDates.length - 1],
   });
+
+  const dates = generateDatesRange(
+    filterDate.startDate,
+    filterDate.endDate,
+  ).reverse();
 
   useEffect(() => {
     dailyReflectionServices
       .getDailyReflections(
-        filterDate.startDate
-          ? getDateForRequest(filterDate.startDate)
-          : undefined,
-        filterDate.endDate ? getDateForRequest(filterDate.endDate) : undefined,
+        getDateForRequest(filterDate.startDate),
+        getDateForRequest(filterDate.endDate),
       )
       .then((reflections) => {
         console.log(reflections);

@@ -54,8 +54,6 @@ const getPeriodByPredefinedPeriod = (period: string): DateRangeFilter => {
         startDate: new Date(now.getFullYear(), 0, 1),
         endDate: new Date(),
       };
-    case 'all_time':
-      return {};
   }
   return { startDate: new Date(), endDate: new Date() };
 };
@@ -75,12 +73,12 @@ function DailyReflectionsFilter({
   }, []);
 
   const onSelectStartDate = useCallback((date?: Date) => {
-    setFilterDate({ ...filterDate, startDate: date });
+    setFilterDate({ ...filterDate, startDate: date as Date });
     setSelectedPeriod(undefined);
   }, []);
 
   const onSelectEndDate = useCallback((date?: Date) => {
-    setFilterDate({ ...filterDate, endDate: date });
+    setFilterDate({ ...filterDate, endDate: date as Date });
     setSelectedPeriod(undefined);
   }, []);
 
@@ -97,7 +95,6 @@ function DailyReflectionsFilter({
             <SelectItem value="this_month">This month</SelectItem>
             <SelectItem value="last_month">Last month</SelectItem>
             <SelectItem value="this_year">This year</SelectItem>
-            <SelectItem value="all_time">All time</SelectItem>
           </SelectGroup>
         </SelectContent>
       </Select>
