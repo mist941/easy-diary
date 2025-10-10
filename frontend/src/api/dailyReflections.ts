@@ -6,13 +6,16 @@ import axios from '@/api/axios';
 
 const dailyReflectionServices = {
   async getDailyReflections(
-    startDate: string,
-    endDate: string,
+    startDate?: string,
+    endDate?: string,
   ): Promise<IDailyReflection[]> {
     try {
-      const response = await axios.get(
-        `/daily-reflections?from_date=${startDate}&to_date=${endDate}`,
-      );
+      const response = await axios.get(`/daily-reflections`, {
+        params: {
+          from_date: startDate,
+          to_date: endDate,
+        },
+      });
       return response.data;
     } catch (error) {
       throw error;

@@ -76,11 +76,11 @@ const extractTimeFromDate = (date: string): string => {
 };
 
 /**
- * Generates a list of dates starting from today and going back specified number of days
+ * Generates a range of dates starting from today and going back specified number of days
  * @param daysBack - Number of days to go back from today (default: 10)
  * @returns Array of Date objects in descending order (today first, oldest last)
  */
-const generateDatesList = (daysBack: number = 10): Date[] => {
+const generateDatesRangeFromToday = (daysBack: number = 10): Date[] => {
   const dates: Date[] = [];
   const today = moment();
 
@@ -98,5 +98,5 @@ export {
   formatTimeForBackend,
   getHumanReadableDate,
   extractTimeFromDate,
-  generateDatesList,
+  generateDatesRangeFromToday,
 };
