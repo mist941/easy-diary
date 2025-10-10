@@ -17,6 +17,7 @@ import { CalendarIcon } from 'lucide-react';
 import { Calendar } from '@/components/ui/Calendar';
 import { format } from 'date-fns';
 import { DateRangeFilter } from '../types';
+import { useCallback, useState } from 'react';
 
 interface DailyReflectionsFilterProps {
   filterDate: DateRangeFilter;
@@ -63,14 +64,29 @@ function DailyReflectionsFilter({
   filterDate,
   setFilterDate,
 }: DailyReflectionsFilterProps) {
-  const onSelectPeriod = (period: string) => {
+  const [selectedPeriod, setSelectedPeriod] = useState<string | undefined>(
+    'last_7_days',
+  );
+
+  const onSelectPeriod = useCallback((period: string) => {
     const periodFilter = getPeriodByPredefinedPeriod(period);
     setFilterDate(periodFilter);
-  };
+    setSelectedPeriod(period);
+  }, []);
+
+  const onSelectStartDate = useCallback((date?: Date) => {
+    setFilterDate({ ...filterDate, startDate: date });
+    setSelectedPeriod(undefined);
+  }, []);
+
+  const onSelectEndDate = useCallback((date?: Date) => {
+    setFilterDate({ ...filterDate, endDate: date });
+    setSelectedPeriod(undefined);
+  }, []);
 
   return (
     <div className="flex gap-2 justify-between mb-4">
-      <Select onValueChange={onSelectPeriod}>
+      <Select value={selectedPeriod} onValueChange={onSelectPeriod}>
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="Select a period" />
         </SelectTrigger>
@@ -105,9 +121,7 @@ function DailyReflectionsFilter({
             <Calendar
               mode="single"
               selected={filterDate.startDate}
-              onSelect={(date) =>
-                setFilterDate({ ...filterDate, startDate: date as Date })
-              }
+              onSelect={onSelectStartDate}
             />
           </PopoverContent>
         </Popover>
@@ -130,9 +144,7 @@ function DailyReflectionsFilter({
             <Calendar
               mode="single"
               selected={filterDate.endDate}
-              onSelect={(date) =>
-                setFilterDate({ ...filterDate, endDate: date as Date })
-              }
+              onSelect={onSelectEndDate}
             />
           </PopoverContent>
         </Popover>
