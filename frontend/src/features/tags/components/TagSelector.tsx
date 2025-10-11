@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ITag } from '@/features/tags/types';
-import { tagsServices } from '@/api';
+import { useTagsManagement } from '@/features/tags/hooks/useTagsManagement';
 import { Button } from '@/components/ui/Button';
 import { X, Plus } from 'lucide-react';
 import { ColorPeview } from '@/components/ui/ColorPeview';
@@ -18,25 +18,8 @@ function TagSelector({
   onTagsChange,
   className,
 }: TagSelectorProps) {
-  const [availableTags, setAvailableTags] = useState<ITag[]>([]);
+  const { tags: availableTags, loading } = useTagsManagement();
   const [isOpen, setIsOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    fetchTags();
-  }, []);
-
-  const fetchTags = async () => {
-    setLoading(true);
-    try {
-      const tags = await tagsServices.getTags();
-      setAvailableTags(tags);
-    } catch (error) {
-      console.error('Failed to fetch tags:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const toggleTag = (tag: ITag) => {
     const isSelected = selectedTags.find((t) => t.id === tag.id);

@@ -16,7 +16,7 @@ function ReflectionsList({
   onUpdate,
 }: ReflectionsListProps) {
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 overflow-y-auto h-[calc(100vh-150px)] custom-scrollbar scroll-smooth p-2">
       {dates.map((date) => {
         const reflection = reflections.find((reflection) =>
           moment(reflection.date).isSame(moment(date), 'day'),
