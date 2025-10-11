@@ -12,7 +12,7 @@ WORKDIR /app
 
 # Install Python and required packages first
 RUN apt-get update && \
-  apt-get install -y python3 python3-pip python3-venv nginx && \
+  apt-get install -y python3 python3-pip python3-venv nginx dos2unix && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
@@ -30,9 +30,10 @@ COPY --from=frontend-builder /app/frontend/ /app/frontend/
 # Copy nginx configuration
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
 
-# Script to start all services
+# Copy and fix start script
 COPY scripts/start.sh /app/start.sh
-RUN chmod +x /app/start.sh
+RUN dos2unix /app/start.sh && \
+    chmod +x /app/start.sh
 
 EXPOSE 80
 
