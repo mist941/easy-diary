@@ -56,7 +56,7 @@ function ReflectionItem({
           date: getDateForRequest(reflection.date),
           mood: editedMood,
           content: editedContent,
-          tags: reflection.tags.map((tag) => tag.name),
+          tag_ids: reflection.tags.map((tag) => tag.id),
         });
         setIsEditing(false);
       } catch (error) {
@@ -74,7 +74,7 @@ function ReflectionItem({
           date: getDateForRequest(reflection.date),
           mood: editedMood,
           content: editedContent,
-          tags: reflection.tags.map((tag) => tag.name),
+          tag_ids: reflection.tags.map((tag) => tag.id),
         });
         setIsEditing(false);
       } catch (error) {
@@ -89,7 +89,7 @@ function ReflectionItem({
     <div
       className={`bg-sidebar p-3 rounded-md hover:bg-sidebar/80 transition-all duration-300 ease-in-out cursor-pointer flex flex-col gap-2 ${
         reflection.id === 0
-          ? 'opacity-50 hover:bg-sidebar hover:opacity-100 hover:border-none'
+          ? `${isEditing ? 'opacity-100' : 'opacity-50'} hover:bg-sidebar hover:opacity-100 hover:border-none`
           : ''
       } ${isEditing ? 'ring-2 ring-primary/20 bg-sidebar/90' : ''}`}
       onClick={!isEditing ? handleEdit : undefined}

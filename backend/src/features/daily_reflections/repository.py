@@ -2,6 +2,7 @@ from datetime import datetime
 from typing import List
 
 from sqlalchemy import select
+from sqlalchemy.orm import selectinload
 
 from src.core.database import AsyncSession
 from src.core.models import DailyReflectionModel, TagModel
@@ -9,6 +10,7 @@ from src.features.tags.entities import Tag
 
 from .dto import DailyReflectionCreate
 from .entities import DailyReflection
+from .enums import Mood
 from .interfaces import IDailyReflectionRepository
 
 
@@ -20,28 +22,42 @@ class DailyReflectionRepository(IDailyReflectionRepository):
         self, from_date: datetime, to_date: datetime
     ) -> List[DailyReflection]:
         daily_reflections = await self.db.execute(
-            select(DailyReflectionModel).where(
+            select(DailyReflectionModel)
+            .options(selectinload(DailyReflectionModel.tags))
+            .where(
                 DailyReflectionModel.date >= from_date,
                 DailyReflectionModel.date <= to_date,
             )
         )
-        return [
-            DailyReflection(
-                id=dr.id, date=dr.date, mood=dr.mood, content=dr.content, tags=dr.tags
+        
+        result = []
+        for dr in daily_reflections.scalars().all():
+            tag_entities = [
+                Tag(id=tag.id, name=tag.name, color=tag.color)
+                for tag in dr.tags
+            ]
+            result.append(
+                DailyReflection(
+                    id=dr.id, 
+                    date=dr.date, 
+                    mood=Mood(dr.mood), 
+                    content=dr.content, 
+                    tags=tag_entities
+                )
             )
-            for dr in daily_reflections.scalars().all()
-        ]
+        return result
 
     async def create(
         self, daily_reflection_data: DailyReflectionCreate
     ) -> DailyReflection:
         daily_reflection = DailyReflectionModel(
             date=daily_reflection_data.date,
-            mood=daily_reflection_data.mood,
+            mood=daily_reflection_data.mood.value,
             content=daily_reflection_data.content,
         )
 
         try:
+            tag_entities = []
             if daily_reflection_data.tag_ids:
                 tags_result = await self.db.execute(
                     select(TagModel).where(
@@ -50,20 +66,20 @@ class DailyReflectionRepository(IDailyReflectionRepository):
                 )
                 tags = tags_result.scalars().all()
                 daily_reflection.tags = list(tags)
+                
+                tag_entities = [
+                    Tag(id=tag.id, name=tag.name, color=tag.color)
+                    for tag in tags
+                ]
 
             self.db.add(daily_reflection)
             await self.db.commit()
             await self.db.refresh(daily_reflection)
 
-            tag_entities = [
-                Tag(id=tag.id, name=tag.name, color=tag.color)
-                for tag in daily_reflection.tags
-            ]
-
             return DailyReflection(
                 id=daily_reflection.id,
                 date=daily_reflection.date,
-                mood=daily_reflection.mood,
+                mood=Mood(daily_reflection.mood),
                 content=daily_reflection.content,
                 tags=tag_entities,
             )

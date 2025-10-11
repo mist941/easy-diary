@@ -4,5 +4,5 @@ export interface IDailyReflectionRequest {
   date: string;
   mood: Mood;
   content: string;
-  tags: string[];
+  tag_ids: number[];
 }
