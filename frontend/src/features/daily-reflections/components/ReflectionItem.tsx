@@ -1,6 +1,7 @@
 import { IDailyReflection, IDailyReflectionRequest } from '../types';
 import { getHumanReadableDate } from '@/utils/time';
 import { MoodIcon } from './MoodIcon';
+import { TagSelector } from '../../tags/components';
 import { useState } from 'react';
 import { Mood } from '../types/enums';
 import { Button } from '@/components/ui/Button';
@@ -14,6 +15,8 @@ import {
 } from '@/components/ui/Select';
 import { getDateForRequest } from '@/utils/time';
 import { getMoodDisplayName } from '../utils';
+import { ITag } from '@/features/tags/types';
+import { TagView } from '@/features/tags/components';
 
 interface ReflectionItemProps {
   reflection: IDailyReflection;
@@ -31,18 +34,21 @@ function ReflectionItem({
     reflection.mood,
   );
   const [editedContent, setEditedContent] = useState(reflection.content);
+  const [editedTags, setEditedTags] = useState<ITag[]>(reflection.tags);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleEdit = () => {
     setIsEditing(true);
     setEditedMood(reflection.mood);
     setEditedContent(reflection.content);
+    setEditedTags(reflection.tags);
   };
 
   const handleCancel = () => {
     setIsEditing(false);
     setEditedMood(reflection.mood);
     setEditedContent(reflection.content);
+    setEditedTags(reflection.tags);
   };
 
   const handleSave = async () => {
@@ -56,7 +62,7 @@ function ReflectionItem({
           date: getDateForRequest(reflection.date),
           mood: editedMood,
           content: editedContent,
-          tag_ids: reflection.tags.map((tag) => tag.id),
+          tag_ids: editedTags.map((tag) => tag.id),
         });
         setIsEditing(false);
       } catch (error) {
@@ -74,7 +80,7 @@ function ReflectionItem({
           date: getDateForRequest(reflection.date),
           mood: editedMood,
           content: editedContent,
-          tag_ids: reflection.tags.map((tag) => tag.id),
+          tag_ids: editedTags.map((tag) => tag.id),
         });
         setIsEditing(false);
       } catch (error) {
@@ -171,6 +177,11 @@ function ReflectionItem({
                 onClick={(e) => e.stopPropagation()}
               />
             </div>
+
+            <TagSelector
+              selectedTags={editedTags}
+              onTagsChange={setEditedTags}
+            />
           </>
         ) : (
           <>
@@ -184,10 +195,14 @@ function ReflectionItem({
 
       {!isEditing && (
         <footer>
-          <p className="text-sm text-gray-500">
-            Tags:{' '}
-            {reflection.tags.map((tag) => tag.name).join(', ') || 'No tags'}
-          </p>
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="text-sm text-gray-500">Tags:</span>
+            {reflection.tags.length > 0 ? (
+              reflection.tags.map((tag) => <TagView key={tag.id} tag={tag} />)
+            ) : (
+              <span className="text-sm text-gray-500">No tags</span>
+            )}
+          </div>
         </footer>
       )}
     </div>

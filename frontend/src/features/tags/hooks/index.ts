@@ -1,0 +1,1 @@
+export { useTagsManagement } from './useTagsManagement';
