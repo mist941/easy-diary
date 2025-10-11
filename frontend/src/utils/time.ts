@@ -99,23 +99,28 @@ const generateDatesRangeFromToday = (daysBack: number = 10): Date[] => {
  * @returns Array of Date objects in chronological order (start date first, end date last)
  */
 const generateDatesRange = (startDate: Date, endDate: Date): Date[] => {
-  const dates: Date[] = [];
-  const start = moment(startDate);
-  const end = moment(endDate);
+  try {
+    const dates: Date[] = [];
+    const start = moment(startDate);
+    const end = moment(endDate);
 
-  // Ensure start date is not after end date
-  if (start.isAfter(end)) {
+    // Ensure start date is not after end date
+    if (start.isAfter(end)) {
+      return [];
+    }
+
+    const current = start.clone();
+
+    while (current.isSameOrBefore(end, 'day')) {
+      dates.push(current.toDate());
+      current.add(1, 'day');
+    }
+
+    return dates;
+  } catch (error) {
+    console.error('Failed to generate dates range:', error);
     return [];
   }
-
-  const current = start.clone();
-
-  while (current.isSameOrBefore(end, 'day')) {
-    dates.push(current.toDate());
-    current.add(1, 'day');
-  }
-
-  return dates;
 };
 
 export {
