@@ -1,17 +1,19 @@
-import { IDailyReflection } from '../types/entities';
+import { IDailyReflection, IDailyReflectionRequest } from '../types';
 import { ReflectionItem } from './ReflectionItem';
 import moment from 'moment';
 
 interface ReflectionsListProps {
   reflections: IDailyReflection[];
   dates: Date[];
-  onReflectionUpdate?: (updatedReflection: IDailyReflection) => void;
+  onCreate?: (createdReflection: IDailyReflectionRequest) => void;
+  onUpdate?: (id: number, updatedReflection: IDailyReflectionRequest) => void;
 }
 
 function ReflectionsList({
   reflections,
   dates,
-  onReflectionUpdate,
+  onCreate,
+  onUpdate,
 }: ReflectionsListProps) {
   return (
     <div className="flex flex-col gap-4">
@@ -31,7 +33,8 @@ function ReflectionsList({
                 content: '',
                 tags: [],
               }}
-              onUpdate={onReflectionUpdate}
+              onUpdate={onUpdate}
+              onCreate={onCreate}
             />
           );
         }
@@ -39,7 +42,8 @@ function ReflectionsList({
           <ReflectionItem
             key={reflection.id}
             reflection={reflection}
-            onUpdate={onReflectionUpdate}
+            onUpdate={onUpdate}
+            onCreate={onCreate}
           />
         );
       })}

@@ -1,6 +1,10 @@
 import { generateDatesRange, getDateForRequest } from '@/utils/time';
 import { useEffect, useState } from 'react';
-import { DateRangeFilter, IDailyReflection } from '../types';
+import {
+  DateRangeFilter,
+  IDailyReflection,
+  IDailyReflectionRequest,
+} from '../types';
 import { dailyReflectionServices } from '@/api';
 import moment from 'moment';
 
@@ -31,7 +35,7 @@ function useManageReflections() {
     })();
   }, [filterDate]);
 
-  const handleReflectionUpdate = (updatedReflection: IDailyReflection) => {
+  const refreshReflections = (updatedReflection: IDailyReflection) => {
     try {
       setReflections((prev) => {
         const existingIndex = prev.findIndex((r) =>
@@ -51,12 +55,40 @@ function useManageReflections() {
     }
   };
 
+  const updateReflection = async (
+    id: number,
+    updatedReflection: IDailyReflectionRequest,
+  ) => {
+    try {
+      const reflection = await dailyReflectionServices.updateDailyReflection(
+        id,
+        updatedReflection,
+      );
+      refreshReflections(reflection);
+    } catch (error) {
+      console.error('Failed to update reflection:', error);
+    }
+  };
+
+  const createReflection = async (
+    createdReflection: IDailyReflectionRequest,
+  ) => {
+    try {
+      const reflection =
+        await dailyReflectionServices.createDailyReflection(createdReflection);
+      refreshReflections(reflection);
+    } catch (error) {
+      console.error('Failed to create reflection:', error);
+    }
+  };
+
   return {
     reflections,
     filterDate,
-    setFilterDate,
     dates,
-    handleReflectionUpdate,
+    setFilterDate,
+    updateReflection,
+    createReflection,
   };
 }
 

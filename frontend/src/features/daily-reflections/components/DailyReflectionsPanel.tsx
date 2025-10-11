@@ -10,7 +10,8 @@ function DailyReflectionsPanel() {
     filterDate,
     dates,
     setFilterDate,
-    handleReflectionUpdate,
+    updateReflection,
+    createReflection,
   } = useManageReflections();
 
   return (
@@ -22,7 +23,8 @@ function DailyReflectionsPanel() {
       <ReflectionsList
         dates={dates}
         reflections={reflections}
-        onReflectionUpdate={handleReflectionUpdate}
+        onCreate={createReflection}
+        onUpdate={updateReflection}
       />
     </div>
   );

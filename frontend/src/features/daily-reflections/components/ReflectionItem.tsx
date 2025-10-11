@@ -1,4 +1,4 @@
-import { IDailyReflection } from '../types/entities';
+import { IDailyReflection, IDailyReflectionRequest } from '../types';
 import { getHumanReadableDate } from '@/utils/time';
 import { MoodIcon } from './MoodIcon';
 import { useState } from 'react';
@@ -12,16 +12,20 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/Select';
-import { dailyReflectionServices } from '@/api';
 import { getDateForRequest } from '@/utils/time';
 import { getMoodDisplayName } from '../utils';
 
 interface ReflectionItemProps {
   reflection: IDailyReflection;
-  onUpdate?: (updatedReflection: IDailyReflection) => void;
+  onUpdate?: (id: number, updatedReflection: IDailyReflectionRequest) => void;
+  onCreate?: (createdReflection: IDailyReflectionRequest) => void;
 }
 
-function ReflectionItem({ reflection, onUpdate }: ReflectionItemProps) {
+function ReflectionItem({
+  reflection,
+  onUpdate,
+  onCreate,
+}: ReflectionItemProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedMood, setEditedMood] = useState<Mood | undefined>(
     reflection.mood,
@@ -46,15 +50,14 @@ function ReflectionItem({ reflection, onUpdate }: ReflectionItemProps) {
       if (!editedMood || !editedContent.trim()) return;
 
       setIsLoading(true);
+
       try {
-        const newReflection =
-          await dailyReflectionServices.createDailyReflection({
-            date: getDateForRequest(reflection.date),
-            mood: editedMood,
-            content: editedContent,
-            tags: reflection.tags.map((tag) => tag.name),
-          });
-        onUpdate?.(newReflection);
+        onCreate?.({
+          date: getDateForRequest(reflection.date),
+          mood: editedMood,
+          content: editedContent,
+          tags: reflection.tags.map((tag) => tag.name),
+        });
         setIsEditing(false);
       } catch (error) {
         console.error('Failed to create reflection:', error);
@@ -65,15 +68,14 @@ function ReflectionItem({ reflection, onUpdate }: ReflectionItemProps) {
       if (!editedMood || !editedContent.trim()) return;
 
       setIsLoading(true);
+
       try {
-        const updatedReflection =
-          await dailyReflectionServices.updateDailyReflection(reflection.id, {
-            date: getDateForRequest(reflection.date),
-            mood: editedMood,
-            content: editedContent,
-            tags: reflection.tags.map((tag) => tag.name),
-          });
-        onUpdate?.(updatedReflection);
+        onUpdate?.(reflection.id, {
+          date: getDateForRequest(reflection.date),
+          mood: editedMood,
+          content: editedContent,
+          tags: reflection.tags.map((tag) => tag.name),
+        });
         setIsEditing(false);
       } catch (error) {
         console.error('Failed to update reflection:', error);
