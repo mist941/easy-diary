@@ -32,6 +32,21 @@ const dailyReflectionServices = {
       throw error;
     }
   },
+
+  async updateDailyReflection(
+    id: number,
+    dailyReflection: IDailyReflectionRequest,
+  ): Promise<IDailyReflection> {
+    try {
+      const response = await axios.put(
+        `/daily-reflections/${id}`,
+        dailyReflection,
+      );
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
 
 export { dailyReflectionServices };

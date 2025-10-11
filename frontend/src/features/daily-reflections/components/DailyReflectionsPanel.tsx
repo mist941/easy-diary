@@ -1,35 +1,58 @@
 'use client';
 
 import { ReflectionsList } from './ReflectionsList';
-import { Mood } from '../types/enums';
 import { generateDatesRange, getDateForRequest } from '@/utils/time';
 import { dailyReflectionServices } from '@/api';
 import { useEffect, useState } from 'react';
 import { DateRangeFilter } from '../types';
 import { DailyReflectionsFilter } from './DailyReflectionsFilter';
 import moment from 'moment';
+import { IDailyReflection } from '../types';
 
 function DailyReflectionsPanel() {
+  const [reflections, setReflections] = useState<IDailyReflection[]>([]);
   const [filterDate, setFilterDate] = useState<DateRangeFilter>({
     startDate: moment().subtract(7, 'days').toDate(),
     endDate: moment().toDate(),
   });
-  console.log(filterDate);
+
   const dates = generateDatesRange(
     filterDate.startDate,
     filterDate.endDate,
   ).reverse();
 
   useEffect(() => {
-    dailyReflectionServices
-      .getDailyReflections(
-        getDateForRequest(filterDate.startDate),
-        getDateForRequest(filterDate.endDate),
-      )
-      .then((reflections) => {
-        console.log(reflections);
-      });
-  }, []);
+    const loadReflections = () => {
+      dailyReflectionServices
+        .getDailyReflections(
+          getDateForRequest(filterDate.startDate),
+          getDateForRequest(filterDate.endDate),
+        )
+        .then((reflections) => {
+          setReflections(reflections);
+        });
+    };
+
+    loadReflections();
+  }, [filterDate]);
+
+  const handleReflectionUpdate = (updatedReflection: IDailyReflection) => {
+    setReflections((prev) => {
+      const existingIndex = prev.findIndex((r) =>
+        moment(r.date).isSame(moment(updatedReflection.date), 'day'),
+      );
+
+      if (existingIndex >= 0) {
+        // Update existing reflection
+        const updated = [...prev];
+        updated[existingIndex] = updatedReflection;
+        return updated;
+      } else {
+        // Add new reflection
+        return [...prev, updatedReflection];
+      }
+    });
+  };
 
   return (
     <div className="w-full xl:w-1/2 xl:mx-auto h-full">
@@ -39,57 +62,8 @@ function DailyReflectionsPanel() {
       />
       <ReflectionsList
         dates={dates}
-        reflections={[
-          {
-            id: 1,
-            date: new Date('2025-10-07'),
-            mood: Mood.GOOD,
-            content: 'I had a great day!',
-            tags: [{ id: 1, name: 'happy', color: 'red' }],
-          },
-          {
-            id: 2,
-            date: new Date('2025-10-06'),
-            mood: Mood.BAD,
-            content: 'I had a bad day!',
-            tags: [{ id: 2, name: 'sad', color: 'blue' }],
-          },
-          {
-            id: 3,
-            date: new Date('2025-10-05'),
-            mood: Mood.NEUTRAL,
-            content: 'I had a neutral day!',
-            tags: [{ id: 3, name: 'neutral', color: 'gray' }],
-          },
-          {
-            id: 4,
-            date: new Date('2025-10-04'),
-            mood: Mood.TERRIBLE,
-            content: 'I had a terrible day!',
-            tags: [{ id: 4, name: 'terrible', color: 'black' }],
-          },
-          {
-            id: 5,
-            date: new Date('2025-10-03'),
-            mood: Mood.VERY_BAD,
-            content: 'I had a very bad day!',
-            tags: [{ id: 5, name: 'very_bad', color: 'red' }],
-          },
-          {
-            id: 6,
-            date: new Date('2025-10-02'),
-            mood: Mood.VERY_GOOD,
-            content: 'I had a very good day!',
-            tags: [{ id: 6, name: 'very_good', color: 'green' }],
-          },
-          {
-            id: 7,
-            date: new Date('2025-10-01'),
-            mood: Mood.EXCELLENT,
-            content: 'I had an excellent day!',
-            tags: [{ id: 7, name: 'excellent', color: 'purple' }],
-          },
-        ]}
+        reflections={reflections}
+        onReflectionUpdate={handleReflectionUpdate}
       />
     </div>
   );

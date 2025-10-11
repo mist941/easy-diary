@@ -5,9 +5,14 @@ import moment from 'moment';
 interface ReflectionsListProps {
   reflections: IDailyReflection[];
   dates: Date[];
+  onReflectionUpdate?: (updatedReflection: IDailyReflection) => void;
 }
 
-function ReflectionsList({ reflections, dates }: ReflectionsListProps) {
+function ReflectionsList({
+  reflections,
+  dates,
+  onReflectionUpdate,
+}: ReflectionsListProps) {
   return (
     <div className="flex flex-col gap-4">
       {dates.map((date) => {
@@ -26,10 +31,17 @@ function ReflectionsList({ reflections, dates }: ReflectionsListProps) {
                 content: '',
                 tags: [],
               }}
+              onUpdate={onReflectionUpdate}
             />
           );
         }
-        return <ReflectionItem key={reflection.id} reflection={reflection} />;
+        return (
+          <ReflectionItem
+            key={reflection.id}
+            reflection={reflection}
+            onUpdate={onReflectionUpdate}
+          />
+        );
       })}
     </div>
   );
