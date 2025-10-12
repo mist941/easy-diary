@@ -30,6 +30,10 @@ COPY --from=frontend-builder /app/frontend/ /app/frontend/
 # Copy nginx configuration
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
 
+COPY .env.default /tmp/.env.default
+RUN cp /tmp/.env.default /app/.env && \
+    rm -f /tmp/.env.default 2>/dev/null || true
+
 # Copy and fix start script
 COPY scripts/start.sh /app/start.sh
 RUN dos2unix /app/start.sh && \
