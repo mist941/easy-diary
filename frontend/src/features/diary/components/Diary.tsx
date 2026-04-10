@@ -29,7 +29,6 @@ function Diary() {
       {Array.from({ length: 24 }).map((_, index) => {
         const hour = (index + 5) % 24;
         const timeString = hour.toString().padStart(2, '0') + ':00';
-
         return (
           <DiaryHour
             key={index}
