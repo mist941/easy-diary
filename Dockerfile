@@ -1,4 +1,4 @@
-FROM node:25-slim
+FROM node:25-slim as frontend-builder
 WORKDIR /app/frontend
 COPY frontend/package*.json ./
 RUN npm install
