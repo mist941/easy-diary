@@ -3,6 +3,7 @@ WORKDIR /app/frontend
 COPY frontend/package*.json ./
 RUN npm install
 COPY frontend/ .
+RUN npx prettier --write "src/**/*.{ts,tsx}"
 RUN npm run build
 
 WORKDIR /app/backend
