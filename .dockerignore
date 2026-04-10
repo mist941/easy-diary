@@ -3,3 +3,6 @@ frontend/.next
 frontend/.gitignore
 frontend/.prettierignore
 frontend/.prettierrc.json
+frontend/jest.config.js
+frontend/jest.setup.ts
+frontend/yarn.lock
