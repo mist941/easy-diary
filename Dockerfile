@@ -1,9 +1,8 @@
-FROM node:25
-
+FROM node:25-slim
 WORKDIR /app/frontend
-
 COPY frontend/package*.json ./
-
-COPY frontend/ .
-
 RUN npm install
+COPY frontend/ .
+RUN npm run build
+
+WORKDIR /app/backend
