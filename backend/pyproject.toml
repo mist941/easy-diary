@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "easy-diary-backend"
+version = "1.0.0"
+description = "Easy Diary FastAPI backend"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi==0.115.11",
+    "uvicorn[standard]==0.34.0",
+    "sqlalchemy[asyncio]==2.0.39",
+    "asyncpg==0.30.0",
+    "psycopg[binary]==3.2.6",
+    "alembic==1.15.1",
+    "python-dotenv==1.0.1",
+    "pydantic==2.10.6",
+    "gunicorn==23.0.0",
+    "pydantic-settings==2.8.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "black",
+    "flake8",
+    "isort",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+namespaces = true
