@@ -20,7 +20,7 @@ RUN apt-get update && \
   rm -rf /var/lib/apt/lists/*
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
 COPY .env.default /tmp/.env.default
-COPY --from=frontend-builder /app/ /app/frontend/
+COPY --from=frontend-builder /app/.next /app/frontend/
 COPY --from=backend-builder /app/ /app/backend/
 RUN cp /tmp/.env.default /app/.env && \
     rm -f /tmp/.env.default 2>/dev/null || true
