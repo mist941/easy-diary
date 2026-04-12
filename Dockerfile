@@ -1,8 +1,9 @@
 FROM node:25-slim AS frontend-builder
 WORKDIR /app
 COPY frontend/package*.json ./
-RUN npm install && prettier --write .
+RUN npm install
 COPY frontend/ .
+RUN npx prettier --write "src/**/*.{ts,tsx}"
 RUN npm run build
 
 FROM python:3.12-slim AS backend-builder
