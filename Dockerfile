@@ -1,13 +1,15 @@
 FROM node:25-slim as frontend-builder
+WORKDIR /app
 COPY frontend/package*.json ./
 RUN npm ci --omit=dev
 COPY frontend/ .
 RUN npm run build
 
 FROM python:3.12-slim as backend-builder
+WORKDIR /app
 COPY backend/requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+COPY backend/ .
+RUN pip install --no-cache-dir .
 
-# RUN apt-get update && \
-  # apt-get install -y python3 python3-pip python3-venv nginx dos2unix && \
-  # apt-get clean && \
-  # rm -rf /var/lib/apt/lists/*
+USER nobody
