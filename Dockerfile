@@ -26,10 +26,10 @@ COPY scripts/start.sh /app/start.sh
 RUN cp /tmp/.env.default /app/.env && \
     rm -f /tmp/.env.default 2>/dev/null || true
 
-USER nobody
-
 RUN dos2unix /app/start.sh && \
     chmod +x /app/start.sh
+
+USER nobody
 
 EXPOSE 80
 
