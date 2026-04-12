@@ -14,7 +14,7 @@ RUN pip install --no-cache-dir .
 
 FROM node:25-slim
 RUN apt-get update && \
-  apt-get install -y python3 python3-pip python3-venv nginx dos2unix && \
+  apt-get install -y python3 python3-pip nginx dos2unix && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
