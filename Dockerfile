@@ -22,9 +22,15 @@ COPY nginx/nginx.conf /etc/nginx/nginx.conf
 COPY .env.default /tmp/.env.default
 COPY --from=frontend-builder /app/.next /app/frontend/
 COPY --from=backend-builder /app/ /app/backend/
+COPY scripts/start.sh /app/start.sh
 RUN cp /tmp/.env.default /app/.env && \
     rm -f /tmp/.env.default 2>/dev/null || true
 
 USER nobody
 
+RUN dos2unix /app/start.sh && \
+    chmod +x /app/start.sh
+
 EXPOSE 80
+
+ENTRYPOINT ["/app/start.sh"]
