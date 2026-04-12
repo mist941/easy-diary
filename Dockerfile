@@ -33,4 +33,6 @@ USER nobody
 
 EXPOSE 80
 
+WORKDIR /app
+
 ENTRYPOINT ["/app/start.sh"]
