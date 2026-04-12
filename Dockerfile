@@ -1,7 +1,7 @@
-FROM node:22-slim AS frontend-builder
+FROM node:25-slim AS frontend-builder
 WORKDIR /app
 COPY frontend/package*.json ./
-RUN npm ci
+RUN npm install
 COPY frontend/ .
 RUN npm run build
 
@@ -12,7 +12,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY backend/ .
 RUN pip install --no-cache-dir .
 
-FROM node:22-slim
+FROM node:25-slim
 RUN apt-get update && \
   apt-get install -y python3 python3-pip python3-venv nginx dos2unix && \
   apt-get clean && \
