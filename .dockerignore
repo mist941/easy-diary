@@ -6,3 +6,8 @@ frontend/.prettierrc.json
 frontend/jest.config.js
 frontend/jest.setup.ts
 frontend/yarn.lock
+
+backend/venv
+backend/logs
+backend/__pycache__
+backend/**/__pycache__/
