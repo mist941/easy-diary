@@ -1,7 +1,7 @@
 FROM node:25-slim AS frontend-builder
 WORKDIR /app
 COPY frontend/package*.json ./
-RUN npm install --omit=dev
+RUN npm install && prettier --write .
 COPY frontend/ .
 RUN npm run build
 
