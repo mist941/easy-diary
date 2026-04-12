@@ -12,7 +12,10 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      # Postgres 18+ images expect a single mount at the data *parent* dir so
+      # version-specific PGDATA paths and pg_upgrade work. See:
+      # https://github.com/docker-library/postgres/pull/1259
+      - postgres_data:/var/lib/postgresql
 
   frontend:
     build:
