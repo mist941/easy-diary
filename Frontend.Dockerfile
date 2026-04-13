@@ -4,7 +4,6 @@ COPY frontend/package*.json ./
 RUN npm install
 COPY frontend/ .
 RUN npm run build
-RUN npm prune --production
 
 FROM node:24-slim
 WORKDIR /app
