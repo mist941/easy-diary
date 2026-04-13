@@ -1,13 +1,15 @@
-FROM node:25-slim AS frontend-builder
+FROM node:24-slim AS frontend-builder
 WORKDIR /app
 COPY frontend/package*.json ./
 RUN npm install
 COPY frontend/ .
-RUN npx prettier --write "src/**/*.{ts,tsx}"
 RUN npm run build
+RUN npm prune --production
 
-FROM node:25-slim
+FROM node:24-slim
 WORKDIR /app
-COPY --from=frontend-builder /app/ /app/
+COPY --from=frontend-builder /app/.next/standalone/ /app/
 
-ENTRYPOINT ["npm", "run", "start"]
+EXPOSE 3000
+
+ENTRYPOINT ["node", "server.js"]
