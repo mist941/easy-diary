@@ -18,7 +18,7 @@ COPY scripts/start-backend.sh ./start-backend.sh
 RUN dos2unix /app/start-backend.sh && \
     chmod +x /app/start-backend.sh
 
-RUN addgroup -S app && adduser -S app -G app
+RUN addgroup --system app && adduser --system --ingroup app app
 USER app
 
 EXPOSE 8000

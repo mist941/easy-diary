@@ -9,7 +9,7 @@ FROM node:24-slim
 WORKDIR /app
 COPY --from=frontend-builder /app/.next/standalone/ /app/
 
-RUN addgroup -S app && adduser -S app -G app
+RUN addgroup --system app && adduser --system --ingroup app app
 USER app
 
 EXPOSE 3000
