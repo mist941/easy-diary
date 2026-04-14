@@ -9,6 +9,9 @@ FROM node:24-slim
 WORKDIR /app
 COPY --from=frontend-builder /app/.next/standalone/ /app/
 
+RUN addgroup -S app && adduser -S app -G app
+USER app
+
 EXPOSE 3000
 
 ENTRYPOINT ["node", "server.js"]
