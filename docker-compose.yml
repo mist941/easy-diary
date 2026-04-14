@@ -25,6 +25,8 @@ services:
     restart: always
     tmpfs:
       - /tmp
+    cap_drop:
+      - ALL
     ports:
       - "3000:3000"
 
@@ -43,6 +45,8 @@ services:
       - POSTGRES_DB=${POSTGRES_DB}
     tmpfs:
       - /tmp
+    cap_drop:
+      - ALL
     ports:
       - "3050:3050"
     volumes:
