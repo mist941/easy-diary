@@ -8,6 +8,8 @@ RUN npm run build
 FROM node:24-slim
 WORKDIR /app
 COPY --from=frontend-builder /app/.next/standalone/ /app/
+COPY --from=frontend-builder /app/.next/static /app/.next/static
+COPY --from=frontend-builder /app/public /app/public
 
 RUN addgroup --system app && adduser --system --ingroup app app
 USER app
